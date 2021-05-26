@@ -1,6 +1,6 @@
 """A video library class."""
 
-from ..video import video
+import video
 
 
 class VideoLibrary:

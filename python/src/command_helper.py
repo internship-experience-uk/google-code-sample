@@ -1,6 +1,6 @@
 """A command helper class."""
 
-from video import video_player
+import video_player
 
 player = video_player.VideoPlayer()
 
@@ -14,7 +14,9 @@ class Command:
     def execute_command(self, command):
         """Executes the user command."""
         if not command:
-            print("Please enter a valid command, type HELP for a list of available commands.")
+            print(
+                "Please enter a valid command, "
+                "type HELP for a list of available commands.")
             return
 
         if command[0].upper() == "SHOW_ALL_VIDEOS":
@@ -45,43 +47,47 @@ class Command:
                 player.create_playlist(command[1])
             except IndexError:
                 print(
-                    "Please enter CREATE_PLAYLIST command followed by a playlist name.")
+                    "Please enter CREATE_PLAYLIST command followed by a "
+                    "playlist name.")
 
         elif command[0].upper() == "ADD_TO_PLAYLIST":
             try:
                 player.add_to_playlist(command[1], command[2])
             except IndexError:
                 print(
-                    """Please enter ADD_TO_PLAYLIST command followed by a playlist name
-            and video_id to add.""")
+                    """Please enter ADD_TO_PLAYLIST command followed by a 
+                    playlist name and video_id to add.""")
 
         elif command[0].upper() == "REMOVE_FROM_PLAYLIST":
             try:
                 player.remove_from_playlist(command[1], command[2])
             except IndexError:
                 print(
-                    """Please enter REMOVE_FROM_PLAYLIST command followed by a playlist
-            name and video_id to remove.""")
+                    """Please enter REMOVE_FROM_PLAYLIST command followed by a 
+                    playlist name and video_id to remove.""")
 
         elif command[0].upper() == "CLEAR_PLAYLIST":
             try:
                 player.clear_playlist(command[1])
             except IndexError:
                 print(
-                    "Please enter CLEAR_PLAYLIST command followed by a playlist name.")
+                    "Please enter CLEAR_PLAYLIST command followed by a "
+                    "playlist name.")
 
         elif command[0].upper() == "DELETE_PLAYLIST":
             try:
                 player.delete_playlist(command[1])
             except IndexError:
                 print(
-                    "Please enter DELETE_PLAYLIST command followed by a playlist name.")
+                    "Please enter DELETE_PLAYLIST command followed by a "
+                    "playlist name.")
 
         elif command[0].upper() == "SHOW_PLAYLIST":
             try:
                 player.show_playlist(command[1])
             except IndexError:
-                print("Please enter SHOW_PLAYLIST command followed by a playlist name.")
+                print("Please enter SHOW_PLAYLIST command followed by a "
+                      "playlist name.")
 
         elif command[0].upper() == "SHOW_ALL_PLAYLISTS":
             player.show_all_playlists()
@@ -90,15 +96,16 @@ class Command:
             try:
                 player.search_videos(command[1])
             except IndexError:
-                print("Please enter SEARCH_VIDEOS command followed by a search term.")
+                print("Please enter SEARCH_VIDEOS command followed by a "
+                      "search term.")
 
         elif command[0].upper() == "SEARCH_VIDEOS_WITH_TAG":
             try:
                 player.search_videos_tag(command[1])
             except IndexError:
                 print(
-                    "Please enter SEARCH_VIDEOS_WITH_TAG command followed by a video tag."
-                )
+                    "Please enter SEARCH_VIDEOS_WITH_TAG command followed by a "
+                    "video tag.")
 
         elif command[0].upper() == "FLAG_VIDEO":
             try:
@@ -107,25 +114,27 @@ class Command:
                 try:
                     player.flag_video(command[1])
                 except IndexError:
-                    print("""Please enter FLAG_VIDEO command followed by a video_id
-                and an optional flag reason.""")
+                    print("""Please enter FLAG_VIDEO command followed by a 
+                    video_id and an optional flag reason.""")
 
         elif command[0].upper() == "ALLOW_VIDEO":
             try:
                 player.allow_video(command[1])
             except IndexError:
-                print("Please enter ALLOW_VIDEO command followed by a video_id.")
+                print("Please enter ALLOW_VIDEO command followed by a "
+                      "video_id.")
 
         elif command[0].upper() == "HELP":
             self._get_help()
 
         elif command[0].upper() == "EXIT":
-            exit("YouTube has now terminated it's execution. Thank you and goodbye!")
+            exit("YouTube has now terminated its execution. "
+                 "Thank you and goodbye!")
 
         else:
             print(
-                "Please enter a valid command, type HELP for a list of available commands."
-            )
+                "Please enter a valid command, type HELP for a list of "
+                "available commands.")
 
     def _get_help(self):
         """Displays all available commands to the user."""

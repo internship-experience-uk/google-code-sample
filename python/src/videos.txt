@@ -1,4 +1,4 @@
-Amazing Cat Video | amazing_cat_video_id | #cat , #animal
-Amazing Dog Video | amazing_dog_video_id | #dog , #animal
-Funny Dogs | funny_dogs_video_id | #dog , #animal
-Life at Google | life_at_google_video_id | #google , #career
+Amazing Cat Video | amazing_cat_video_id |  # cat , #animal
+Amazing Dog Video | amazing_dog_video_id |  # dog , #animal
+Funny Dogs | funny_dogs_video_id |  # dog , #animal
+Life at Google | life_at_google_video_id |  # google , #career

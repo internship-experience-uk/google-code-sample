@@ -1,6 +1,6 @@
 """A youtube terminal simulator."""
 
-from command import command_helper
+import command_helper
 
 command = command_helper.Command()
 
