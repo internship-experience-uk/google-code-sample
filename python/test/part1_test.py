@@ -31,7 +31,7 @@ def test_show_playing(capfd):
     assert "Currently playing: Amazing Cats (amazing_cats_video_id)" in out
 
 
-def test_show_playing(capfd):
+def test_show_nothing_playing(capfd):
     player = video_player.VideoPlayer()
     player.show_playing()
     out, err = capfd.readouterr()

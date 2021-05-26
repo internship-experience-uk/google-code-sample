@@ -8,11 +8,14 @@ You can write code in any editor you'd like. However, different editors have
 different ways of dealing with Python code, so in case of doubt we recommend 
 you run the code and tests from the command line as shown  below.
 
-> :warning: If you are using PyCharm, make sure to mark the src/ directory as Sources Root
-> (Right click on src/ -> Mark Directory As -> Sources Root ) and the test/ directory as Test Sources Root
-> (Right click on test/ -> Mark Directory As -> Test Sources Root)
+> :warning: **PyCharm/IntelliJ users:** :warning:
+>
+> Make sure to mark the `python/` and `src/` directory as Sources Root
+> (Right-click on src/ -> Mark Directory As -> Sources Root ) and the `test/` directory as Test Sources Root
+> (Right-click on test/ -> Mark Directory As -> Test Sources Root)
+> If you imported the project at the python/ level, you will only need to mark the `src/` folder
+> as sources root.
 > This will allow your editor to correctly index the project.
-
 
 
 ## Running the Command line application

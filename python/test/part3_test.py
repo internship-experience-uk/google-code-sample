@@ -13,7 +13,7 @@ def test_search_videos(capfd):
             "it's a no.") in out
 
 
-def test_search_videos_nonexistant(capfd):
+def test_search_videos_nonexistent(capfd):
     player = video_player.VideoPlayer()
     player.search_videos("blah")
     out, err = capfd.readouterr()

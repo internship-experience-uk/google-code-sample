@@ -1,14 +1,14 @@
 from src import video_player
 
 
-def test_flag_video(capfd):
+def test_flag_video_with_reason(capfd):
     player = video_player.VideoPlayer()
     player.flag_video("amazing_cats_video_id", "dont_like_cats")
     out, err = capfd.readouterr()
     assert "Successfully flagged video: Amazing Cats (reason: dont_like_cats)" in out
 
 
-def test_flag_video(capfd):
+def test_flag_video_without_reason(capfd):
     player = video_player.VideoPlayer()
     player.flag_video("another_cat_video_id")
     out, err = capfd.readouterr()
