@@ -1,5 +1,6 @@
 # Editor files
 .idea/
+out/
 
 # Python files
 # Byte-compiled / optimized / DLL files
