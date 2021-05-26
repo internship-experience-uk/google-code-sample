@@ -1,6 +1,7 @@
 """A command helper class."""
 
 import video_player
+import textwrap
 
 player = video_player.VideoPlayer()
 
@@ -138,26 +139,28 @@ class Command:
 
     def _get_help(self):
         """Displays all available commands to the user."""
-
-        print("""Available commands:
-        SHOW_ALL_VIDEOS - Lists all videos from the library.
-        PLAY <video_id> - Plays specified video.
-        PLAY_RANDOM - Plays a random video from the library.
-        STOP - Stop the current video.
-        PAUSE - Pause the current video.
-        CONTINUE - Resume the current paused video.
-        SHOW_PLAYING - Displays the title, url and paused status of the video that is currently playing (or paused).
-        CREATE_PLAYLIST <playlist_name> - Creates a new (empty) playlist with the provided name.
-        ADD_TO_PLAYLIST <playlist_name> <video_id> - Adds the requested video to the playlist.
-        REMOVE_FROM_PLAYLIST <playlist_name> <video_id> - Removes the specified video from the specified playlist
-        CLEAR_PLAYLIST <playlist_name> - Removes all the videos from the playlist.
-        DELETE_PLAYLIST <playlist_name> - Deletes the playlist.
-        SHOW_PLAYLIST <playlist_name> - List all the videos in this playlist.
-        SHOW_ALL_PLAYLISTS - Display all the available playlists.
-        SEARCH_VIDEOS <search_term> - Display all the videos whose titles contain the search_term.
-        SEARCH_VIDEOS_WITH_TAG <tag_name> -Display all videos whose tags contains the provided tag.
-        FLAG_VIDEO <video_id> <flag_reason> - Mark a video as flagged.
-        ALLOW_VIDEO <video_id> - Removes a flag from a video.
-        HELP - Displays help.
-        EXIT - Terminates the program execution.
+        help_text = textwrap.dedent("""
+        Available commands:
+            SHOW_ALL_VIDEOS - Lists all videos from the library.
+            PLAY <video_id> - Plays specified video.
+            PLAY_RANDOM - Plays a random video from the library.
+            STOP - Stop the current video.
+            PAUSE - Pause the current video.
+            CONTINUE - Resume the current paused video.
+            SHOW_PLAYING - Displays the title, url and paused status of the video that is currently playing (or paused).
+            CREATE_PLAYLIST <playlist_name> - Creates a new (empty) playlist with the provided name.
+            ADD_TO_PLAYLIST <playlist_name> <video_id> - Adds the requested video to the playlist.
+            REMOVE_FROM_PLAYLIST <playlist_name> <video_id> - Removes the specified video from the specified playlist
+            CLEAR_PLAYLIST <playlist_name> - Removes all the videos from the playlist.
+            DELETE_PLAYLIST <playlist_name> - Deletes the playlist.
+            SHOW_PLAYLIST <playlist_name> - List all the videos in this playlist.
+            SHOW_ALL_PLAYLISTS - Display all the available playlists.
+            SEARCH_VIDEOS <search_term> - Display all the videos whose titles contain the search_term.
+            SEARCH_VIDEOS_WITH_TAG <tag_name> -Display all videos whose tags contains the provided tag.
+            FLAG_VIDEO <video_id> <flag_reason> - Mark a video as flagged.
+            ALLOW_VIDEO <video_id> - Removes a flag from a video.
+            HELP - Displays help.
+            EXIT - Terminates the program execution.
         """)
+        print(help_text)
+
