@@ -1,6 +1,34 @@
 # Editor files
-.idea/
 out/
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+.settings/
+bin/
+tmp/
+.metadata
+.classpath
+.project
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.factorypath
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+.vscode/
+.code-workspace
+.DS_Store
+
 
 # Python files
 # Byte-compiled / optimized / DLL files
