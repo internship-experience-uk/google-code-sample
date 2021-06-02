@@ -1,4 +1,4 @@
-package test;
+package com.google;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import src.VideoPlayer;
 
 public class Part2Test {
 

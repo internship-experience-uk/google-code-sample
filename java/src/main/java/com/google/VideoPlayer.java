@@ -1,4 +1,4 @@
-package src;
+package com.google;
 
 public class VideoPlayer {
 

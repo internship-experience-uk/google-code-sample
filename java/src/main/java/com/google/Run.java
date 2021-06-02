@@ -1,4 +1,4 @@
-package src;
+package com.google;
 
 import java.util.Arrays;
 import java.util.Scanner;
