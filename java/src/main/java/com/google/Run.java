@@ -11,6 +11,11 @@ public class Run {
     var scanner = new Scanner(System.in);
     while (true) {
       var input = scanner.nextLine();
+      if (input.equals("EXIT")) {
+        System.out.println("YouTube has now terminated its execution. " +
+            "Thank you and goodbye!");
+        System.exit(0);
+      }
       parser.executeCommand(Arrays.asList(input.split("\\s+")));
     }
   }

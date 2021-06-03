@@ -28,10 +28,10 @@ mvn test
 
 To run tests for a single Part:
 ```shell script
-mvn test -dtest=Part1Test
-mvn test -dtest=Part2Test
-mvn test -dtest=Part3Test
-mvn test -dtest=Part4Test
+mvn test -Dtest=Part1Test
+mvn test -Dtest=Part2Test
+mvn test -Dtest=Part3Test
+mvn test -Dtest=Part4Test
 ```
 
 ## Running and Testing from IntelliJ

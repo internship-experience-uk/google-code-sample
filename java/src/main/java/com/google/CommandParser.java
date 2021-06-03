@@ -146,10 +146,6 @@ class CommandParser {
       case "HELP":
         this.getHelp();
         break;
-      case "EXIT":
-        System.out.println("YouTube has now terminated its execution. " +
-            "Thank you and goodbye!");
-        System.exit(0);
       default:
         System.out.println(
             "Please enter a valid command, type HELP for a list of "
