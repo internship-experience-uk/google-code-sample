@@ -4,15 +4,7 @@ import video
 
 
 class VideoLibrary:
-    """A class used to represent a Video Library.
-
-    Methods
-    -------
-    get_videos(name)
-        Return all available video information from the video library.
-    get_video(name, video_id)
-        Returns a video object from the video library.
-  """
+    """A class used to represent a Video Library."""
 
     def __init__(self):
         """The VideoLibrary class is initialized."""

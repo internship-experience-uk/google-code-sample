@@ -98,7 +98,7 @@ public class Part4Test {
     assertTrue(outputStream.toString().contains(
         "Amazing cats (amazing_cats_video_id) [#cat #animal] - FLAGGED reason: dont_like_cats)"));
     assertTrue(outputStream.toString()
-        .contains("Another Cat video (another_cat_video_id) [#cat #animal]"));
+        .contains("Another Cat Video (another_cat_video_id) [#cat #animal]"));
     assertTrue(outputStream.toString().contains("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
     assertTrue(outputStream.toString()
         .contains("Life at Google (life_at_google_video_id) [#google #career]"));
@@ -111,7 +111,7 @@ public class Part4Test {
     assertTrue(outputStream.toString()
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     assertTrue(outputStream.toString().contains("Here are the results for cat:"));
-    assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cat_video_id)"));
+    assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains(
         "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
   }

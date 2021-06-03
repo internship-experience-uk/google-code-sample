@@ -38,7 +38,7 @@ def test_add_to_playlist_already_added(capfd):
     assert "Can not add video to my_playlist. Video already added." in out
 
 
-def test_add_to_playlist_none_existant_video(capfd):
+def test_add_to_playlist_nonexistent_video(capfd):
     player = video_player.VideoPlayer()
     player.create_playlist("my_playlist")
     player.add_to_playlist("my_playlist", "amazing_cats_video_id")
@@ -48,7 +48,7 @@ def test_add_to_playlist_none_existant_video(capfd):
     assert "Can not add video to my_playlist: Video does not exist." in out
 
 
-def test_add_to_playlist_none_existant(capfd):
+def test_add_to_playlist_nonexistent(capfd):
     player = video_player.VideoPlayer()
     player.add_to_playlist("another_playlist", "amazing_cats_video_id")
     out, err = capfd.readouterr()
@@ -94,7 +94,7 @@ def test_remove_from_playlist(capfd):
     assert "Can not remove video from my_playlist: Video is not in playlist." in out
 
 
-def test_remove_from_playlist_nonexistant_video(capfd):
+def test_remove_from_playlist_nonexistent_video(capfd):
     player = video_player.VideoPlayer()
     player.create_playlist("my_playlist")
     player.add_to_playlist("my_playlist", "amazing_cats_video_id")
@@ -122,7 +122,7 @@ def test_clear_playlist(capfd):
     assert "No videos here yet." in out
 
 
-def test_clear_playlist_nonexistant(capfd):
+def test_clear_playlist_nonexistent(capfd):
     player = video_player.VideoPlayer()
     player.clear_playlist("my_playlist")
     out, err = capfd.readouterr()
@@ -138,7 +138,7 @@ def test_delete_playlist(capfd):
     assert "Deleted playlist: my_playlist" in out
 
 
-def test_delete_playlist_nonexistant(capfd):
+def test_delete_playlist_nonexistent(capfd):
     player = video_player.VideoPlayer()
     player.delete_playlist("my_playlist")
     out, err = capfd.readouterr()

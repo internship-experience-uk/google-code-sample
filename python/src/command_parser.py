@@ -1,6 +1,4 @@
 """A command helper class."""
-import os
-import sys
 
 import video_player
 import textwrap
@@ -10,41 +8,40 @@ class CommandParser:
     """A class used to parse and execute a user Command."""
 
     def __init__(self):
-        """The Command class is initialized."""
         self._player = video_player.VideoPlayer()
 
     def execute_command(self, command):
-        """Executes the user command."""
+        """Executes the user command. Expects the command to be upper case."""
         if not command:
             print(
                 "Please enter a valid command, "
                 "type HELP for a list of available commands.")
             return
 
-        if command[0].upper() == "SHOW_ALL_VIDEOS":
+        if command[0] == "SHOW_ALL_VIDEOS":
             self._player.show_all_videos()
 
-        elif command[0].upper() == "PLAY":
+        elif command[0] == "PLAY":
             try:
                 self._player.play_video(command[1])
             except IndexError:
                 print("Please enter PLAY command followed by video_id.")
 
-        elif command[0].upper() == "PLAY_RANDOM":
+        elif command[0] == "PLAY_RANDOM":
             self._player.play_random_video()
-        elif command[0].upper() == "STOP":
+        elif command[0] == "STOP":
             self._player.stop_video()
 
-        elif command[0].upper() == "PAUSE":
+        elif command[0] == "PAUSE":
             self._player.pause_video()
 
-        elif command[0].upper() == "CONTINUE":
+        elif command[0] == "CONTINUE":
             self._player.continue_video()
 
-        elif command[0].upper() == "SHOW_PLAYING":
+        elif command[0] == "SHOW_PLAYING":
             self._player.show_playing()
 
-        elif command[0].upper() == "CREATE_PLAYLIST":
+        elif command[0] == "CREATE_PLAYLIST":
             try:
                 self._player.create_playlist(command[1])
             except IndexError:
@@ -52,7 +49,7 @@ class CommandParser:
                     "Please enter CREATE_PLAYLIST command followed by a "
                     "playlist name.")
 
-        elif command[0].upper() == "ADD_TO_PLAYLIST":
+        elif command[0] == "ADD_TO_PLAYLIST":
             try:
                 self._player.add_to_playlist(command[1], command[2])
             except IndexError:
@@ -60,7 +57,7 @@ class CommandParser:
                     """Please enter ADD_TO_PLAYLIST command followed by a 
                     playlist name and video_id to add.""")
 
-        elif command[0].upper() == "REMOVE_FROM_PLAYLIST":
+        elif command[0] == "REMOVE_FROM_PLAYLIST":
             try:
                 self._player.remove_from_playlist(command[1], command[2])
             except IndexError:
@@ -68,7 +65,7 @@ class CommandParser:
                     """Please enter REMOVE_FROM_PLAYLIST command followed by a 
                     playlist name and video_id to remove.""")
 
-        elif command[0].upper() == "CLEAR_PLAYLIST":
+        elif command[0] == "CLEAR_PLAYLIST":
             try:
                 self._player.clear_playlist(command[1])
             except IndexError:
@@ -76,7 +73,7 @@ class CommandParser:
                     "Please enter CLEAR_PLAYLIST command followed by a "
                     "playlist name.")
 
-        elif command[0].upper() == "DELETE_PLAYLIST":
+        elif command[0] == "DELETE_PLAYLIST":
             try:
                 self._player.delete_playlist(command[1])
             except IndexError:
@@ -84,24 +81,24 @@ class CommandParser:
                     "Please enter DELETE_PLAYLIST command followed by a "
                     "playlist name.")
 
-        elif command[0].upper() == "SHOW_PLAYLIST":
+        elif command[0] == "SHOW_PLAYLIST":
             try:
                 self._player.show_playlist(command[1])
             except IndexError:
                 print("Please enter SHOW_PLAYLIST command followed by a "
                       "playlist name.")
 
-        elif command[0].upper() == "SHOW_ALL_PLAYLISTS":
+        elif command[0] == "SHOW_ALL_PLAYLISTS":
             self._player.show_all_playlists()
 
-        elif command[0].upper() == "SEARCH_VIDEOS":
+        elif command[0] == "SEARCH_VIDEOS":
             try:
                 self._player.search_videos(command[1])
             except IndexError:
                 print("Please enter SEARCH_VIDEOS command followed by a "
                       "search term.")
 
-        elif command[0].upper() == "SEARCH_VIDEOS_WITH_TAG":
+        elif command[0] == "SEARCH_VIDEOS_WITH_TAG":
             try:
                 self._player.search_videos_tag(command[1])
             except IndexError:
@@ -109,7 +106,7 @@ class CommandParser:
                     "Please enter SEARCH_VIDEOS_WITH_TAG command followed by a "
                     "video tag.")
 
-        elif command[0].upper() == "FLAG_VIDEO":
+        elif command[0] == "FLAG_VIDEO":
             try:
                 self._player.flag_video(command[1], command[2])
             except IndexError:
@@ -119,20 +116,15 @@ class CommandParser:
                     print("""Please enter FLAG_VIDEO command followed by a 
                     video_id and an optional flag reason.""")
 
-        elif command[0].upper() == "ALLOW_VIDEO":
+        elif command[0] == "ALLOW_VIDEO":
             try:
                 self._player.allow_video(command[1])
             except IndexError:
                 print("Please enter ALLOW_VIDEO command followed by a "
                       "video_id.")
 
-        elif command[0].upper() == "HELP":
+        elif command[0] == "HELP":
             self._get_help()
-
-        elif command[0].upper() == "EXIT":
-            print("YouTube has now terminated its execution. "
-                  "Thank you and goodbye!")
-            sys.exit(os.EX_OK)
         else:
             print(
                 "Please enter a valid command, type HELP for a list of "

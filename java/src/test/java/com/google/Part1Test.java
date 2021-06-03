@@ -22,8 +22,8 @@ public class Part1Test {
 
   @Test
   public void testPlayVideo() {
-    videoPlayer.playVideo("amazing_cat_video_id");
-    assertTrue(outputStream.toString().contains("Playing video:  Amazing Cat"));
+    videoPlayer.playVideo("amazing_cats_video_id");
+    assertTrue(outputStream.toString().contains("Playing video:  Amazing Cats"));
   }
 
   @Test
@@ -42,8 +42,8 @@ public class Part1Test {
 
   @Test
   public void testPlayVideoStopCurrent() {
-    videoPlayer.playVideo("amazing_cat_video_id");
-    videoPlayer.playVideo("amazing_dog_video_id");
+    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.playVideo("funny_dogs_video_id");
 
     assertTrue(outputStream.toString().contains("Stopping video: Amazing Cats"));
     assertTrue(outputStream.toString().contains("Playing video: Funny Dogs"));
@@ -54,14 +54,14 @@ public class Part1Test {
     videoPlayer.playRandomVideo();
 
     Pattern pattern = Pattern
-        .compile("Playing video: (Amazing cats|Another Cat video|Funny Dogs|Life at Google)\n");
+        .compile("Playing video: (Amazing cats|Another Cat Video|Funny Dogs|Life at Google)\n");
     Matcher matcher = pattern.matcher(outputStream.toString());
     assertTrue(matcher.find());
   }
 
   @Test
   public void testStopVideo() {
-    videoPlayer.playVideo("amazing_cat_video_id");
+    videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.stopVideo();
 
     assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
@@ -76,7 +76,7 @@ public class Part1Test {
 
   @Test
   public void testPauseVideo() {
-    videoPlayer.playVideo("amazing_cat_video_id");
+    videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.pauseVideo();
 
     assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
@@ -93,7 +93,7 @@ public class Part1Test {
 
   @Test
   public void testContinueVideo() {
-    videoPlayer.playVideo("amazing_cat_video_id");
+    videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.pauseVideo();
     videoPlayer.continueVideo();
 
@@ -104,7 +104,7 @@ public class Part1Test {
 
   @Test
   public void testContinueVideoNotPaused() {
-    videoPlayer.playVideo("amazing_cat_video_id");
+    videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.continueVideo();
 
     assertTrue(outputStream.toString()

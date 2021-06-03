@@ -22,8 +22,8 @@ public class Part3Test {
   public void testSearchVideos() {
     videoPlayer.searchVideos("cat");
     assertTrue(outputStream.toString().contains("Here are the results for cat:"));
-    assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cat_video_id)"));
-    assertTrue(outputStream.toString().contains("2) Another Cat video (another_cat_video_id)"));
+    assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
+    assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
         "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
   }
@@ -38,8 +38,8 @@ public class Part3Test {
   public void testSearchVideosTag() {
     videoPlayer.showAllVideos();
     assertTrue(outputStream.toString().contains("Here are the results for cat:"));
-    assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cat_video_id)"));
-    assertTrue(outputStream.toString().contains("2) Another Cat video (another_cat_video_id)"));
+    assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
+    assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
         "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
   }
