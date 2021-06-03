@@ -35,7 +35,7 @@ mvn test -Dtest=Part4Test
 ```
 
 ## Running and Testing from IntelliJ
-You should be able to import the project with java/ being the root of the project.
+To import the project as a Maven project, follow [the official IntelliJ instructions](https://www.jetbrains.com/help/idea/maven-support.html#maven_import_project_start). Alternatively, you should be able to import the project at the java/ folder and IntelliJ will automatically recognize the project as a Maven project.
 
 To run the Application, click on the little green play symbol next to `Run`.
 To run the tests, click on the little green double arrow next to the tests class.
