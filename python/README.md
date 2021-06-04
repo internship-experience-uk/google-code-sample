@@ -29,12 +29,13 @@ For more verbose test output you can use
 python3 -m pytest -v
 ```
 
-To run them individually per part:
+To run them individually per part you might have to prefix your command with
+the correct PYTHONPATH:
 ```shell script
-python3 -m pytest test/part1_test.py
-python3 -m pytest test/part2_test.py
-python3 -m pytest test/part3_test.py
-python3 -m pytest test/part4_test.py
+PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part1_test.py
+PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part2_test.py
+PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part3_test.py
+PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part4_test.py
 ```
 
 For more information on pytest commandline options, such as only running a specific test,

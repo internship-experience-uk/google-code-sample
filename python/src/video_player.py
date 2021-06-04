@@ -1,7 +1,5 @@
 """A video player class."""
 
-from video_library import VideoLibrary
-
 
 class VideoPlayer:
     """A class used to represent a Video Player."""

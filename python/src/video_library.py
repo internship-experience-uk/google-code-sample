@@ -29,11 +29,7 @@ class VideoLibrary:
         video_id: The video url.
 
     Returns:
-        The Video object for the requested video_id.
-    Raises:
-        Exception: if the video is not found.
+        The Video object for the requested video_id. None if the video doesn't
+        exist
     """
-        if video_id in self._videos:
-            return self._videos[video_id]
-        else:
-            raise Exception("Video not found in video library.")
+        return self._videos.get(video_id, None)
