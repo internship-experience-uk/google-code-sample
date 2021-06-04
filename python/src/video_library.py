@@ -1,6 +1,7 @@
 """A video library class."""
 
-import video
+from .video import Video
+import os
 
 
 class VideoLibrary:
@@ -9,16 +10,17 @@ class VideoLibrary:
     def __init__(self):
         """The VideoLibrary class is initialized."""
         self._videos = {}
-        with open("videos.txt", "r") as video_file:
+        video_file_path = os.path.join(os.path.dirname(__file__), 'videos.txt')
+        with open(video_file_path, "r") as video_file:
             for video_info in video_file.readlines():
                 title, url, tags = video_info.split("|")
-                self._videos[url.strip()] = video.Video(
+                self._videos[url.strip()] = Video(
                     title.strip(), url.strip(),
                     [tag.strip() for tag in tags.split(",")])
 
-    def get_videos(self):
+    def get_all_videos(self):
         """Returns all available video information from the video library."""
-        return self._videos.values()
+        return list(self._videos.values())
 
     def get_video(self, video_id):
         """Returns the a video object (title, url, tags) from the video library.

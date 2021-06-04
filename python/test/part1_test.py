@@ -7,20 +7,20 @@ def test_show_all_videos(capfd):
     player.show_all_videos()
     out, err = capfd.readouterr()
     assert "Here's a list of all available videos:" in out
-    assert "Amazing cats (amazing_cats_video_id) [#cat #animal]" in out
+    assert "Amazing Cats (amazing_cats_video_id) [#cat #animal]" in out
     assert "Another Cat Video (another_cat_video_id) [#cat #animal]" in out
     assert "Funny Dogs (funny_dogs_video_id) [#dog #animal]" in out
     assert "Life at Google (life_at_google_video_id) [#google #career]" in out
     assert "Video about nothing (nothing_video_id) []" in out
     assert all(out.splitlines()[i] <= out.splitlines()[i + 1]
-               for i in range(len(out.splitlines()) - 1))
+               for i in range(1, len(out.splitlines()) - 1))
 
 
 def test_play_video(capfd):
     player = video_player.VideoPlayer()
     player.play_video("amazing_cats_video_id")
     out, err = capfd.readouterr()
-    assert "Playing video:  Amazing Cats" in out
+    assert "Playing video: Amazing Cats" in out
 
 
 def test_play_video_nonexistent(capfd):
@@ -28,6 +28,71 @@ def test_play_video_nonexistent(capfd):
     player.play_video("does_not_exist")
     out, err = capfd.readouterr()
     assert "Cannot play video: Video does not exist" in out
+
+
+def test_play_video_stop_previous(capfd):
+    player = video_player.VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.play_video("funny_dogs_video_id")
+    out, err = capfd.readouterr()
+    assert "Stopping video: Amazing Cats" in out
+    assert "Playing video: Funny Dogs" in out
+
+
+def test_play_video_dont_stop_previous_if_nonexistent(capfd):
+    player = video_player.VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.play_video("some_other_video")
+    out, err = capfd.readouterr()
+    assert "Stopping video: Amazing Cats" not in out
+    assert "Cannot play video: Video does not exist" in out
+
+
+def test_stop_video(capfd):
+    player = video_player.VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.stop_video()
+    out, err = capfd.readouterr()
+    assert "Playing video: Amazing Cats" in out
+    assert "Stopping video: Amazing Cats" in out
+
+
+def test_stop_video_twice(capfd):
+    player = video_player.VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.stop_video()
+    player.stop_video()
+    out, err = capfd.readouterr()
+    assert "Playing video: Amazing Cats" in out
+    assert "Stopping video: Amazing Cats" in out
+    assert "Nothing is currently playing" in out
+
+
+def test_stop_video_none_playing(capfd):
+    player = video_player.VideoPlayer()
+    player.stop_video()
+    out, err = capfd.readouterr()
+    assert "Nothing is currently playing" in out
+
+
+def test_play_random_video(capfd):
+    player = video_player.VideoPlayer()
+    player.play_random_video()
+    out, err = capfd.readouterr()
+    assert re.match(
+        "Playing video: (Amazing cats|Another Cat Video|Funny Dogs|Life at Google)\n",
+        out)
+
+
+def test_play_random_stops_previous_video(capfd):
+    player = video_player.VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.play_random_video()
+    out, err = capfd.readouterr()
+    assert "Stopping video: Amazing Cats" in out
+    assert re.match(
+        "Playing video: (Amazing cats|Another Cat Video|Funny Dogs|Life at Google)\n",
+        out)
 
 
 def test_show_playing(capfd):
@@ -46,38 +111,7 @@ def test_show_nothing_playing(capfd):
     assert "Nothing currently playing" in out
 
 
-def test_play_video_stop_current(capfd):
-    player = video_player.VideoPlayer()
-    player.play_video("amazing_cats_video_id")
-    player.play_video("amazing_dogs_video_id")
-    out, err = capfd.readouterr()
-    assert "Stopping video: Amazing Cats" in out
-    assert "Playing video: Funny Dogs" in out
 
-
-def test_play_random_video(capfd):
-    player = video_player.VideoPlayer()
-    player.play_random_video()
-    out, err = capfd.readouterr()
-    assert re.match(
-        "Playing video: (Amazing cats|Another Cat Video|Funny Dogs|Life at Google)\n",
-        out)
-
-
-def test_stop_video(capfd):
-    player = video_player.VideoPlayer()
-    player.play_video("amazing_cats_video_id")
-    player.stop_video()
-    out, err = capfd.readouterr()
-    assert "Playing video: Amazing Cats" in out
-    assert "Stopping video: Amazing Cats" in out
-
-
-def test_stop_video_none_playing(capfd):
-    player = video_player.VideoPlayer()
-    player.stop_video()
-    out, err = capfd.readouterr()
-    assert "Nothing is currently playing" in out
 
 
 def test_pause_video(capfd):

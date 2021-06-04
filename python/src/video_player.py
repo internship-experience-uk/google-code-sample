@@ -1,4 +1,7 @@
 """A video player class."""
+import random
+
+from .video_library import VideoLibrary
 
 
 class VideoPlayer:
