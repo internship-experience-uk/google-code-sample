@@ -94,7 +94,7 @@ public class Part4Test {
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     assertTrue(outputStream.toString().contains("Here's a list of all available videos:"));
     assertTrue(outputStream.toString().contains(
-        "Amazing cats (amazing_cats_video_id) [#cat #animal] - FLAGGED reason: dont_like_cats)"));
+        " Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED reason: dont_like_cats)"));
     assertTrue(outputStream.toString()
         .contains("Another Cat Video (another_cat_video_id) [#cat #animal]"));
     assertTrue(outputStream.toString().contains("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
@@ -119,7 +119,7 @@ public class Part4Test {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.showPlaying();
-    assertTrue(outputStream.toString().contains("Playing video:  Amazing Cats"));
+    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
     assertTrue(outputStream.toString()
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     assertTrue(outputStream.toString().contains("Nothing currently playing"));
