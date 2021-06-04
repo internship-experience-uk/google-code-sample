@@ -31,13 +31,13 @@ public class Part3Test {
   @Test
   public void testSearchVideosNonexistent() {
     videoPlayer.searchVideos("blah");
-    assertTrue(outputStream.toString().contains("No search results for blah."));
+    assertTrue(outputStream.toString().contains("No search results for blah"));
   }
 
   @Test
-  public void testSearchVideosTag() {
-    videoPlayer.showAllVideos();
-    assertTrue(outputStream.toString().contains("Here are the results for cat:"));
+  public void testSearchVideosWithTag() {
+    videoPlayer.searchVideosWithTag("#cat");
+    assertTrue(outputStream.toString().contains("Here are the results for #cat:"));
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
@@ -45,8 +45,8 @@ public class Part3Test {
   }
 
   @Test
-  public void testSearchVideosTagNonexistant() {
+  public void testSearchVideosWithTagNonexistent() {
     videoPlayer.searchVideosWithTag("#blah");
-    assertTrue(outputStream.toString().contains("No search results for #blah."));
+    assertTrue(outputStream.toString().contains("No search results for #blah"));
   }
 }

@@ -11,6 +11,7 @@ def test_show_all_videos(capfd):
     assert "Another Cat Video (another_cat_video_id) [#cat #animal]" in out
     assert "Funny Dogs (funny_dogs_video_id) [#dog #animal]" in out
     assert "Life at Google (life_at_google_video_id) [#google #career]" in out
+    assert "Video about nothing (nothing_video_id) []" in out
     assert all(out.splitlines()[i] <= out.splitlines()[i + 1]
                for i in range(len(out.splitlines()) - 1))
 
@@ -20,6 +21,13 @@ def test_play_video(capfd):
     player.play_video("amazing_cats_video_id")
     out, err = capfd.readouterr()
     assert "Playing video:  Amazing Cats" in out
+
+
+def test_play_video_nonexistent(capfd):
+    player = video_player.VideoPlayer()
+    player.play_video("does_not_exist")
+    out, err = capfd.readouterr()
+    assert "Cannot play video: Video does not exist" in out
 
 
 def test_show_playing(capfd):
@@ -35,7 +43,7 @@ def test_show_nothing_playing(capfd):
     player = video_player.VideoPlayer()
     player.show_playing()
     out, err = capfd.readouterr()
-    assert "Nothing currently playing." in out
+    assert "Nothing currently playing" in out
 
 
 def test_play_video_stop_current(capfd):
@@ -69,7 +77,7 @@ def test_stop_video_none_playing(capfd):
     player = video_player.VideoPlayer()
     player.stop_video()
     out, err = capfd.readouterr()
-    assert "Nothing is currently playing." in out
+    assert "Nothing is currently playing" in out
 
 
 def test_pause_video(capfd):
@@ -85,7 +93,7 @@ def test_pause_video_none_playing(capfd):
     player = video_player.VideoPlayer()
     player.pause_video()
     out, err = capfd.readouterr()
-    assert "Can not pause video: No video currently playing." in out
+    assert "Cannot pause video: No video currently playing" in out
 
 
 def test_continue_video(capfd):
@@ -104,11 +112,11 @@ def test_continue_video_playing(capfd):
     player.play_video("amazing_cats_video_id")
     player.continue_video()
     out, err = capfd.readouterr()
-    assert "Can not continue video: Video is currently playing and not paused." in out
+    assert "Cannot continue video: Video is currently playing and not paused" in out
 
 
 def test_continue_none_playing(capfd):
     player = video_player.VideoPlayer()
     player.continue_video()
     out, err = capfd.readouterr()
-    assert "Can not continue video: No video currently playing." in out
+    assert "Cannot continue video: No video currently playing" in out

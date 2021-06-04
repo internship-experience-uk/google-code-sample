@@ -30,7 +30,7 @@ public class Part2Test {
     videoPlayer.createPlaylist("my_playlist");
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString()
-        .contains("Can not create playlist: A playlist with the same name already "));
+        .contains("Cannot create playlist: A playlist with the same name already "));
   }
 
   @Test
@@ -49,7 +49,7 @@ public class Part2Test {
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
     assertTrue(
-        outputStream.toString().contains("Can not add video to my_playlist. Video already added."));
+        outputStream.toString().contains("Cannot add video to my_playlist. Video already added"));
   }
 
   @Test
@@ -59,14 +59,14 @@ public class Part2Test {
     videoPlayer.addVideoToPlaylist("my_playlist", "some_other_video_id");
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString()
-        .contains("Can not add video to my_playlist: Video does not exist."));
+        .contains("Cannot add video to my_playlist: Video does not exist"));
   }
 
   @Test
   public void TestAddVideoToPlaylistNonExistent() {
     videoPlayer.addVideoToPlaylist("another_playlist", "amazing_cats_video_id");
     assertTrue(outputStream.toString()
-        .contains("Can not add video to another_playlist. Playlist does not exist."));
+        .contains("Cannot add video to another_playlist. Playlist does not exist"));
   }
 
   @Test
@@ -104,7 +104,7 @@ public class Part2Test {
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
     assertTrue(outputStream.toString().contains("Removed video from my_playlist: Amazing Cats"));
     assertTrue(outputStream.toString()
-        .contains("Can not remove video from my_playlist: Video is not in playlist."));
+        .contains("Cannot remove video from my_playlist: Video is not in playlist"));
   }
 
   @Test
@@ -115,7 +115,7 @@ public class Part2Test {
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
     assertTrue(outputStream.toString()
-        .contains("Can not remove video from my_playlist: Video does not exist."));
+        .contains("Cannot remove video from my_playlist: Video does not exist"));
   }
   @Test
   public void testClearPlaylist() {
@@ -131,30 +131,30 @@ public class Part2Test {
     assertTrue(
         outputStream.toString().contains("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
     assertTrue(
-        outputStream.toString().contains("Successfully removed all videos from my_playlist."));
+        outputStream.toString().contains("Successfully removed all videos from my_playlist"));
     assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
-    assertTrue(outputStream.toString().contains("No videos here yet."));
+    assertTrue(outputStream.toString().contains("No videos here yet"));
   }
 
   @Test
   public void testClearPlaylistNonexistant() {
     videoPlayer.clearPlaylist("my_playlist");
     assertTrue(outputStream.toString()
-        .contains("Can not clear playlist another_playlist: Playlist does not exist."));
+        .contains("Cannot clear playlist another_playlist: Playlist does not exist"));
   }
 
   @Test
   public void testDeletePlaylist() {
     videoPlayer.createPlaylist("my_playlist");
-    videoPlayer.clearPlaylist("my_playlist");
+    videoPlayer.deletePlaylist("my_playlist");
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString().contains("Deleted playlist: my_playlist"));
   }
 
   @Test
   public void test_delete_playlist_nonexistant() {
-    videoPlayer.clearPlaylist("my_playlist");
+    videoPlayer.deletePlaylist("my_playlist");
     assertTrue(outputStream.toString()
-        .contains("Can not delete playlist my_playlist: Playlist does not exist."));
+        .contains("Cannot delete playlist my_playlist: Playlist does not exist"));
   }
 }

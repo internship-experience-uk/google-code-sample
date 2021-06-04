@@ -23,7 +23,7 @@ def test_flag_video_already_flagged(capfd):
     player.flag_video("amazing_cats_video_id", "dont_like_cats")
     out, err = capfd.readouterr()
     assert "Successfully flagged video: Amazing Cats (reason: dont_like_cats)" in out
-    assert "Can not flag video: Video already flagged." in out
+    assert "Cannot flag video: Video already flagged" in out
 
 
 def test_flag_video_nonexistent(capfd):
@@ -32,7 +32,7 @@ def test_flag_video_nonexistent(capfd):
     out, err = capfd.readouterr()
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in out
-    assert "Can not flag video: Video does not exist." in out
+    assert "Cannot flag video: Video does not exist" in out
 
 
 def test_flag_video_play(capfd):
@@ -42,7 +42,7 @@ def test_flag_video_play(capfd):
     out, err = capfd.readouterr()
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: Not supplied)" in out
-    assert "Can not play video: Video is currently flagged " \
+    assert "Cannot play video: Video is currently flagged " \
            "(reason: Not supplied)" in out
 
 
@@ -55,7 +55,7 @@ def test_flag_video_add_to_playlist(capfd):
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: Not supplied)" in out
     assert "Successfully created new playlist: my_playlist" in out
-    assert ("Can not add video to playlist my_playlist: Video is currently "
+    assert ("Cannot add video to playlist my_playlist: Video is currently "
             "flagged (reason: Not supplied)") in out
 
 
@@ -101,7 +101,7 @@ def test_flag_video_search_videos(capfd):
     assert "1) Amazing Cats (amazing_cats_video_id)" in out
     assert ("Would you like to play any of the above? If yes, "
             "specify the number of the video. If your answer is not a valid "
-            "number, we will assume it's a no.") in out
+            "number, we will assume it's a no") in out
 
 
 def test_flag_video_stop_video_playing(capfd):
@@ -113,15 +113,13 @@ def test_flag_video_stop_video_playing(capfd):
     assert "Playing video:  Amazing Cats" in out
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in out
-    assert "Nothing currently playing." in out
+    assert "Nothing currently playing" in out
 
 
 def test_allow_video(capfd):
     player = video_player.VideoPlayer()
     player.flag_video("amazing_cats_video_id", "dont_like_cats")
     player.allow_video("amazing_cats_video_id")
-    player.allow_video("amazing_cats_video_id")
-    player.show_playing()
     out, err = capfd.readouterr()
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in out
@@ -133,7 +131,7 @@ def test_allow_video_not_flagged(capfd):
     player.allow_video("amazing_cats_video_id")
     player.show_playing()
     out, err = capfd.readouterr()
-    assert "Can not remove flag from video. Video is not flagged." in out
+    assert "Cannot remove flag from video. Video is not flagged" in out
 
 
 def test_allow_video_show_playlist(capfd):
