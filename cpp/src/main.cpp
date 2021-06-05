@@ -1,9 +1,11 @@
+#include <algorithm>
+#include <fstream>
 #include <iostream>
-#include <vector>
 #include <sstream>
 #include <unordered_map>
 #include <vector>
-#include <fstream>
+#include <vector>
+
 #include "commandparser.h"
 #include "helper.h"
 
