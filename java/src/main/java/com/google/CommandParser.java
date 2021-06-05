@@ -9,8 +9,8 @@ class CommandParser {
 
   private final VideoPlayer videoPlayer;
 
-  CommandParser() {
-    this.videoPlayer = new VideoPlayer();
+  CommandParser(VideoPlayer videoPlayer) {
+    this.videoPlayer = videoPlayer;
   }
 
   /**

@@ -1,13 +1,15 @@
 """A youtube terminal simulator."""
 
-import command_parser
+from command_parser import CommandParser
+from video_player import VideoPlayer
 import sys
 import os
 
 if __name__ == "__main__":
     print("""Hello and welcome to YouTube, what would you like to do?
     Enter HELP for list of available commands or EXIT to terminate.""")
-    parser = command_parser.CommandParser()
+    video_player = VideoPlayer()
+    parser = CommandParser(video_player)
     while True:
         command = input().upper()
         if command == "EXIT":

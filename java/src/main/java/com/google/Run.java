@@ -7,7 +7,8 @@ public class Run {
   public static void main(String[] args){
     System.out.println("Hello and welcome to YouTube, what would you like to do? "
         + "Enter HELP for list of available commands or EXIT to terminate.");
-    var parser = new CommandParser();
+    var videoPlayer = new VideoPlayer();
+    var parser = new CommandParser(videoPlayer);
     var scanner = new Scanner(System.in);
     while (true) {
       var input = scanner.nextLine();

@@ -1,14 +1,13 @@
 """A command helper class."""
 
-import video_player
 import textwrap
 
 
 class CommandParser:
     """A class used to parse and execute a user Command."""
 
-    def __init__(self):
-        self._player = video_player.VideoPlayer()
+    def __init__(self, video_player):
+        self._player = video_player
 
     def execute_command(self, command):
         """Executes the user command. Expects the command to be upper case."""

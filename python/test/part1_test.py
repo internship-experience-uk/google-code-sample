@@ -148,7 +148,7 @@ def test_continue_video(capfd):
     assert "Continuing video: Amazing Cats" in out
 
 
-def test_continue_video_playing(capfd):
+def test_continue_video_not_paused(capfd):
     player = VideoPlayer()
     player.play_video("amazing_cats_video_id")
     player.continue_video()
