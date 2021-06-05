@@ -9,7 +9,7 @@
 #include "commandparser.h"
 #include "helper.h"
 
-int main(int argc, char *argv[])
+int main()
 {
      std::cout << "Hello and welcome to YouTube, what would you like to do? "
                   "Enter HELP for list of available commands or EXIT to terminate." << std::endl;
