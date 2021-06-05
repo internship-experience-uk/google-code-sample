@@ -101,7 +101,7 @@ def test_show_playing(capfd):
     player.show_playing()
     out, err = capfd.readouterr()
     assert "Playing video: Amazing Cats" in out
-    assert "Currently playing: Amazing Cats (amazing_cats_video_id)" in out
+    assert "Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]" in out
 
 
 def test_show_nothing_playing(capfd):
@@ -126,7 +126,8 @@ def test_pause_video_show_playing(capfd):
     player.pause_video()
     player.show_playing()
     out, err = capfd.readouterr()
-    assert "Currently playing: Amazing Cats (amazing_cats_video_id) - PAUSED" in out
+    assert "Currently playing: Amazing Cats (amazing_cats_video_id) " \
+           "[#cat #animal] - PAUSED" in out
 
 
 def test_pause_video_none_playing(capfd):
