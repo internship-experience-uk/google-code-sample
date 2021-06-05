@@ -15,12 +15,12 @@ class Video {
         Video(std::string title, std::string videoId, std::vector<std::string> tags);
         
         // Returns the title of the video.
-        std::string getTitle();
+        std::string const & getTitle() const;
         
         // Returns the video id of the video.
-        std::string getVideoId();
+        std::string const & getVideoId() const;
         
         // Returns a readonly collection of the tags of the video.
-        std::vector<std::string> getTags();
+        std::vector<std::string> const & getTags() const;
 };
 
