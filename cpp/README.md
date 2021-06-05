@@ -20,7 +20,7 @@ cmake -S . -B build
 
 Followed by:
 ```shell script
-cmake -S . -B build
+cmake --build build/
 ```
 
 To run:
