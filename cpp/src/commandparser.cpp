@@ -8,11 +8,16 @@ CommandParser::CommandParser(){
 };
 
 void CommandParser::executeCommand(std::vector<std::string> command) {
+    if (command.empty()) {
+        std::cout << "No commands passed in to executeCommand, that is unexpected" << std::endl;
+        return;
+    }
+
     if(command[0] == "SHOW_ALL_VIDEOS"){
         videoPlayer.showAllVideos();
     }
     else if (command[0] == "PLAY"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter PLAY command followed by video_id." << std::endl;
         }
         else{
@@ -20,22 +25,22 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "PLAY_RANDOM"){
-            videoPlayer.playRandomVideo();
+        videoPlayer.playRandomVideo();
     }
-    else if (command[0] == "STOP"){ 
-            videoPlayer.stopVideo();
+    else if (command[0] == "STOP"){
+        videoPlayer.stopVideo();
     }
     else if (command[0] == "PAUSE"){
-            videoPlayer.pauseVideo();
+        videoPlayer.pauseVideo();
     }
     else if (command[0] == "CONTINUE"){
-            videoPlayer.continueVideo();
+        videoPlayer.continueVideo();
     }
     else if (command[0] == "SHOW_PLAYING"){
-            videoPlayer.showPlaying();
+        videoPlayer.showPlaying();
     }
     else if (command[0] == "CREATE_PLAYLIST"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter CREATE_PLAYLIST command followed by video_id." << std::endl;
         }
         else{
@@ -43,7 +48,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "ADD_TO_PLAYLIST"){
-        if(command[1].empty() || command[2].empty()) {
+        if(command.size() != 3) {
             std::cout << "Please enter ADD_TO_PLAYLIST command followed by playlist name and video_id." << std::endl;
         }
         else{
@@ -51,7 +56,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "REMOVE_FROM_PLAYLIST"){
-        if(command[1].empty() || command[2].empty()) {
+        if(command.size() != 3) {
             std::cout << "Please enter REMOVE_FROM_PLAYLIST command followed by playlist name and video_id." << std::endl;
         }
         else{
@@ -59,7 +64,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "CLEAR_PLAYLIST"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter CLEAR_PLAYLIST command followed by a playlist name." << std::endl;
         }
         else{
@@ -67,7 +72,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "DELETE_PLAYLIST"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter DELETE_PLAYLIST command followed by a playlist name." << std::endl;
         }
         else{
@@ -75,7 +80,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "SHOW_PLAYLIST"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter SHOW_PLAYLIST command followed by a playlist name." << std::endl;
         }
         else{
@@ -83,10 +88,10 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "SHOW_ALL_PLAYLISTS"){
-            videoPlayer.showAllPlaylists(); 
+        videoPlayer.showAllPlaylists();
     }
     else if (command[0] == "SEARCH_VIDEOS"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter SEARCH_VIDEOS command followed by a search term." << std::endl;
         }
         else{
@@ -94,7 +99,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "SEARCH_VIDEOS_WITH_TAG"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter SEARCH_VIDEOS_WITH_TAG command followed by a video tag." << std::endl;
         }
         else{
@@ -102,17 +107,19 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "FLAG_VIDEO"){
-        if(!command[1].empty() && command[2].empty()) {
-            videoPlayer.flagVideo(command[1]);
-        }
-        else if (command[1].empty()){
-            std::cout << "Please enter FLAG_VIDEO command followed by a video_id and an optional flag reason." << std::endl;
-        } else {
-            videoPlayer.flagVideo(command[1], command[2]);
+        switch (command.size()) {
+            case 2:
+                videoPlayer.flagVideo(command[1]);
+                break;
+            case 3:
+                videoPlayer.flagVideo(command[1], command[2]);
+                break;
+            default:
+                std::cout << "Please enter FLAG_VIDEO command followed by a video_id and an optional flag reason." << std::endl;
         }
     }
     else if (command[0] == "ALLOW_VIDEO"){
-        if(command[1].empty()) {
+        if(command.size() != 2) {
             std::cout << "Please enter ALLOW_VIDEO command followed by a video_id." << std::endl;
         }
         else{
@@ -120,7 +127,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
         }
     }
     else if (command[0] == "HELP"){
-            getHelp();
+        getHelp();
     }
     else {
         std::cout << "Please enter a valid command, type HELP for a list of available commands." << std::endl;
@@ -149,6 +156,6 @@ void CommandParser::getHelp() {
                         "    ALLOW_VIDEO <video_id> - Removes a flag from a video.\n"
                         "    HELP - Displays help.\n"
                         "    EXIT - Terminates the program execution.\n";
-    std::cout << helpText << std::endl;                    
+    std::cout << helpText << std::endl;
 };
 
