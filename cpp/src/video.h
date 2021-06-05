@@ -12,7 +12,7 @@ class Video {
         std::string videoId;
         std::vector<std::string> tags;
     public:
-        Video(std::string title, std::string videoId, std::vector<std::string> tags);
+        Video(std::string&& title, std::string&& videoId, std::vector<std::string>&& tags);
         
         // Returns the title of the video.
         std::string const & getTitle() const;
