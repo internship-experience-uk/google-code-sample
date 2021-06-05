@@ -1,7 +1,6 @@
-#ifndef VIDEOPLAYER_H
-#define VIDEOPLAYER_H
+#pragma once
 
-#include <iostream>
+#include <string>
 
 /**
  * A class used to represent a Video Player.
@@ -29,5 +28,3 @@ class VideoPlayer {
         void flagVideo( std::string videoId,  std::string reason);
         void allowVideo( std::string videoId);
 };
-
-#endif

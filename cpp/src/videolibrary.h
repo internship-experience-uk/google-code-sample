@@ -1,10 +1,10 @@
-#ifndef VIDEOLIBRARY_H
-#define VIDEOLIBRARY_H
+#pragma once
 
-#include <iostream>
+#include "video.h"
+
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include "video.h"
 
 /**
  * A class used to represent a Video Library.
@@ -18,5 +18,3 @@ class VideoLibrary {
         std::vector<Video> getVideos();
         Video getVideo(std::string videoId);  
 };
-
-#endif

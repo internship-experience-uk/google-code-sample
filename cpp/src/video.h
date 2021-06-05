@@ -1,7 +1,6 @@
-#ifndef VIDEO_H
-#define VIDEO_H
+#pragma once
 
-#include <iostream>
+#include <string>
 #include <vector>
 
 /** 
@@ -25,4 +24,3 @@ class Video {
         std::vector<std::string> getTags();
 };
 
-#endif

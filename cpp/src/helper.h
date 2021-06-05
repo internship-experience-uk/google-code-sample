@@ -1,9 +1,5 @@
-#ifndef HELPER_H
-#define HELPER_H
+#pragma once
 
-#include <iostream>
-#include <vector>
+#include <string>
 
 std::string trim(std::string s);    
-
-#endif

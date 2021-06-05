@@ -1,9 +1,10 @@
-#ifndef COMMANDPARSER_H
-#define COMMANDPARSER_H
+#pragma once
 
-#include <iostream>
-#include <vector>
 #include "videoplayer.h"
+
+#include <string>
+#include <vector>
+
 
 /**
  * A class used to parse and execute a user Command.
@@ -17,5 +18,3 @@ class CommandParser {
         // Executes the given user command.
         void executeCommand(std::vector<std::string> command);
 };
-
-#endif
