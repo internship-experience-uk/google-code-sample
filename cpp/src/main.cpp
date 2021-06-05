@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "commandparser.h"
+#include "videoplayer.h"
 #include "helper.h"
 
 int main()
@@ -17,7 +18,8 @@ int main()
     std::string userInput;
     std::string command;
     std::vector<std::string> commandList;
-    CommandParser cp = CommandParser();
+    VideoPlayer vp;
+    CommandParser cp = CommandParser(std::move(vp));
 
     while(std::getline(std::cin, userInput)) {
         if(userInput.empty()){

@@ -1,10 +1,6 @@
 #include <iostream>
 #include "videoplayer.h"
   
-VideoPlayer::VideoPlayer() {
-    // The VideoPlayer constructor
-};
-
 void VideoPlayer::showAllVideos(){
     std::cout << "showAllVideos needs implementation" << std::endl;
 };

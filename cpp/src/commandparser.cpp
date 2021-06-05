@@ -3,8 +3,9 @@
 #include <sstream>
 #include "commandparser.h"
 
-CommandParser::CommandParser(){
-    videoPlayer = VideoPlayer();
+CommandParser::CommandParser(VideoPlayer&& vp)
+    :videoPlayer{vp}
+{
 };
 
 void CommandParser::executeCommand(std::vector<std::string> command) {
@@ -134,8 +135,8 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
     }
 };
 
-void CommandParser::getHelp() {
-    std::string helpText = " Available commands:\n"
+void CommandParser::getHelp() const {
+    static std::string const helpText = " Available commands:\n"
                         "    SHOW_ALL_VIDEOS - Lists all videos from the library.\n"
                         "    PLAY <video_id> - Plays specified video.\n"
                         "    PLAY_RANDOM - Plays a random video from the library.\n"

@@ -12,9 +12,9 @@
 class CommandParser {
     private:
         VideoPlayer videoPlayer;
-        void getHelp();
+        void getHelp() const;
     public:
-        CommandParser();
+        CommandParser(VideoPlayer&& vp);
         // Executes the given user command.
         void executeCommand(std::vector<std::string> command);
 };
