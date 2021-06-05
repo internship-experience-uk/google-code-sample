@@ -20,7 +20,7 @@ VideoLibrary::VideoLibrary(){
              std::getline(linestream, title, '|');
              std::getline(linestream, id, '|');   
              while(std::getline(linestream, tag, ',')){
-                tags.__emplace_back(trim(tag));
+                tags.emplace_back(trim(tag));
              }
              Video video = Video(trim(title), trim(id), tags);
              this->videos.insert(std::make_pair(trim(id), video));
@@ -36,7 +36,7 @@ std::vector<Video> VideoLibrary::getVideos() {
  std::vector<Video> videos;
  std::unordered_map<std::string, Video>::iterator it;
  for(it = this->videos.begin(); it != this->videos.end(); it++){
-     videos.__emplace_back(it->second);
+     videos.emplace_back(it->second);
  }
  return videos;
 };
