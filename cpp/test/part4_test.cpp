@@ -91,7 +91,7 @@ TEST(Part4, flagVideoShowAllVideos)
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     EXPECT_THAT(output, HasSubstr("Here's a list of all available videos:"));
-    EXPECT_THAT(output, HasSubstr("Amazing cats (amazing_cats_video_id) [#cat #animal] - FLAGGED reason: dont_like_cats)"));
+    EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED reason: dont_like_cats)"));
     EXPECT_THAT(output, HasSubstr("Another Cat Video (another_cat_video_id) [#cat #animal]"));
     EXPECT_THAT(output, HasSubstr("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
     EXPECT_THAT(output, HasSubstr("Life at Google (life_at_google_video_id) [#google #career]"));
@@ -107,7 +107,7 @@ TEST(Part4, flagVideoSearchVideos)
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-    EXPECT_THAT(output, HasSubstr( "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no"));
+    EXPECT_THAT(output, HasSubstr( "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
 }
 
 TEST(Part4, flagVideoStopVideoPlaying)
@@ -118,7 +118,7 @@ TEST(Part4, flagVideoStopVideoPlaying)
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.showPlaying();
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_THAT(output, HasSubstr("Playing video:  Amazing Cats"));
+    EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     EXPECT_THAT(output, HasSubstr("Nothing currently playing"));
 }
@@ -140,7 +140,7 @@ TEST(Part4, allowVideoNotFlagged)
     testing::internal::CaptureStdout();
     videoPlayer.allowVideo("amazing_cats_video_id");
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_THAT(output, HasSubstr("Cannot remove flag from video. Video is not flagged"));
+    EXPECT_THAT(output, HasSubstr("Cannot remove flag from video: Video is not flagged"));
 }
 
 TEST(Part4, allowVideoShowPlaylist)

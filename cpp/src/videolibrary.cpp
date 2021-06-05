@@ -31,7 +31,6 @@ VideoLibrary::VideoLibrary()
     else{
         std::cout << "Couldn't find videos.txt" << std::endl;
     }
-
 };
 
 std::vector<Video> VideoLibrary::getVideos() const {
