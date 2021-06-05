@@ -14,6 +14,13 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+add_compile_options(
+    -Wall
+    -Wextra
+    -pedantic
+    # Below is to avoid unnecessary warnings before code is implemented.
+    -Wno-unused-parameter)
+
 add_executable(youtube
     src/commandparser.cpp
     src/helper.cpp
