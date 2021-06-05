@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
      CommandParser cp = CommandParser();
 
      while(true) {
-         getline(std::cin, userInput);
+         std::getline(std::cin, userInput);
          if(userInput.empty()){
             std::cout <<  "Please enter a valid command, type HELP for a list of available commands." << std::endl;
          } 
