@@ -45,7 +45,7 @@ class VideoPlayer:
 
         print("show_playing needs implementation")
 
-    def create_playlist(self, name):
+    def create_playlist(self, playlist_name):
         """Creates a playlist with a given name.
 
     Args:
@@ -53,7 +53,7 @@ class VideoPlayer:
     """
         print("create_playlist needs implementation")
 
-    def add_to_playlist(self, name, video_id):
+    def add_to_playlist(self, playlist_name, video_id):
         """Adds a video to a playlist with a given name.
 
     Args:
@@ -62,7 +62,7 @@ class VideoPlayer:
     """
         print("add_to_playlist needs implementation")
 
-    def remove_from_playlist(self, name, video_id):
+    def remove_from_playlist(self, playlist_name, video_id):
         """Removes a video to a playlist with a given name.
 
     Args:
@@ -71,27 +71,27 @@ class VideoPlayer:
     """
         print("remove_from_playlist needs implementation")
 
-    def clear_playlist(self, name):
+    def clear_playlist(self, playlist_name):
         """Removes all videos from a playlist with a given name.
 
      Args:
-        name: The playlist name.
+        playlist_name: The playlist name.
     """
         print("clears_playlist needs implementation")
 
-    def delete_playlist(self, name):
+    def delete_playlist(self, playlist_name):
         """Deletes a playlist with a given name.
 
     Args:
-        name: The playlist name.
+        playlist_name: The playlist name.
     """
         print("deletes_playlist needs implementation")
 
-    def show_playlist(self, name):
+    def show_playlist(self, playlist_name):
         """Display all videos in a playlist with a given name.
 
     Args:
-        name: The playlist name.
+        playlist_name: The playlist name.
     """
         print("show_playlist needs implementation")
 

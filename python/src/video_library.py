@@ -1,7 +1,14 @@
 """A video library class."""
 
 from video import Video
-import os
+from pathlib import Path
+import csv
+
+
+# Helper Wrapper around CSV reader to strip whitespace from around
+# each item.
+def _csv_reader_with_strip(reader):
+    yield from ((item.strip() for item in line) for line in reader)
 
 
 class VideoLibrary:
@@ -10,13 +17,16 @@ class VideoLibrary:
     def __init__(self):
         """The VideoLibrary class is initialized."""
         self._videos = {}
-        video_file_path = os.path.join(os.path.dirname(__file__), 'videos.txt')
-        with open(video_file_path, "r") as video_file:
-            for video_info in video_file.readlines():
-                title, url, tags = video_info.split("|")
-                self._videos[url.strip()] = Video(
-                    title.strip(), url.strip(),
-                    [tag.strip() for tag in tags.split(",")])
+        with open(Path(__file__).parent / "videos.txt") as video_file:
+            reader = _csv_reader_with_strip(
+                csv.reader(video_file, delimiter="|"))
+            for video_info in reader:
+                title, url, tags = video_info
+                self._videos[url] = Video(
+                    title,
+                    url,
+                    tags.split(","),
+                )
 
     def get_all_videos(self):
         """Returns all available video information from the video library."""

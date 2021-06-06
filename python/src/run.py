@@ -1,5 +1,5 @@
 """A youtube terminal simulator."""
-
+from command_parser import CommandException
 from command_parser import CommandParser
 from video_player import VideoPlayer
 import sys
@@ -16,5 +16,7 @@ if __name__ == "__main__":
             print("YouTube has now terminated its execution. "
                   "Thank you and goodbye!")
             sys.exit(os.EX_OK)
-
-        parser.execute_command(command.split())
+        try:
+            parser.execute_command(command.split())
+        except CommandException as e:
+            print(e)
