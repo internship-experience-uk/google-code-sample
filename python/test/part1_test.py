@@ -1,5 +1,5 @@
 import re
-from video_player import VideoPlayer
+from src.video_player import VideoPlayer
 
 
 def test_show_all_videos(capfd):

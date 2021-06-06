@@ -1,4 +1,4 @@
-from video_player import VideoPlayer
+from src.video_player import VideoPlayer
 from unittest import mock
 
 

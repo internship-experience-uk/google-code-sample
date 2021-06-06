@@ -1,6 +1,6 @@
 """A video library class."""
 
-from video import Video
+from .video import Video
 from pathlib import Path
 import csv
 

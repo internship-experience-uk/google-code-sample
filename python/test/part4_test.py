@@ -1,6 +1,6 @@
 from unittest import mock
 
-from video_player import VideoPlayer
+from src.video_player import VideoPlayer
 
 
 def test_flag_video_with_reason(capfd):

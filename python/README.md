@@ -11,7 +11,7 @@ you run the code and tests from the command line as shown  below.
 ## Running and testing from the Commandline
 To run:
 ```shell script
-python3 src/run.py
+python3 -m src.run
 ```
 
 #### Running the tests
@@ -29,22 +29,31 @@ For more verbose test output you can use
 python3 -m pytest -v
 ```
 
-To run them individually per part you might have to prefix your command with
-the correct PYTHONPATH:
 ```shell script
-PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part1_test.py
-PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part2_test.py
-PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part3_test.py
-PYTHONPATH=$(pwd)/src/ python3 -m pytest test/part4_test.py
+python3 -m pytest test/part1_test.py
+python3 -m pytest test/part2_test.py
+python3 -m pytest test/part3_test.py
+python3 -m pytest test/part4_test.py
 ```
 
 For more information on pytest commandline options, such as only running a specific test,
 you can read more [here](https://docs.pytest.org/en/reorganize-docs/new-docs/user/commandlineuseful.html).
 
-## Running and testing from IntelliJ
+## Running and testing from IntelliJ/PyCharm
+* Mark both the `python/` and `src/` directory as Sources Root
+    * (Right-click on src/ > Mark Directory As > Sources Root )
+* Mark the  `test/` directory as Test Sources Root
+    * (Right-click on test/ > Mark Directory As > Test Sources Root)
 
-Make sure to mark the `python/` and `src/` directory as Sources Root
-(Right-click on src/ -> Mark Directory As -> Sources Root ) and the `test/` directory as Test Sources Root
-(Right-click on test/ -> Mark Directory As -> Test Sources Root)
-If you imported the project at the python/ level, you will only need to mark the `src/` folder
-as sources root. This will allow your editor to correctly index the project.
+This will allow your editor to correctly index the project.
+
+To run the Application, follow the setup below:
+![intellij_setup](intellij_setup.png)
+
+To run the tests, add a pytest configuration as follows:
+* Run > Edit Configurations > "+" Button > Python tests > pytest
+
+![intellij_test_setup](intellij_test_setup.png)
+
+Then you will be able to run and debug the unit tests.
+
