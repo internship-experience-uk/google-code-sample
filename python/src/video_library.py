@@ -25,7 +25,7 @@ class VideoLibrary:
                 self._videos[url] = Video(
                     title,
                     url,
-                    tags.split(","),
+                    [tag.strip() for tag in tags.split(",")] if tags else [],
                 )
 
     def get_all_videos(self):
