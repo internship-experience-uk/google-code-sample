@@ -11,6 +11,10 @@ TEST(Part3, searchVideosWithNoAnswer)
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.searchVideos("cat");
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("No");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
@@ -24,16 +28,16 @@ TEST(Part3, searchVideosAndPlayAnswer)
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.searchVideos("cat");
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("2");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
     EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
-    std::streambuf* orig = std::cin.rdbuf();
-    std::istringstream input("2");
-    std::cin.rdbuf(input.rdbuf());
     EXPECT_THAT(output, HasSubstr("Playing video: Another Cat Video"));
-    std::cin.rdbuf(orig);
 }
 
 TEST(Part3, searchVideosAnswerOutOfBounds)
@@ -41,16 +45,17 @@ TEST(Part3, searchVideosAnswerOutOfBounds)
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.searchVideos("cat");
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("5");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
     EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
-    std::streambuf* orig = std::cin.rdbuf();
-    std::istringstream input("5");
-    std::cin.rdbuf(input.rdbuf());
+  
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
-    std::cin.rdbuf(orig);
 }
 
 TEST(Part3, searchVideosInvalidNumber)
@@ -58,16 +63,16 @@ TEST(Part3, searchVideosInvalidNumber)
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.searchVideos("cat");
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("ab3g");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
     EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
-    std::streambuf* orig = std::cin.rdbuf();
-    std::istringstream input("ab3g");
-    std::cin.rdbuf(input.rdbuf());
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
-    std::cin.rdbuf(orig);
 }
 
 TEST(Part3, searchVideosNoResults)
@@ -84,6 +89,10 @@ TEST(Part3, searchVideosWithTagNoAnswer)
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.searchVideosWithTag("#cat");
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("no");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
@@ -97,16 +106,16 @@ TEST(Part3, searchVideosWithTagPlayAnswer)
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.searchVideos("#blah");
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("1");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
     EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
-    std::streambuf* orig = std::cin.rdbuf();
-    std::istringstream input("ab3g");
-    std::cin.rdbuf(input.rdbuf());
     EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
-    std::cin.rdbuf(orig);
 }
 
 TEST(Part3, searchVideosWithTagAnswerOutOfBounds)
@@ -115,15 +124,15 @@ TEST(Part3, searchVideosWithTagAnswerOutOfBounds)
     testing::internal::CaptureStdout();
     videoPlayer.searchVideosWithTag("#cat");
     std::string output = testing::internal::GetCapturedStdout();
+    std::streambuf* orig = std::cin.rdbuf();
+    std::istringstream input("5");
+    std::cin.rdbuf(input.rdbuf());
+    std::cin.rdbuf(orig);
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
     EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
-    std::streambuf* orig = std::cin.rdbuf();
-    std::istringstream input("5");
-    std::cin.rdbuf(input.rdbuf());
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
-    std::cin.rdbuf(orig);
 }
 
 TEST(Part3, searchVideosWithTagNoResults)
