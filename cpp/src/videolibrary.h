@@ -16,5 +16,5 @@ class VideoLibrary {
     public:
         VideoLibrary();
         std::vector<Video> getVideos() const;
-        Video const & getVideo(std::string videoId) const;
+        Video const *getVideo(std::string videoId) const;
 };

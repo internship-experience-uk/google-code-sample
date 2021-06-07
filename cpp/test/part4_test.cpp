@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+
 #include "../src/videoplayer.h"
 
 using ::testing::HasSubstr;
@@ -43,7 +44,7 @@ TEST(Part4, flagVideoNonexistent)
     EXPECT_THAT(output, HasSubstr("Cannot flag video: Video does not exist"));
 }
 
-TEST(Part4, flagVideoPlay)
+TEST(Part4, flagVideoCanNoLongerPlay)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
@@ -53,6 +54,7 @@ TEST(Part4, flagVideoPlay)
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: Not supplied)"));
     EXPECT_THAT(output, HasSubstr("Cannot play video: Video is currently flagged (reason: Not supplied)"));
 }
+
 
 TEST(Part4, flagVideoAddVideoToPlaylist)
 {
@@ -79,7 +81,7 @@ TEST(Part4, flagVideoShowPlaylist)
     EXPECT_THAT(output, HasSubstr("Added video to my_playlist: Amazing Cats"));
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     EXPECT_THAT(output, HasSubstr("Showing Playlist: my_playlist"));
-    EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED(reason: dont_like_cats)"));
+    EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED (reason: dont_like_cats)"));
 }
 
 TEST(Part4, flagVideoShowAllVideos)
@@ -107,7 +109,7 @@ TEST(Part4, flagVideoSearchVideos)
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-    EXPECT_THAT(output, HasSubstr( "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr( "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a noß"));
 }
 
 TEST(Part4, flagVideoStopVideoPlaying)

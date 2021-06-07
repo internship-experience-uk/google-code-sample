@@ -10,7 +10,7 @@
 
 VideoLibrary::VideoLibrary()
 {
-    std::ifstream file("videos.txt");
+    std::ifstream file("./src/videos.txt");
     if(file.is_open()){
         std::string line;
         while (std::getline(file, line)) {
@@ -34,7 +34,6 @@ VideoLibrary::VideoLibrary()
 };
 
 std::vector<Video> VideoLibrary::getVideos() const {
-    // lots of copying, but would need a bigger redesign to avoid
     std::vector<Video> result;
     for (auto const & video : this->videos) {
         result.emplace_back(video.second);
@@ -42,17 +41,12 @@ std::vector<Video> VideoLibrary::getVideos() const {
     return result;
 };
 
-Video const & VideoLibrary::getVideo(std::string videoId) const {
-    // the way it was before would do map lookup twice! first for find(),
-    // then for at()
+Video const *VideoLibrary::getVideo(std::string videoId) const {
     auto const found = this->videos.find(videoId);
     if(found == this->videos.end()) {
-        // design-wise this is bad. Throwing an exception is expensive in C++,
-        // and should be only for exceptional situations, like system blowing up.
-        // User looking for a non-existing video is not an exception, but something
-        // that will happen a lot.
-        throw std::runtime_error("Video not found in video library");
+        std::cout << "Video not found in video library" << std::endl;
+        return nullptr;
     } else {
-        return found->second;
+        return &(found->second);
     }
 };

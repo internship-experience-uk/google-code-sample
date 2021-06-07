@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+
 #include "../src/videoplayer.h"
 
 using ::testing::HasSubstr;
@@ -22,7 +23,7 @@ TEST(Part2, createExistingPlaylist)
     videoPlayer.createPlaylist("my_playlist");
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Successfully created new playlist: my_playlist"));
-    EXPECT_THAT(output, HasSubstr("Cannot create playlist: A playlist with the same name already "));
+    EXPECT_THAT(output, HasSubstr("Cannot create playlist: A playlist with the same name already exists"));
 }
 
 TEST(Part2, addToPlaylist)
@@ -71,17 +72,26 @@ TEST(Part2, addVideoToPlaylistNonExistent)
     EXPECT_THAT(output, HasSubstr("Cannot add video to another_playlist: Playlist does not exist"));
 }
 
-TEST(Part2, showAllPlaylist)
+TEST(Part2, showAllPlaylistsNoPlaylistsExist)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
     videoPlayer.showAllPlaylists();
-    videoPlayer.createPlaylist("my_playlist");
-    videoPlayer.showAllPlaylists();
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("No playlists exist yet"));
+}
+
+TEST(Part2, showAllPlaylist)
+{
+    VideoPlayer videoPlayer = VideoPlayer();
+    testing::internal::CaptureStdout();
+    videoPlayer.createPlaylist("my_playlist");
+    videoPlayer.createPlaylist("another_playlist");
+    videoPlayer.showAllPlaylists();
+    std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Showing all playlists:"));
     EXPECT_THAT(output, HasSubstr("my_playlist"));
+    EXPECT_THAT(output, HasSubstr("another_playlist"));
 }
 
 TEST(Part2, showPlaylist)
@@ -101,6 +111,15 @@ TEST(Part2, showPlaylist)
     EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
 }
 
+TEST(Part2, showPlaylistNonExistent)
+{
+    VideoPlayer videoPlayer = VideoPlayer();
+    testing::internal::CaptureStdout();
+    videoPlayer.showPlaylist("my_playlist");
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_THAT(output, HasSubstr("Cannot show playlist my_playlist: Playlist does not exist"));
+}
+
 TEST(Part2, removeFromPlaylist)
 {
     VideoPlayer videoPlayer = VideoPlayer();
@@ -116,6 +135,16 @@ TEST(Part2, removeFromPlaylist)
     EXPECT_THAT(output, HasSubstr("Cannot remove video from my_playlist: Video is not in playlist"));
 }
 
+TEST(Part2, removeFromPlaylistVideoNotInPlaylist)
+{
+    VideoPlayer videoPlayer = VideoPlayer();
+    testing::internal::CaptureStdout();
+    videoPlayer.createPlaylist("my_playlist");
+    videoPlayer.removeFromPlaylist("my_playlist", "amazing_cats_video_id");
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_THAT(output, HasSubstr("Cannot remove video from my_playlist: Video is not in playlist"));
+}
+
 TEST(Part2, removeFromPlaylistNonexistantVideo)
 {
     VideoPlayer videoPlayer = VideoPlayer();
@@ -127,6 +156,15 @@ TEST(Part2, removeFromPlaylistNonexistantVideo)
     EXPECT_THAT(output, HasSubstr("Successfully created new playlist: my_playlist"));
     EXPECT_THAT(output, HasSubstr("Added video to my_playlist: Amazing Cats"));
     EXPECT_THAT(output, HasSubstr("Cannot remove video from my_playlist: Video does not exist"));
+}
+
+TEST(Part2, removeFromPlaylistNonexistentPlaylist)
+{
+    VideoPlayer videoPlayer = VideoPlayer();
+    testing::internal::CaptureStdout();
+    videoPlayer.removeFromPlaylist("my_cool_playlist", "some_other_video_id");
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_THAT(output, HasSubstr("Cannot remove video from my_cool_playlist: Playlist does not exist"));
 }
 
 TEST(Part2, clearPlaylist)
@@ -154,7 +192,7 @@ TEST(Part2,  clearPlaylistNonexistant)
     testing::internal::CaptureStdout();
     videoPlayer.clearPlaylist("my_playlist");
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_THAT(output, HasSubstr("Cannot clear playlist another_playlist: Playlist does not exist"));
+    EXPECT_THAT(output, HasSubstr("Cannot clear playlist my_playlist: Playlist does not exist"));
 }
 
 TEST(Part2,  deletePlaylist)

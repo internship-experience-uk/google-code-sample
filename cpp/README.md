@@ -30,5 +30,13 @@ To run:
 
 To run all the tests:
 ```shell script
-cd build && ctest --output-on-failure
+ ctest --test-dir build --output-on-failure
+```
+
+To run tests for a single Part (after building):
+```shell script
+./build/part1_test
+./build/part2_test
+./build/part3_test
+./build/part4_test
 ```

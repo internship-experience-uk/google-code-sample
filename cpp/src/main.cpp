@@ -9,6 +9,7 @@
 #include "commandparser.h"
 #include "videoplayer.h"
 #include "helper.h"
+#include "videolibrary.h"
 
 int main()
 {
