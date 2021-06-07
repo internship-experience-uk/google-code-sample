@@ -12,7 +12,7 @@ you run the code and tests from the command line as shown  below.
 
 The below commands assume you are located in the root folder.
 
-## Running and Testing from the Commandline
+## Running and Testing from the Command line
 To build:
 ```shell script
 cmake -S . -B build
