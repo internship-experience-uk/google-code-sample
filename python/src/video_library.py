@@ -11,6 +11,13 @@ def _csv_reader_with_strip(reader):
     yield from ((item.strip() for item in line) for line in reader)
 
 
+def _split_tags_ignoring_whitespace(tags):
+    for tag in tags.split(","):
+        tag = tag.strip()
+        if tag:
+            yield tag
+
+
 class VideoLibrary:
     """A class used to represent a Video Library."""
 
@@ -25,7 +32,7 @@ class VideoLibrary:
                 self._videos[url] = Video(
                     title,
                     url,
-                    tags.split(","),
+                    tuple(_split_tags_ignoring_whitespace(tags)),
                 )
 
     def get_all_videos(self):
