@@ -35,11 +35,11 @@ class VideoLibrary:
     def get_video(self, video_id):
         """Returns the a video object (title, url, tags) from the video library.
 
-    Args:
-        video_id: The video url.
+        Args:
+            video_id: The video url.
 
-    Returns:
-        The Video object for the requested video_id. None if the video doesn't
-        exist
-    """
+        Returns:
+            The Video object for the requested video_id. None if the video
+            does not exist.
+        """
         return self._videos.get(video_id, None)
