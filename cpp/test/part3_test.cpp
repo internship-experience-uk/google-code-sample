@@ -10,10 +10,10 @@ TEST(Part3, searchVideosWithNoAnswer)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideos("cat");
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("No");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideos("cat");
     std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
@@ -27,10 +27,10 @@ TEST(Part3, searchVideosAndPlayAnswer)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideos("cat");
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("2");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideos("cat");
     std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
@@ -44,10 +44,10 @@ TEST(Part3, searchVideosAnswerOutOfBounds)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideos("cat");
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("5");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideos("cat");
     std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
@@ -62,10 +62,10 @@ TEST(Part3, searchVideosInvalidNumber)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideos("cat");
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("ab3g");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideos("cat");
     std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
@@ -88,10 +88,10 @@ TEST(Part3, searchVideosWithTagNoAnswer)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideosWithTag("#cat");
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("no");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideosWithTag("#cat");
     std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
@@ -105,10 +105,10 @@ TEST(Part3, searchVideosWithTagPlayAnswer)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideos("#blah");
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("1");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideos("#blah");
     std::cin.rdbuf(orig);
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
@@ -122,11 +122,11 @@ TEST(Part3, searchVideosWithTagAnswerOutOfBounds)
 {
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.searchVideosWithTag("#cat");
     std::string output = testing::internal::GetCapturedStdout();
     std::streambuf* orig = std::cin.rdbuf();
     std::istringstream input("5");
     std::cin.rdbuf(input.rdbuf());
+    videoPlayer.searchVideosWithTag("#cat");
     std::cin.rdbuf(orig);
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));

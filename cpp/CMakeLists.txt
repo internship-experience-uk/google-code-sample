@@ -55,6 +55,14 @@ add_executable(
   src/videoplayer.cpp
 )
 
+add_executable(
+  videolibrary_test
+  test/videolibrary_test.cpp
+  src/videolibrary.cpp
+  src/video.cpp
+  src/helper.cpp
+)
+
 target_link_libraries(
   part1_test
   gmock
@@ -83,8 +91,16 @@ target_link_libraries(
   gtest_main
 )
 
+target_link_libraries(
+  videolibrary_test
+  gmock
+  gtest
+  gtest_main
+)
+
 include(GoogleTest)
 gtest_discover_tests(part1_test)
 gtest_discover_tests(part2_test)
 gtest_discover_tests(part3_test)
 gtest_discover_tests(part4_test)
+gtest_discover_tests(videolibrary_test)
