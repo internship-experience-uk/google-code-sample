@@ -16,11 +16,11 @@ class VideoPlayer {
         void showPlaying();
         void createPlaylist( std::string playlistName);
         void addVideoToPlaylist( std::string playlistName,  std::string videoId);
+        void showPlaylist( std::string playlistName);
+        void showAllPlaylists();
         void removeFromPlaylist( std::string playlistName,  std::string videoId);
         void clearPlaylist( std::string playlistName);
         void deletePlaylist( std::string playlistName);
-        void showPlaylist( std::string playlistName);
-        void showAllPlaylists();
         void searchVideos( std::string searchTerm);
         void searchVideosWithTag( std::string videoTag);
         void flagVideo( std::string videoId);

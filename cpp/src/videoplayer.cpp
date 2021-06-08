@@ -28,6 +28,12 @@ void VideoPlayer::createPlaylist(std::string playlistName){
 void VideoPlayer::addVideoToPlaylist(std::string playlistName, std::string videoId){
     std::cout << "addVideoToPlaylist needs implementation" << std::endl;
 };
+void VideoPlayer::showPlaylist(std::string playlistName){
+    std::cout << "showPlaylist needs implementation" << std::endl;
+};
+void VideoPlayer::showAllPlaylists(){
+    std::cout << "showAllPlaylists needs implementation" << std::endl;
+};
 void VideoPlayer::removeFromPlaylist(std::string playlistName, std::string videoId){
     std::cout << "removeFromPlaylist needs implementation" << std::endl;
 };
@@ -36,12 +42,6 @@ void VideoPlayer::clearPlaylist(std::string playlistName){
 };
 void VideoPlayer::deletePlaylist(std::string playlistName){
     std::cout << "deletePlaylist needs implementation" << std::endl;
-};
-void VideoPlayer::showPlaylist(std::string playlistName){
-    std::cout << "showPlaylist needs implementation" << std::endl;
-};
-void VideoPlayer::showAllPlaylists(){
-    std::cout << "showAllPlaylists needs implementation" << std::endl;
 };
 void VideoPlayer::searchVideos(std::string searchTerm){
     std::cout << "searchVideos needs implementation" << std::endl;
