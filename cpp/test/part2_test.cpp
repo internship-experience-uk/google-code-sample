@@ -104,10 +104,10 @@ TEST(Part2, showPlaylist)
     videoPlayer.showPlaylist("my_playlist");
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Successfully created new playlist: my_playlist"));
-    EXPECT_THAT(output, HasSubstr("Showing Playlist: my_playlist"));
+    EXPECT_THAT(output, HasSubstr("Showing playlist: my_playlist"));
     EXPECT_THAT(output, HasSubstr("No videos here yet"));
     EXPECT_THAT(output, HasSubstr("Added video to my_playlist: Amazing Cats"));
-    EXPECT_THAT(output, HasSubstr("Showing Playlist: my_playlist"));
+    EXPECT_THAT(output, HasSubstr("Showing playlist: my_playlist"));
     EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
 }
 
@@ -179,10 +179,10 @@ TEST(Part2, clearPlaylist)
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Successfully created new playlist: my_playlist"));
     EXPECT_THAT(output, HasSubstr("Added video to my_playlist: Amazing Cats"));
-    EXPECT_THAT(output, HasSubstr("Showing Playlist: my_playlist"));
+    EXPECT_THAT(output, HasSubstr("Showing playlist: my_playlist"));
     EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
     EXPECT_THAT(output, HasSubstr("Successfully removed all videos from my_playlist"));
-    EXPECT_THAT(output, HasSubstr("Showing Playlist: my_playlist"));
+    EXPECT_THAT(output, HasSubstr("Showing playlist: my_playlist"));
     EXPECT_THAT(output, HasSubstr("No videos here yet"));
 }
 
