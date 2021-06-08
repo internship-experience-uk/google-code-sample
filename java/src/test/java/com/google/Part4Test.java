@@ -89,7 +89,7 @@ public class Part4Test {
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
     assertTrue(outputStream.toString()
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
+    assertTrue(outputStream.toString().contains("Showing playlist: my_playlist"));
     assertTrue(outputStream.toString().contains(
         "Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED (reason: dont_like_cats)"));
   }
@@ -132,7 +132,7 @@ public class Part4Test {
     assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
     assertTrue(outputStream.toString()
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertTrue(outputStream.toString().contains("Nothing currently playing"));
+    assertTrue(outputStream.toString().contains("No video is currently playing"));
   }
 
   @Test
@@ -165,7 +165,7 @@ public class Part4Test {
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
     assertTrue(outputStream.toString()
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
+    assertTrue(outputStream.toString().contains("Showing playlist: my_playlist"));
     assertTrue(outputStream.toString().contains(
         "Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED (reason: dont_like_cats)"));
     assertTrue(

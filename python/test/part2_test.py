@@ -84,10 +84,10 @@ def test_show_playlist(capfd):
     player.show_playlist("my_cool_playlist")
     out, err = capfd.readouterr()
     assert "Successfully created new playlist: my_cool_playlist" in out
-    assert "Showing Playlist: my_cool_playlist" in out
+    assert "Showing playlist: my_cool_playlist" in out
     assert "No videos here yet" in out
     assert "Added video to my_cool_playlist: Amazing Cats" in out
-    assert "Showing Playlist: my_cool_playlist" in out
+    assert "Showing playlist: my_cool_playlist" in out
     assert "Amazing Cats (amazing_cats_video_id) [#cat #animal]" in out
 
 
@@ -148,10 +148,10 @@ def test_clear_playlist(capfd):
     out, err = capfd.readouterr()
     assert "Successfully created new playlist: my_cool_playlist" in out
     assert "Added video to my_cool_playlist: Amazing Cats" in out
-    assert "Showing Playlist: my_cool_playlist" in out
+    assert "Showing playlist: my_cool_playlist" in out
     assert "Amazing Cats (amazing_cats_video_id) [#cat #animal]" in out
     assert "Successfully removed all videos from my_cool_playlist" in out
-    assert "Showing Playlist: my_cool_playlist" in out
+    assert "Showing playlist: my_cool_playlist" in out
     assert "No videos here yet" in out
 
 

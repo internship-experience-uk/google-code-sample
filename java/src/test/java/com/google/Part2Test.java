@@ -103,10 +103,10 @@ public class Part2Test {
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.showPlaylist("my_playlist");
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
-    assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
+    assertTrue(outputStream.toString().contains("Showing playlist: my_playlist"));
     assertTrue(outputStream.toString().contains("No videos here yet"));
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
+    assertTrue(outputStream.toString().contains("Showing playlist: my_playlist"));
     assertTrue(
         outputStream.toString().contains("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   }
@@ -167,12 +167,12 @@ public class Part2Test {
 
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString().contains("Added video to my_playlist: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
+    assertTrue(outputStream.toString().contains("Showing playlist: my_playlist"));
     assertTrue(
         outputStream.toString().contains("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
     assertTrue(
         outputStream.toString().contains("Successfully removed all videos from my_playlist"));
-    assertTrue(outputStream.toString().contains("Showing Playlist: my_playlist"));
+    assertTrue(outputStream.toString().contains("Showing playlist: my_playlist"));
     assertTrue(outputStream.toString().contains("No videos here yet"));
   }
 

@@ -108,7 +108,7 @@ def test_show_nothing_playing(capfd):
     player = VideoPlayer()
     player.show_playing()
     out, err = capfd.readouterr()
-    assert "Nothing currently playing" in out
+    assert "No video is currently playing" in out
 
 
 def test_pause_video(capfd):

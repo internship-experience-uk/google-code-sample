@@ -70,7 +70,7 @@ def test_flag_video_show_playlist(capfd):
     assert "Added video to my_playlist: Amazing Cats" in out
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in out
-    assert "Showing Playlist: my_playlist" in out
+    assert "Showing playlist: my_playlist" in out
     assert ("Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED "
             "(reason: dont_like_cats)") in out
 
@@ -115,7 +115,7 @@ def test_flag_video_stop_video_playing(capfd):
     assert "Playing video: Amazing Cats" in out
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in out
-    assert "Nothing currently playing" in out
+    assert "No video is currently playing" in out
 
 
 def test_allow_video(capfd):
@@ -149,7 +149,7 @@ def test_allow_video_show_playlist(capfd):
     assert "Added video to my_playlist: Amazing Cats" in out
     assert ("Successfully flagged video: Amazing Cats "
             "(reason: dont_like_cats)") in out
-    assert "Showing Playlist: my_playlist" in out
+    assert "Showing playlist: my_playlist" in out
     assert ("Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED "
             "(reason: dont_like_cats)") in out
     assert "Successfully removed flag from video: Amazing Cats" in out
