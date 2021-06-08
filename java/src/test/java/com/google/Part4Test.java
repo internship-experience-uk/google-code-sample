@@ -132,7 +132,7 @@ public class Part4Test {
     assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
     assertTrue(outputStream.toString()
         .contains("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertTrue(outputStream.toString().contains("Nothing currently playing"));
+    assertTrue(outputStream.toString().contains("No video is currently playing"));
   }
 
   @Test

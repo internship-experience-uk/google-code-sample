@@ -131,7 +131,7 @@ TEST(Part1, showNothingPlaying)
     testing::internal::CaptureStdout();
     videoPlayer.showPlaying();
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_THAT(output, HasSubstr("Nothing currently playing"));
+    EXPECT_THAT(output, HasSubstr("No video is currently playing"));
 }
 
 

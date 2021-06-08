@@ -115,7 +115,7 @@ def test_flag_video_stop_video_playing(capfd):
     assert "Playing video: Amazing Cats" in out
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in out
-    assert "Nothing currently playing" in out
+    assert "No video is currently playing" in out
 
 
 def test_allow_video(capfd):

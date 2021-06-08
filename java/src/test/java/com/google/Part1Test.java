@@ -138,7 +138,7 @@ public class Part1Test {
   @Test
   public void testShowNothingPlaying() {
     videoPlayer.showPlaying();
-    assertTrue(outputStream.toString().contains("Nothing currently playing"));
+    assertTrue(outputStream.toString().contains("No video is currently playing"));
   }
 
   @Test

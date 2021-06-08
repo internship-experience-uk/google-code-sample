@@ -122,7 +122,7 @@ TEST(Part4, flagVideoStopVideoPlaying)
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
     EXPECT_THAT(output, HasSubstr("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    EXPECT_THAT(output, HasSubstr("Nothing currently playing"));
+    EXPECT_THAT(output, HasSubstr("No video is currently playing"));
 }
 
 TEST(Part4, allowVideo)
