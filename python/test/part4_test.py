@@ -102,8 +102,9 @@ def test_flag_video_search_videos(capfd):
     assert "Here are the results for cat:" in out
     assert "1) Another Cat Video (another_cat_video_id)" in out
     assert ("Would you like to play any of the above? If yes, "
-            "specify the number of the video. If your answer is not a valid "
-            "number, we will assume it's a no") in out
+            "specify the number of the video.") in out
+    assert("If your answer is not a valid number, we will assume "
+           "it's a no.") in out
 
 
 def test_flag_video_stop_video_playing(capfd):

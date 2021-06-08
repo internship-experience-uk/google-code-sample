@@ -39,7 +39,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertFalse(outputStream.toString().contains("Playing video"));
   }
 
@@ -52,7 +54,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertTrue(outputStream.toString().contains("Playing video: Another Cat Video"));
   }
 
@@ -65,7 +69,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertFalse(outputStream.toString().contains("Playing video"));
   }
 
@@ -77,7 +83,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertFalse(outputStream.toString().contains("Playing video"));
   }
 
@@ -95,7 +103,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertFalse(outputStream.toString().contains("Playing video"));
   }
 
@@ -107,7 +117,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
   }
 
@@ -119,7 +131,9 @@ public class Part3Test {
     assertTrue(outputStream.toString().contains("1) Amazing Cats (amazing_cats_video_id)"));
     assertTrue(outputStream.toString().contains("2) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
     assertFalse(outputStream.toString().contains("Playing video"));
   }
 
