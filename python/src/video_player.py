@@ -49,7 +49,7 @@ class VideoPlayer:
         """Creates a playlist with a given name.
 
         Args:
-            name: The playlist name.
+            playlist_name: The playlist name.
         """
         print("create_playlist needs implementation")
 
@@ -57,16 +57,29 @@ class VideoPlayer:
         """Adds a video to a playlist with a given name.
 
         Args:
-            name: The playlist name.
+            playlist_name: The playlist name.
             video_id: The video_id to be added.
         """
         print("add_to_playlist needs implementation")
+
+    def show_playlist(self, playlist_name):
+        """Display all videos in a playlist with a given name.
+
+        Args:
+            playlist_name: The playlist name.
+        """
+        print("show_playlist needs implementation")
+
+    def show_all_playlists(self):
+        """Display all playlists."""
+
+        print("show_all_playlists needs implementation")
 
     def remove_from_playlist(self, playlist_name, video_id):
         """Removes a video to a playlist with a given name.
 
         Args:
-            name: The playlist name.
+            playlist_name: The playlist name.
             video_id: The video_id to be removed.
         """
         print("remove_from_playlist needs implementation")
@@ -86,19 +99,6 @@ class VideoPlayer:
             playlist_name: The playlist name.
         """
         print("deletes_playlist needs implementation")
-
-    def show_playlist(self, playlist_name):
-        """Display all videos in a playlist with a given name.
-
-        Args:
-            playlist_name: The playlist name.
-        """
-        print("show_playlist needs implementation")
-
-    def show_all_playlists(self):
-        """Display all playlists."""
-
-        print("show_all_playlists needs implementation")
 
     def search_videos(self, search_term):
         """Display all the videos whose titles contain the search_term.

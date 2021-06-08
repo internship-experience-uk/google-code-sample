@@ -45,6 +45,14 @@ public class VideoPlayer {
     System.out.println("addVideoToPlaylist needs implementation");
   }
 
+  public void showPlaylist(String playlistName) {
+    System.out.println("showPlaylist needs implementation");
+  }
+
+  public void showAllPlaylists() {
+    System.out.println("showAllPlaylists needs implementation");
+  }
+
   public void removeFromPlaylist(String playlistName, String videoId) {
     System.out.println("removeFromPlaylist needs implementation");
   }
@@ -55,14 +63,6 @@ public class VideoPlayer {
 
   public void deletePlaylist(String playlistName) {
     System.out.println("deletePlaylist needs implementation");
-  }
-
-  public void showPlaylist(String playlistName) {
-    System.out.println("showPlaylist needs implementation");
-  }
-
-  public void showAllPlaylists() {
-    System.out.println("showAllPlaylists needs implementation");
   }
 
   public void searchVideos(String searchTerm) {
