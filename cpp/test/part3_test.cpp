@@ -19,7 +19,8 @@ TEST(Part3, searchVideosWithNoAnswer)
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
 }
 
@@ -36,7 +37,8 @@ TEST(Part3, searchVideosAndPlayAnswer)
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, HasSubstr("Playing video: Another Cat Video"));
 }
 
@@ -53,8 +55,8 @@ TEST(Part3, searchVideosAnswerOutOfBounds)
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
-  
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
 }
 
@@ -71,7 +73,8 @@ TEST(Part3, searchVideosInvalidNumber)
     EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
 }
 
@@ -97,7 +100,8 @@ TEST(Part3, searchVideosWithTagNoAnswer)
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
 }
 
@@ -114,7 +118,8 @@ TEST(Part3, searchVideosWithTagPlayAnswer)
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
 }
 
@@ -131,7 +136,8 @@ TEST(Part3, searchVideosWithTagAnswerOutOfBounds)
     EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
     EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
     EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
-    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no."));
+    EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If yes, specify the number of the video."));
+    EXPECT_THAT(output, HasSubstr("If your answer is not a valid number, we will assume it's a no."));
     EXPECT_THAT(output, Not(HasSubstr("Playing video")));
 }
 

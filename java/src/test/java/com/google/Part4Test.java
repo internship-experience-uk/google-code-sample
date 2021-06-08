@@ -121,7 +121,9 @@ public class Part4Test {
     assertTrue(outputStream.toString().contains("Here are the results for cat:"));
     assertTrue(outputStream.toString().contains("1) Another Cat Video (another_cat_video_id)"));
     assertTrue(outputStream.toString().contains(
-        "Would you like to play any of the above? If yes, specify the number of the video. If your answer is not a valid number, we will assume it's a no"));
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertTrue(outputStream.toString().contains(
+        "If your answer is not a valid number, we will assume it's a no."));
   }
 
   @Test
