@@ -76,7 +76,7 @@ public class Part4Test {
         .contains("Successfully flagged video: Amazing Cats (reason: Not supplied)"));
     assertTrue(outputStream.toString().contains("Successfully created new playlist: my_playlist"));
     assertTrue(outputStream.toString().contains(
-        "Cannot add video to playlist my_playlist: Video is currently flagged (reason: Not supplied)"));
+        "Cannot add video to my_playlist: Video is currently flagged (reason: Not supplied)"));
   }
 
   @Test

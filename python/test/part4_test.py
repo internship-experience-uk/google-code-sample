@@ -55,7 +55,7 @@ def test_flag_video_add_to_playlist(capfd):
     assert ("Successfully flagged video: Amazing Cats "
             "(reason: Not supplied)") in out
     assert "Successfully created new playlist: my_playlist" in out
-    assert ("Cannot add video to playlist my_playlist: Video is currently "
+    assert ("Cannot add video to my_playlist: Video is currently "
             "flagged (reason: Not supplied)") in out
 
 
