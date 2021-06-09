@@ -71,7 +71,7 @@ TEST(Part4, flagVideoAddVideoToPlaylist) {
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: my_playlist"));
   EXPECT_THAT(output,
-              HasSubstr("Cannot add video to playlist my_playlist: Video is "
+              HasSubstr("Cannot add video to my_playlist: Video is "
                         "currently flagged (reason: Not supplied)"));
 }
 
