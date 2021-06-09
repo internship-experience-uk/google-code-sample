@@ -137,6 +137,13 @@ def test_allow_video_not_flagged(capfd):
     assert "Cannot remove flag from video: Video is not flagged" in out
 
 
+def test_allow_video_nonexistent(capfd):
+    player = VideoPlayer()
+    player.allow_video("video_does_not_exist")
+    out, err = capfd.readouterr()
+    assert "Cannot remove flag from video: Video does not exist" in out
+
+
 def test_allow_video_show_playlist(capfd):
     player = VideoPlayer()
     player.create_playlist("my_playlist")

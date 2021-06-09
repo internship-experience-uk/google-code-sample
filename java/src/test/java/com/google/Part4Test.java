@@ -156,6 +156,13 @@ public class Part4Test {
   }
 
   @Test
+  public void testAllowVideoNonexistent() {
+    videoPlayer.allowVideo("video_does_not_exist");
+    assertTrue(
+        outputStream.toString().contains("Cannot remove flag from video: Video does not exist"));
+  }
+
+  @Test
   public void testAllowVideoShowPlaylist() {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
