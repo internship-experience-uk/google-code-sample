@@ -30,7 +30,7 @@ VideoLibrary::VideoLibrary() {
   } else {
     std::cout << "Couldn't find videos.txt" << std::endl;
   }
-};
+}
 
 std::vector<Video> VideoLibrary::getVideos() const {
   std::vector<Video> result;
@@ -38,7 +38,7 @@ std::vector<Video> VideoLibrary::getVideos() const {
     result.emplace_back(video.second);
   }
   return result;
-};
+}
 
 Video const *VideoLibrary::getVideo(std::string videoId) const {
   auto const found = this->videos.find(videoId);
@@ -48,4 +48,4 @@ Video const *VideoLibrary::getVideo(std::string videoId) const {
   } else {
     return &(found->second);
   }
-};
+}
