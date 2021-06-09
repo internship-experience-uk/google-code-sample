@@ -33,7 +33,8 @@ int main() {
         commandList.push_back(command);
       }
       std::transform(commandList[0].begin(), commandList[0].end(),
-                     commandList[0].begin(), ::toupper);
+                     commandList[0].begin(),
+                     [](auto c) { return static_cast<char>(std::toupper(c)); });
       if (commandList[0] == "EXIT") {
         break;
       }
