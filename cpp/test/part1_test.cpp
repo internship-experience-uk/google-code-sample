@@ -56,7 +56,7 @@ TEST(Part1, playVideoDontStopPreviousIfNonExistent)
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.playVideo("some_other_video");
     std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_THAT(output, HasSubstr("Stopping video: Amazing Cats"));
+    EXPECT_THAT(output, Not(HasSubstr("Stopping video: Amazing Cats")));
     EXPECT_THAT(output, HasSubstr("Cannot play video: Video does not exist"));
 }
 
