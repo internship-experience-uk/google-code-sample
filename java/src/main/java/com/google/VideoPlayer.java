@@ -17,12 +17,12 @@ public class VideoPlayer {
     System.out.println("playVideo needs implementation");
   }
 
-  public void playRandomVideo() {
-    System.out.println("playRandomVideo needs implementation");
-  }
-
   public void stopVideo() {
     System.out.println("stopVideo needs implementation");
+  }
+
+  public void playRandomVideo() {
+    System.out.println("playRandomVideo needs implementation");
   }
 
   public void pauseVideo() {
@@ -45,12 +45,12 @@ public class VideoPlayer {
     System.out.println("addVideoToPlaylist needs implementation");
   }
 
-  public void showPlaylist(String playlistName) {
-    System.out.println("showPlaylist needs implementation");
-  }
-
   public void showAllPlaylists() {
     System.out.println("showAllPlaylists needs implementation");
+  }
+
+  public void showPlaylist(String playlistName) {
+    System.out.println("showPlaylist needs implementation");
   }
 
   public void removeFromPlaylist(String playlistName, String videoId) {
