@@ -176,6 +176,15 @@ TEST(Part4, allowVideoNotFlagged) {
               HasSubstr("Cannot remove flag from video: Video is not flagged"));
 }
 
+TEST(Part4, allowVideoNonexistent) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  videoPlayer.allowVideo("video_does_not_exist");
+  std::string output = testing::internal::GetCapturedStdout();
+  EXPECT_THAT(output,
+              HasSubstr("Cannot remove flag from video: Video does not exist"));
+}
+
 TEST(Part4, allowVideoShowPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
