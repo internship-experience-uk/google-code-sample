@@ -33,7 +33,7 @@ class VideoLibrary:
         return list(self._videos.values())
 
     def get_video(self, video_id):
-        """Returns the a video object (title, url, tags) from the video library.
+        """Returns the video object (title, url, tags) from the video library.
 
         Args:
             video_id: The video url.
