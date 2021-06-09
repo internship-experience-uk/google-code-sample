@@ -8,10 +8,10 @@ Video::Video(std::string&& title, std::string&& videoId,
   this->title = title;
   this->videoId = videoId;
   this->tags = tags;
-};
+}
 
-std::string const& Video::getTitle() const { return this->title; };
+std::string const& Video::getTitle() const { return this->title; }
 
-std::string const& Video::getVideoId() const { return this->videoId; };
+std::string const& Video::getVideoId() const { return this->videoId; }
 
-std::vector<std::string> const& Video::getTags() const { return this->tags; };
+std::vector<std::string> const& Video::getTags() const { return this->tags; }

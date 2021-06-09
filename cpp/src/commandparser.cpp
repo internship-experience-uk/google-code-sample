@@ -4,7 +4,7 @@
 #include <sstream>
 #include <vector>
 
-CommandParser::CommandParser(VideoPlayer&& vp) : videoPlayer{vp} {};
+CommandParser::CommandParser(VideoPlayer&& vp) : videoPlayer{vp} {}
 
 void CommandParser::executeCommand(std::vector<std::string> command) {
   if (command.empty()) {
@@ -124,7 +124,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
                  "available commands."
               << std::endl;
   }
-};
+}
 
 void CommandParser::getHelp() const {
   static std::string const helpText =
@@ -158,4 +158,4 @@ void CommandParser::getHelp() const {
       "    HELP - Displays help.\n"
       "    EXIT - Terminates the program execution.\n";
   std::cout << helpText << std::endl;
-};
+}
