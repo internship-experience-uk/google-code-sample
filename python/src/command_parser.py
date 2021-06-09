@@ -24,89 +24,89 @@ class CommandParser:
                 "Please enter a valid command, "
                 "type HELP for a list of available commands.")
 
-        if command[0] == "SHOW_ALL_VIDEOS":
+        if command[0].upper() == "SHOW_ALL_VIDEOS":
             self._player.show_all_videos()
 
-        elif command[0] == "PLAY":
+        elif command[0].upper() == "PLAY":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter PLAY command followed by video_id.")
             self._player.play_video(command[1])
 
-        elif command[0] == "PLAY_RANDOM":
+        elif command[0].upper() == "PLAY_RANDOM":
             self._player.play_random_video()
-        elif command[0] == "STOP":
+        elif command[0].upper() == "STOP":
             self._player.stop_video()
 
-        elif command[0] == "PAUSE":
+        elif command[0].upper() == "PAUSE":
             self._player.pause_video()
 
-        elif command[0] == "CONTINUE":
+        elif command[0].upper() == "CONTINUE":
             self._player.continue_video()
 
-        elif command[0] == "SHOW_PLAYING":
+        elif command[0].upper() == "SHOW_PLAYING":
             self._player.show_playing()
 
-        elif command[0] == "CREATE_PLAYLIST":
+        elif command[0].upper() == "CREATE_PLAYLIST":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter CREATE_PLAYLIST command followed by a "
                     "playlist name.")
             self._player.create_playlist(command[1])
 
-        elif command[0] == "ADD_TO_PLAYLIST":
+        elif command[0].upper() == "ADD_TO_PLAYLIST":
             if len(command) != 3:
                 raise CommandException(
                     "Please enter ADD_TO_PLAYLIST command followed by a "
                     "playlist name and video_id to add.")
             self._player.add_to_playlist(command[1], command[2])
 
-        elif command[0] == "REMOVE_FROM_PLAYLIST":
+        elif command[0].upper() == "REMOVE_FROM_PLAYLIST":
             if len(command) != 3:
                 raise CommandException(
                     "Please enter REMOVE_FROM_PLAYLIST command followed by a "
                     "playlist name and video_id to remove.")
             self._player.remove_from_playlist(command[1], command[2])
 
-        elif command[0] == "CLEAR_PLAYLIST":
+        elif command[0].upper() == "CLEAR_PLAYLIST":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter CLEAR_PLAYLIST command followed by a "
                     "playlist name.")
             self._player.clear_playlist(command[1])
 
-        elif command[0] == "DELETE_PLAYLIST":
+        elif command[0].upper() == "DELETE_PLAYLIST":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter DELETE_PLAYLIST command followed by a "
                     "playlist name.")
             self._player.delete_playlist(command[1])
 
-        elif command[0] == "SHOW_PLAYLIST":
+        elif command[0].upper() == "SHOW_PLAYLIST":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter SHOW_PLAYLIST command followed by a "
                     "playlist name.")
             self._player.show_playlist(command[1])
 
-        elif command[0] == "SHOW_ALL_PLAYLISTS":
+        elif command[0].upper() == "SHOW_ALL_PLAYLISTS":
             self._player.show_all_playlists()
 
-        elif command[0] == "SEARCH_VIDEOS":
+        elif command[0].upper() == "SEARCH_VIDEOS":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter SEARCH_VIDEOS command followed by a "
                     "search term.")
             self._player.search_videos(command[1])
 
-        elif command[0] == "SEARCH_VIDEOS_WITH_TAG":
+        elif command[0].upper() == "SEARCH_VIDEOS_WITH_TAG":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter SEARCH_VIDEOS_WITH_TAG command followed by a "
                     "video tag.")
             self._player.search_videos_tag(command[1])
 
-        elif command[0] == "FLAG_VIDEO":
+        elif command[0].upper() == "FLAG_VIDEO":
             if len(command) == 3:
                 self._player.flag_video(command[1], command[2])
             elif len(command) == 2:
@@ -116,14 +116,14 @@ class CommandParser:
                     "Please enter FLAG_VIDEO command followed by a "
                     "video_id and an optional flag reason.")
 
-        elif command[0] == "ALLOW_VIDEO":
+        elif command[0].upper() == "ALLOW_VIDEO":
             if len(command) != 2:
                 raise CommandException(
                     "Please enter ALLOW_VIDEO command followed by a "
                     "video_id.")
             self._player.allow_video(command[1])
 
-        elif command[0] == "HELP":
+        elif command[0].upper() == "HELP":
             self._get_help()
         else:
             print(
