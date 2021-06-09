@@ -10,7 +10,7 @@ using ::testing::ContainsRegex;
 TEST(Part1, showAllVideos){
     VideoPlayer videoPlayer = VideoPlayer();
     testing::internal::CaptureStdout();
-    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.showAllVideos();
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_THAT(output, HasSubstr("Here's a list of all available videos:"));
     EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
