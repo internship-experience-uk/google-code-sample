@@ -66,7 +66,7 @@ TEST(Part4, flagVideoAddVideoToPlaylist) {
   testing::internal::CaptureStdout();
   videoPlayer.flagVideo("amazing_cats_video_id");
   videoPlayer.createPlaylist("my_playlist");
-  videoPlayer.addVideoToPlaylist("my_playist", "amazing_cats_video_id");
+  videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: my_playlist"));
@@ -79,9 +79,9 @@ TEST(Part4, flagVideoShowPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("my_playlist");
-  videoPlayer.addVideoToPlaylist("my_playist", "amazing_cats_video_id");
+  videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
-  videoPlayer.showPlaylist("my_playist");
+  videoPlayer.showPlaylist("my_playlist");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: my_playlist"));
@@ -107,7 +107,7 @@ TEST(Part4, flagVideoShowAllVideos) {
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
   EXPECT_THAT(output, HasSubstr("Here's a list of all available videos:"));
   EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
-                                "#animal] - FLAGGED reason: dont_like_cats)"));
+                                "#animal] - FLAGGED (reason: dont_like_cats)"));
   EXPECT_THAT(
       output,
       HasSubstr("Another Cat Video (another_cat_video_id) [#cat #animal]"));
@@ -121,8 +121,12 @@ TEST(Part4, flagVideoShowAllVideos) {
 TEST(Part4, flagVideoSearchVideos) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
+  std::streambuf* orig = std::cin.rdbuf();
+  std::istringstream input("no");
+  std::cin.rdbuf(input.rdbuf());
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   videoPlayer.searchVideos("cat");
+  std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(
       output,
@@ -189,11 +193,11 @@ TEST(Part4, allowVideoShowPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("my_playlist");
-  videoPlayer.addVideoToPlaylist("my_playist", "amazing_cats_video_id");
+  videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
-  videoPlayer.showPlaylist("my_playist");
+  videoPlayer.showPlaylist("my_playlist");
   videoPlayer.allowVideo("amazing_cats_video_id");
-  videoPlayer.showPlaylist("my_playist");
+  videoPlayer.showPlaylist("my_playlist");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: my_playlist"));
