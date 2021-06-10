@@ -40,3 +40,5 @@ To run tests for a single Part (after building):
 ./build/part3_test
 ./build/part4_test
 ```
+
+> NOTE: Make sure you update the CMakeLists.txt if you add any new dependencies and don't forget to rebuild your code ater making changes for testing.
