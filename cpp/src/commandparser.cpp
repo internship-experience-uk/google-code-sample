@@ -13,7 +13,9 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
     return;
   }
 
-  if (command[0] == "SHOW_ALL_VIDEOS") {
+  if (command[0] == "NUMBER_OF_VIDEOS") {
+    videoPlayer.numberOfVideos();
+  } else if (command[0] == "SHOW_ALL_VIDEOS") {
     videoPlayer.showAllVideos();
   } else if (command[0] == "PLAY") {
     if (command.size() != 2) {
@@ -129,6 +131,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
 void CommandParser::getHelp() const {
   static const char* const helpText = R"(
 Available commands:
+    NUMBER_OF_VIDEOS - Shows how many videos are in the library.
     SHOW_ALL_VIDEOS - Lists all videos from the library.
     PLAY <video_id> - Plays specified video.
     PLAY_RANDOM - Plays a random video from the library.

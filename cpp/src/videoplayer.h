@@ -2,11 +2,17 @@
 
 #include <string>
 
+#include "videolibrary.h"
+
 /**
  * A class used to represent a Video Player.
  */
 class VideoPlayer {
+ private:
+  VideoLibrary videoLibrary;
+
  public:
+  void numberOfVideos();
   void showAllVideos();
   void playVideo(std::string videoId);
   void playRandomVideo();
