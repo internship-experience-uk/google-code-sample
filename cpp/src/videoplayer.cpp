@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+void VideoPlayer::numberOfVideos() {
+  std::cout << videoLibrary.getVideos().size() << " videos in the library"
+            << std::endl;
+}
+
 void VideoPlayer::showAllVideos() {
   std::cout << "showAllVideos needs implementation" << std::endl;
 }

@@ -6,6 +6,14 @@
 using ::testing::ContainsRegex;
 using ::testing::HasSubstr;
 
+TEST(Part1, numberOfVideos) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  videoPlayer.numberOfVideos();
+  std::string output = testing::internal::GetCapturedStdout();
+  EXPECT_THAT(output, HasSubstr("5 videos in the library"));
+}
+
 TEST(Part1, showAllVideos) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
