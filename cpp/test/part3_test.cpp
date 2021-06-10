@@ -125,7 +125,7 @@ TEST(Part3, searchVideosWithTagPlayAnswer) {
   std::streambuf* orig = std::cin.rdbuf();
   std::istringstream input("1");
   std::cin.rdbuf(input.rdbuf());
-  videoPlayer.searchVideos("#blah");
+  videoPlayer.searchVideosWithTag("#cat");
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
@@ -143,12 +143,12 @@ TEST(Part3, searchVideosWithTagPlayAnswer) {
 TEST(Part3, searchVideosWithTagAnswerOutOfBounds) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
-  std::string output = testing::internal::GetCapturedStdout();
   std::streambuf* orig = std::cin.rdbuf();
   std::istringstream input("5");
   std::cin.rdbuf(input.rdbuf());
   videoPlayer.searchVideosWithTag("#cat");
   std::cin.rdbuf(orig);
+  std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
   EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
   EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
