@@ -25,6 +25,8 @@ else()
       -Wno-unused-parameter)
 endif()
 
+file(COPY src/videos.txt DESTINATION src/)
+
 add_executable(youtube
     src/commandparser.cpp
     src/helper.cpp
