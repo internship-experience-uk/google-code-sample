@@ -2,6 +2,13 @@ import re
 from src.video_player import VideoPlayer
 
 
+def test_number_of_videos(capfd):
+    player = VideoPlayer()
+    player.number_of_videos()
+    out, err = capfd.readouterr()
+    assert "5 videos in the library" in out
+
+
 def test_show_all_videos(capfd):
     player = VideoPlayer()
     player.show_all_videos()
