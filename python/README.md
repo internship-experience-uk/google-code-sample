@@ -9,7 +9,7 @@ different ways of dealing with Python code, so in case of doubt we recommend
 you run the code and tests from the command line as shown  below.
 
 ## Running and testing from the Commandline
-To run:
+To run the command-line application:
 ```shell script
 python3 -m src.run
 ```
@@ -19,6 +19,7 @@ The tests are using pytest, if you don't have pytest installed yet, you can do s
 ```shell script
 python3 -m pip install pytest
 ```
+You can close the app by typing EXIT as a command.
 
 To run all the tests:
 ```shell script
@@ -47,7 +48,8 @@ you can read more [here](https://docs.pytest.org/en/reorganize-docs/new-docs/use
 
 This will allow your editor to correctly index the project.
 
-To run the Application, follow the setup below:
+To run the Application, create a new "Run/Debug configuration":
+* Run > Edit Configurations > "+" Button > Python
 ![intellij_setup](intellij_setup.png)
 
 To run the tests, add a pytest configuration as follows:
