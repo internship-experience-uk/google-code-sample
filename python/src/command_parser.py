@@ -24,7 +24,10 @@ class CommandParser:
                 "Please enter a valid command, "
                 "type HELP for a list of available commands.")
 
-        if command[0].upper() == "SHOW_ALL_VIDEOS":
+        if command[0].upper() == "NUMBER_OF_VIDEOS":
+            self._player.number_of_videos()
+
+        elif command[0].upper() == "SHOW_ALL_VIDEOS":
             self._player.show_all_videos()
 
         elif command[0].upper() == "PLAY":
@@ -134,6 +137,7 @@ class CommandParser:
         """Displays all available commands to the user."""
         help_text = textwrap.dedent("""
         Available commands:
+            NUMBER_OF_VIDEOS - Shows how many videos are in the library.
             SHOW_ALL_VIDEOS - Lists all videos from the library.
             PLAY <video_id> - Plays specified video.
             PLAY_RANDOM - Plays a random video from the library.

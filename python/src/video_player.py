@@ -1,11 +1,17 @@
 """A video player class."""
 
+from .video_library import VideoLibrary
+
 
 class VideoPlayer:
     """A class used to represent a Video Player."""
 
     def __init__(self):
-        """The VideoPlayer class is initialized."""
+        self._video_library = VideoLibrary()
+
+    def number_of_videos(self):
+        num_videos = len(self._video_library.get_all_videos())
+        print(f"{num_videos} videos in the library")
 
     def show_all_videos(self):
         """Returns all videos."""

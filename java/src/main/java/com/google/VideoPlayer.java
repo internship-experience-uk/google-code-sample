@@ -2,13 +2,16 @@ package com.google;
 
 public class VideoPlayer {
 
+  private final VideoLibrary videoLibrary;
+
   public VideoPlayer() {
-    // The VideoPlayer constructor
+    this.videoLibrary = new VideoLibrary();
   }
 
-  /**
-   * Shows all videos
-   */
+  public void numberOfVideos() {
+    System.out.printf("%s videos in the library%n", videoLibrary.getVideos().size());
+  }
+
   public void showAllVideos() {
     System.out.println("showAllVideos needs implementation");
   }

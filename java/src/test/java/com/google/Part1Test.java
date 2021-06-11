@@ -27,6 +27,12 @@ public class Part1Test {
   }
 
   @Test
+  public void testNumberOfVideos() {
+    videoPlayer.numberOfVideos();
+    assertTrue(outputStream.toString().contains("5 videos in the library"));
+  }
+
+  @Test
   public void testShowAllVideos() {
     videoPlayer.showAllVideos();
     assertTrue(outputStream.toString().contains("Here's a list of all available videos:"));

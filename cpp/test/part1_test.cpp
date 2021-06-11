@@ -168,6 +168,19 @@ TEST(Part1, pauseVideoShowVideo) {
                         "(amazing_cats_video_id) [#cat #animal] - PAUSED"));
 }
 
+TEST(Part1, pauseVideoPlayVideo) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  videoPlayer.playVideo("amazing_cats_video_id");
+  videoPlayer.pauseVideo();
+  videoPlayer.playVideo("amazing_cats_video_id")
+  videoPlayer.showPlaying();
+  std::string output = testing::internal::GetCapturedStdout();
+  EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
+  EXPECT_THAT(output, HasSubstr("Pausing video: Amazing Cats"));
+  EXPECT_THAT(output, Not(HasSubstr("PAUSED")));
+}
+
 TEST(Part1, pauseVideoNothingPlaying) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();

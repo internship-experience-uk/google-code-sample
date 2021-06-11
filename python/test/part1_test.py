@@ -2,6 +2,13 @@ import re
 from src.video_player import VideoPlayer
 
 
+def test_number_of_videos(capfd):
+    player = VideoPlayer()
+    player.number_of_videos()
+    out, err = capfd.readouterr()
+    assert "5 videos in the library" in out
+
+
 def test_show_all_videos(capfd):
     player = VideoPlayer()
     player.show_all_videos()
@@ -128,6 +135,20 @@ def test_pause_video_show_playing(capfd):
     out, err = capfd.readouterr()
     assert "Currently playing: Amazing Cats (amazing_cats_video_id) " \
            "[#cat #animal] - PAUSED" in out
+
+
+def test_pause_video_play_video(capfd):
+    player = VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.pause_video()
+    player.play_video("amazing_cats_video_id")
+    player.show_playing()
+    out, err = capfd.readouterr()
+    assert "Playing video: Amazing Cats" in out
+    assert "Pausing video: Amazing Cats" in out
+    assert "Currently playing: Amazing Cats (amazing_cats_video_id) " \
+           "[#cat #animal]" in out
+    assert "PAUSED" not in out
 
 
 def test_pause_video_none_playing(capfd):
