@@ -13,7 +13,7 @@ class Video {
   Video(String title, String videoId, List<String> tags) {
     this.title = title;
     this.videoId = videoId;
-    this.tags = tags;
+    this.tags = Collections.unmodifiableList(tags);
   }
 
   /** Returns the title of the video. */
