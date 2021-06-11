@@ -12,6 +12,7 @@ if __name__ == "__main__":
     video_player = VideoPlayer()
     parser = CommandParser(video_player)
     while True:
+        print("YT> ", end='');
         command = input()
         if command.upper() == "EXIT":
             print("YouTube has now terminated its execution. "
