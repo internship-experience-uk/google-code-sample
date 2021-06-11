@@ -1,4 +1,4 @@
-"""A command helper class."""
+"""A command parser class."""
 
 import textwrap
 from typing import Sequence
@@ -38,6 +38,7 @@ class CommandParser:
 
         elif command[0].upper() == "PLAY_RANDOM":
             self._player.play_random_video()
+
         elif command[0].upper() == "STOP":
             self._player.stop_video()
 
