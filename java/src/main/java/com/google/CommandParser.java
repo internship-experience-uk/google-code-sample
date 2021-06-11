@@ -25,6 +25,9 @@ class CommandParser {
     }
 
     switch (command.get(0).toUpperCase()) {
+      case "NUMBER_OF_VIDEOS":
+        this.videoPlayer.numberOfVideos();
+        break;
       case "SHOW_ALL_VIDEOS":
         this.videoPlayer.showAllVideos();
         break;
@@ -160,6 +163,7 @@ class CommandParser {
   private void getHelp() {
     String helpText =
         "Available commands:\n"
+            + "    NUMBER_OF_VIDEOS - Shows how many videos are in the library.\n"
             + "    SHOW_ALL_VIDEOS - Lists all videos from the library.\n"
             + "    PLAY <video_id> - Plays specified video.\n"
             + "    PLAY_RANDOM - Plays a random video from the library.\n"
