@@ -161,6 +161,17 @@ public class Part1Test {
   }
 
   @Test
+  public void testPauseVideoPlayVideo() {
+    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.pauseVideo();
+    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.showPlaying();
+    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
+    assertTrue(outputStream.toString().contains("Pausing video: Amazing Cats"));
+    assertFalse(outputStream.toString().contains("PAUSED"));
+  }
+
+  @Test
   public void testPauseVideoNothingPlaying() {
     videoPlayer.pauseVideo();
     assertTrue(
