@@ -29,21 +29,20 @@ public class Part1Test {
   @Test
   public void testNumberOfVideos() {
     videoPlayer.numberOfVideos();
-    assertTrue(outputStream.toString().contains("5 videos in the library"));
+    assertEquals("5 videos in the library\n", outputStream.toString());
   }
 
   @Test
   public void testShowAllVideos() {
     videoPlayer.showAllVideos();
-    assertTrue(outputStream.toString().contains("Here's a list of all available videos:"));
-    assertTrue(
-        outputStream.toString().contains("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-    assertTrue(outputStream.toString()
-        .contains("Another Cat Video (another_cat_video_id) [#cat #animal]"));
-    assertTrue(outputStream.toString().contains("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
-    assertTrue(outputStream.toString()
-        .contains("Life at Google (life_at_google_video_id) [#google #career]"));
-    assertTrue(outputStream.toString().contains("Video about nothing (nothing_video_id) []"));
+
+    assertEquals("Here's a list of all available videos:\n"
+            + "Amazing Cats (amazing_cats_video_id) [#cat #animal]\n"
+            + "Another Cat Video (another_cat_video_id) [#cat #animal]\n"
+            + "Funny Dogs (funny_dogs_video_id) [#dog #animal]\n"
+            + "Life at Google (life_at_google_video_id) [#google #career]\n"
+            + "Video about nothing (nothing_video_id) []\n"
+        , outputStream.toString());
 
     List<String> outputList = new ArrayList<>(Arrays.asList(outputStream.toString().split("\n")));
     outputList.remove(0);
@@ -55,29 +54,35 @@ public class Part1Test {
   @Test
   public void testPlayVideo() {
     videoPlayer.playVideo("amazing_cats_video_id");
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
+    assertEquals(outputStream.toString(),"Playing video: Amazing Cats\n");
   }
 
   @Test
   public void testPlayVideoNonExistent() {
     videoPlayer.playVideo("some_other_video_that_doesnt_exist");
-    assertTrue(outputStream.toString().contains("Cannot play video: Video does not exist"));
+    assertEquals("Cannot play video: Video does not exist\n", outputStream.toString());
   }
 
   @Test
   public void testPlayVideoStopPrevious() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.playVideo("funny_dogs_video_id");
-    assertTrue(outputStream.toString().contains("Stopping video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Playing video: Funny Dogs"));
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Stopping video: Amazing Cats\n"
+            + "Playing video: Funny Dogs\n"
+        , outputStream.toString());
   }
 
   @Test
   public void testPlayVideoDontStopPreviousIfNonExistent() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.playVideo("some_other_video");
+
     assertFalse(outputStream.toString().contains("Stopping video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Cannot play video: Video does not exist"));
+
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Cannot play video: Video does not exist\n"
+        , outputStream.toString());
   }
 
   @Test
@@ -85,8 +90,9 @@ public class Part1Test {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.stopVideo();
 
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Stopping video: Amazing Cats"));
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Stopping video: Amazing Cats\n"
+        , outputStream.toString());
   }
 
   @Test
@@ -95,17 +101,16 @@ public class Part1Test {
     videoPlayer.stopVideo();
     videoPlayer.stopVideo();
 
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Stopping video: Amazing Cats"));
-    assertTrue(
-        outputStream.toString().contains("Cannot stop video: No video is currently playing"));
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Stopping video: Amazing Cats\n"
+            + "Cannot stop video: No video is currently playing\n"
+        , outputStream.toString());
   }
 
   @Test
   public void testStopVideoNothingPlaying() {
     videoPlayer.stopVideo();
-    assertTrue(
-        outputStream.toString().contains("Cannot stop video: No video is currently playing"));
+    assertEquals("Cannot stop video: No video is currently playing\n", outputStream.toString());
   }
 
   @Test
@@ -136,23 +141,27 @@ public class Part1Test {
   public void testShowPlaying() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.showPlaying();
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString()
-        .contains("Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+
+    assertEquals(outputStream.toString(),
+        "Playing video: Amazing Cats\n"
+            + "Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]\n");
   }
 
   @Test
   public void testShowNothingPlaying() {
     videoPlayer.showPlaying();
-    assertTrue(outputStream.toString().contains("No video is currently playing"));
+
+    assertEquals("No video is currently playing\n", outputStream.toString());
   }
 
   @Test
   public void testPauseVideo() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.pauseVideo();
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Pausing video: Amazing Cats"));
+
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Pausing video: Amazing Cats\n"
+        , outputStream.toString());
   }
 
   @Test
@@ -160,28 +169,18 @@ public class Part1Test {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.pauseVideo();
     videoPlayer.showPlaying();
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Pausing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains(
-        "Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal] - PAUSED"));
-  }
 
-  @Test
-  public void testPauseVideoPlayVideo() {
-    videoPlayer.playVideo("amazing_cats_video_id");
-    videoPlayer.pauseVideo();
-    videoPlayer.playVideo("amazing_cats_video_id");
-    videoPlayer.showPlaying();
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Pausing video: Amazing Cats"));
-    assertFalse(outputStream.toString().contains("PAUSED"));
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Pausing video: Amazing Cats\n"
+            + "Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal] - PAUSED\n"
+        , outputStream.toString());
   }
 
   @Test
   public void testPauseVideoNothingPlaying() {
     videoPlayer.pauseVideo();
-    assertTrue(
-        outputStream.toString().contains("Cannot pause video: No video is currently playing"));
+
+    assertEquals("Cannot pause video: No video is currently playing\n", outputStream.toString());
   }
 
   @Test
@@ -189,23 +188,28 @@ public class Part1Test {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.pauseVideo();
     videoPlayer.continueVideo();
-    assertTrue(outputStream.toString().contains("Playing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Pausing video: Amazing Cats"));
-    assertTrue(outputStream.toString().contains("Continuing video: Amazing Cats"));
+
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Pausing video: Amazing Cats\n"
+            + "Continuing video: Amazing Cats\n"
+        , outputStream.toString());
   }
 
   @Test
   public void testContinueVideoNotPaused() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.continueVideo();
-    assertTrue(outputStream.toString()
-        .contains("Cannot continue video: Video is not paused"));
+
+    assertEquals("Playing video: Amazing Cats\n"
+            + "Cannot continue video: Video is not paused\n"
+        , outputStream.toString());
   }
 
   @Test
   public void testContinueVideoNothingPlaying() {
     videoPlayer.continueVideo();
-    assertTrue(
-        outputStream.toString().contains("Cannot continue video: No video is currently playing"));
+
+    assertEquals("Cannot continue video: No video is currently playing\n"
+        , outputStream.toString());
   }
 }
