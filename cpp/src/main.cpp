@@ -21,7 +21,11 @@ int main() {
   VideoPlayer vp;
   CommandParser cp = CommandParser(std::move(vp));
 
-  while (std::getline(std::cin, userInput)) {
+  for (;;) {
+    std::cout << "YT> ";
+    if (!std::getline(std::cin, userInput)) {
+      break;
+    }
     if (userInput.empty()) {
       std::cout << "Please enter a valid command, type HELP for a list of "
                    "available commands."

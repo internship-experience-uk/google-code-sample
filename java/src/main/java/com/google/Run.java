@@ -11,6 +11,7 @@ public class Run {
     var parser = new CommandParser(videoPlayer);
     var scanner = new Scanner(System.in);
     while (true) {
+      System.out.print("YT> ");
       var input = scanner.nextLine();
       if (input.toUpperCase().equals("EXIT")) {
         System.out.println("YouTube has now terminated its execution. " +
