@@ -97,6 +97,7 @@ TEST(Part2, showAllPlaylist) {
   EXPECT_THAT(output, HasSubstr("Showing all playlists:"));
   EXPECT_THAT(output, HasSubstr("my_playlist"));
   EXPECT_THAT(output, HasSubstr("another_playlist"));
+  EXPECT_TRUE(output.find("another_playlist") < output.find("my_playlist"));
 }
 
 TEST(Part2, showPlaylist) {
@@ -158,7 +159,7 @@ TEST(Part2, removeFromPlaylistVideoNotInPlaylist) {
           "Cannot remove video from my_playlist: Video is not in playlist"));
 }
 
-TEST(Part2, removeFromPlaylistNonexistantVideo) {
+TEST(Part2, removeFromPlaylistNonexistentVideo) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("my_playlist");
@@ -203,7 +204,7 @@ TEST(Part2, clearPlaylist) {
   EXPECT_THAT(output, HasSubstr("No videos here yet"));
 }
 
-TEST(Part2, clearPlaylistNonexistant) {
+TEST(Part2, clearPlaylistNonexistent) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.clearPlaylist("my_playlist");
@@ -224,7 +225,7 @@ TEST(Part2, deletePlaylist) {
   EXPECT_THAT(output, HasSubstr("Deleted playlist: my_playlist"));
 }
 
-TEST(Part2, deletePlaylistNonexistant) {
+TEST(Part2, deletePlaylistNonexistent) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.deletePlaylist("my_playlist");
