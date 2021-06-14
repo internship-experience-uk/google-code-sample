@@ -30,10 +30,16 @@ file(COPY src/videos.txt DESTINATION src/)
 
 add_library(youtube_lib
     src/commandparser.cpp
+    src/commandparser.h
     src/helper.cpp
+    src/helper.h
     src/video.cpp
+    src/video.h
+    src/videolibrary.cpp
+    src/videolibrary.h
     src/videoplayer.cpp
-    src/videolibrary.cpp)
+    src/videoplayer.h
+    src/videoplaylist.h)
 
 add_executable(youtube src/main.cpp)
 target_link_libraries(youtube youtube_lib)
