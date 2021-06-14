@@ -16,8 +16,8 @@ TEST(Part3, searchVideosWithNoAnswer) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
@@ -37,8 +37,8 @@ TEST(Part3, searchVideosAndPlayAnswer) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
@@ -58,8 +58,8 @@ TEST(Part3, searchVideosAnswerOutOfBounds) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
@@ -79,8 +79,8 @@ TEST(Part3, searchVideosInvalidNumber) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
@@ -108,8 +108,8 @@ TEST(Part3, searchVideosWithTagNoAnswer) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
@@ -129,8 +129,8 @@ TEST(Part3, searchVideosWithTagPlayAnswer) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
@@ -150,8 +150,8 @@ TEST(Part3, searchVideosWithTagAnswerOutOfBounds) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Here are the results for #cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
-  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+  EXPECT_THAT(output, HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
