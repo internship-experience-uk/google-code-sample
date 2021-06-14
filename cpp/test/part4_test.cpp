@@ -36,7 +36,7 @@ TEST(Part4, flagVideoAlreadyFlagged) {
       output,
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("Cannot flag video: Video already flagged"));
+  EXPECT_THAT(output, HasSubstr("Cannot flag video: Video is already flagged"));
 }
 
 TEST(Part4, flagVideoNonexistent) {
@@ -133,13 +133,14 @@ TEST(Part4, flagVideoSearchVideos) {
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
   EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Amazing Cats (amazing_cats_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Another Cat Video (another_cat_video_id)"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
       output,
       HasSubstr(
           "If your answer is not a valid number, we will assume it's a no."));
+  EXPECT_THAT(output, Not(HasSubstr("Amazing Cats (amazing_cats_video_id)")));
 }
 
 TEST(Part4, flagVideoStopVideoPlaying) {

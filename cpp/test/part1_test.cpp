@@ -173,7 +173,7 @@ TEST(Part1, pauseVideoPlayVideo) {
   testing::internal::CaptureStdout();
   videoPlayer.playVideo("amazing_cats_video_id");
   videoPlayer.pauseVideo();
-  videoPlayer.playVideo("amazing_cats_video_id")
+  videoPlayer.playVideo("amazing_cats_video_id");
   videoPlayer.showPlaying();
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
@@ -188,6 +188,17 @@ TEST(Part1, pauseVideoNothingPlaying) {
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Cannot pause video: No video is currently playing"));
+}
+
+TEST(Part1, pauseVideoTwice) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  videoPlayer.playVideo("amazing_cats_video_id");
+  videoPlayer.pauseVideo();
+  videoPlayer.pauseVideo();
+  std::string output = testing::internal::GetCapturedStdout();
+  EXPECT_THAT(output,
+              HasSubstr("Video already paused: Amazing Cats"));
 }
 
 TEST(Part1, continueVideo) {
