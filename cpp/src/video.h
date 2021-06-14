@@ -8,12 +8,12 @@
  */
 class Video {
  private:
-  std::string title;
-  std::string videoId;
-  std::vector<std::string> tags;
+  std::string title_;
+  std::string video_id_;
+  std::vector<std::string> tags_;
 
  public:
-  Video(std::string&& title, std::string&& videoId,
+  Video(std::string&& title, std::string&& video_id,
         std::vector<std::string>&& tags);
 
   // Returns the title of the video.

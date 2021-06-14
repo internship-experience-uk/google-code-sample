@@ -3,7 +3,7 @@
 #include <iostream>
 
 void VideoPlayer::numberOfVideos() {
-  std::cout << videoLibrary.getVideos().size() << " videos in the library"
+  std::cout << video_library_.getVideos().size() << " videos in the library"
             << std::endl;
 }
 
@@ -11,7 +11,7 @@ void VideoPlayer::showAllVideos() {
   std::cout << "showAllVideos needs implementation" << std::endl;
 }
 
-void VideoPlayer::playVideo(std::string videoId) {
+void VideoPlayer::playVideo(std::string const& video_id) {
   std::cout << "playVideo needs implementation" << std::endl;
 }
 
@@ -35,16 +35,16 @@ void VideoPlayer::showPlaying() {
   std::cout << "showPlaying needs implementation" << std::endl;
 }
 
-void VideoPlayer::createPlaylist(std::string playlistName) {
+void VideoPlayer::createPlaylist(std::string const& playlist_name) {
   std::cout << "createPlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::addVideoToPlaylist(std::string playlistName,
-                                     std::string videoId) {
+void VideoPlayer::addVideoToPlaylist(std::string const& playlist_name,
+                                     std::string const& video_id) {
   std::cout << "addVideoToPlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::showPlaylist(std::string playlistName) {
+void VideoPlayer::showPlaylist(std::string const& playlist_name) {
   std::cout << "showPlaylist needs implementation" << std::endl;
 }
 
@@ -52,35 +52,35 @@ void VideoPlayer::showAllPlaylists() {
   std::cout << "showAllPlaylists needs implementation" << std::endl;
 }
 
-void VideoPlayer::removeFromPlaylist(std::string playlistName,
-                                     std::string videoId) {
+void VideoPlayer::removeFromPlaylist(std::string const& playlist_name,
+                                     std::string const& video_id) {
   std::cout << "removeFromPlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::clearPlaylist(std::string playlistName) {
+void VideoPlayer::clearPlaylist(std::string const& playlist_name) {
   std::cout << "clearPlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::deletePlaylist(std::string playlistName) {
+void VideoPlayer::deletePlaylist(std::string const& playlist_name) {
   std::cout << "deletePlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::searchVideos(std::string searchTerm) {
+void VideoPlayer::searchVideos(std::string const& search_term) {
   std::cout << "searchVideos needs implementation" << std::endl;
 }
 
-void VideoPlayer::searchVideosWithTag(std::string videoTag) {
+void VideoPlayer::searchVideosWithTag(std::string const& video_tag) {
   std::cout << "searchVideosWithTag needs implementation" << std::endl;
 }
 
-void VideoPlayer::flagVideo(std::string videoId) {
+void VideoPlayer::flagVideo(std::string const& video_id) {
   std::cout << "flagVideo needs implementation" << std::endl;
 }
 
-void VideoPlayer::flagVideo(std::string videoId, std::string reason) {
+void VideoPlayer::flagVideo(std::string const& video_id, std::string const& reason) {
   std::cout << "flagVideo needs implementation" << std::endl;
 }
 
-void VideoPlayer::allowVideo(std::string videoId) {
+void VideoPlayer::allowVideo(std::string const& video_id) {
   std::cout << "allowVideo needs implementation" << std::endl;
 }

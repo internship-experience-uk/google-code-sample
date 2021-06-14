@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "helper.h"
@@ -25,7 +26,7 @@ VideoLibrary::VideoLibrary() {
         tags.emplace_back(trim(std::move(tag)));
       }
       Video video = Video(trim(std::move(title)), trim(id), std::move(tags));
-      this->videos.emplace(trim(std::move(id)), std::move(video));
+      videos_.emplace(trim(std::move(id)), std::move(video));
     }
   } else {
     std::cout << "Couldn't find videos.txt" << std::endl;
@@ -34,15 +35,15 @@ VideoLibrary::VideoLibrary() {
 
 std::vector<Video> VideoLibrary::getVideos() const {
   std::vector<Video> result;
-  for (auto const &video : this->videos) {
+  for (auto const &video : videos_) {
     result.emplace_back(video.second);
   }
   return result;
 }
 
-Video const *VideoLibrary::getVideo(std::string videoId) const {
-  auto const found = this->videos.find(videoId);
-  if (found == this->videos.end()) {
+Video const *VideoLibrary::getVideo(std::string const& video_id) const {
+  auto const found = videos_.find(video_id);
+  if (found == videos_.end()) {
     std::cout << "Video not found in video library" << std::endl;
     return nullptr;
   } else {
