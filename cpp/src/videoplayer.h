@@ -9,14 +9,14 @@
  */
 class VideoPlayer {
  private:
-  VideoLibrary video_library_;
+  VideoLibrary mVideoLibrary;
 
  public:
   VideoPlayer() = default;
 
   // This class is not copyable to avoid expensive copies.
-  VideoPlayer(VideoPlayer const&) = delete;
-  VideoPlayer& operator=(VideoPlayer const&) = delete;
+  VideoPlayer(const VideoPlayer&) = delete;
+  VideoPlayer& operator=(const VideoPlayer&) = delete;
 
   // This class is movable.
   VideoPlayer(VideoPlayer&&) = default;
@@ -24,22 +24,22 @@ class VideoPlayer {
 
   void numberOfVideos();
   void showAllVideos();
-  void playVideo(std::string const& video_id);
+  void playVideo(const std::string& videoId);
   void playRandomVideo();
   void stopVideo();
   void pauseVideo();
   void continueVideo();
   void showPlaying();
-  void createPlaylist(std::string const& playlist_name);
-  void addVideoToPlaylist(std::string const& playlist_name, std::string const& video_id);
-  void showPlaylist(std::string const& playlist_name);
+  void createPlaylist(const std::string& playlistName);
+  void addVideoToPlaylist(const std::string& playlistName, const std::string& videoId);
+  void showPlaylist(const std::string& playlistName);
   void showAllPlaylists();
-  void removeFromPlaylist(std::string const& playlist_name, std::string const& video_id);
-  void clearPlaylist(std::string const& playlist_name);
-  void deletePlaylist(std::string const& playlist_name);
-  void searchVideos(std::string const& search_term);
-  void searchVideosWithTag(std::string const& video_tag);
-  void flagVideo(std::string const& video_id);
-  void flagVideo(std::string const& video_id, std::string const& reason);
-  void allowVideo(std::string const& video_id);
+  void removeFromPlaylist(const std::string& playlistName, const std::string& videoId);
+  void clearPlaylist(const std::string& playlistName);
+  void deletePlaylist(const std::string& playlistName);
+  void searchVideos(const std::string& searchTerm);
+  void searchVideosWithTag(const std::string& videoTag);
+  void flagVideo(const std::string& videoId);
+  void flagVideo(const std::string& videoId, const std::string& reason);
+  void allowVideo(const std::string& videoId);
 };
