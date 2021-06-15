@@ -11,19 +11,19 @@
  */
 class VideoLibrary {
  private:
-  std::unordered_map<std::string, Video> videos_;
+  std::unordered_map<std::string, Video> mVideos;
 
  public:
   VideoLibrary();
 
   // This class is not copyable to avoid expensive copies.
-  VideoLibrary(VideoLibrary const&) = delete;
-  VideoLibrary& operator=(VideoLibrary const&) = delete;
+  VideoLibrary(const VideoLibrary&) = delete;
+  VideoLibrary& operator=(const VideoLibrary&) = delete;
 
   // This class is movable.
   VideoLibrary(VideoLibrary&&) = default;
   VideoLibrary& operator=(VideoLibrary&&) = default;
 
   std::vector<Video> getVideos() const;
-  Video const *getVideo(std::string const& video_id) const;
+  const Video *getVideo(const std::string& videoId) const;
 };

@@ -10,7 +10,7 @@
  */
 class CommandParser {
  private:
-  VideoPlayer video_player_;
+  VideoPlayer mVideoPlayer;
 
   void getHelp() const;
 
@@ -18,13 +18,13 @@ class CommandParser {
   CommandParser(VideoPlayer&& vp);
 
   // This class is not copyable to avoid expensive copies.
-  CommandParser(CommandParser const&) = delete;
-  CommandParser& operator=(CommandParser const&) = delete;
+  CommandParser(const CommandParser&) = delete;
+  CommandParser& operator=(const CommandParser&) = delete;
 
   // This class is movable.
   CommandParser(CommandParser&&) = default;
   CommandParser& operator=(CommandParser&&) = default;
 
   // Executes the given user command.
-  void executeCommand(std::vector<std::string> const& command);
+  void executeCommand(const std::vector<std::string>& command);
 };

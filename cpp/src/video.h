@@ -8,20 +8,20 @@
  */
 class Video {
  private:
-  std::string title_;
-  std::string video_id_;
-  std::vector<std::string> tags_;
+  std::string mTitle;
+  std::string mVideoId;
+  std::vector<std::string> mTags;
 
  public:
-  Video(std::string&& title, std::string&& video_id,
+  Video(std::string&& title, std::string&& videoId,
         std::vector<std::string>&& tags);
 
   // Returns the title of the video.
-  std::string const& getTitle() const;
+  const std::string& getTitle() const;
 
   // Returns the video id of the video.
-  std::string const& getVideoId() const;
+  const std::string& getVideoId() const;
 
   // Returns a readonly collection of the tags of the video.
-  std::vector<std::string> const& getTags() const;
+  const std::vector<std::string>& getTags() const;
 };
