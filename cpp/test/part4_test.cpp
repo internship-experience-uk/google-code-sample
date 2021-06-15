@@ -133,7 +133,7 @@ TEST(Part4, flagVideoSearchVideos) {
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
   EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Another Cat Video (another_cat_video_id)"));
+  EXPECT_THAT(output, HasSubstr("1) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
