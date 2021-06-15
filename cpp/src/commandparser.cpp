@@ -2,11 +2,12 @@
 
 #include <iostream>
 #include <sstream>
+#include <utility>
 #include <vector>
 
-CommandParser::CommandParser(VideoPlayer&& vp) : videoPlayer{vp} {}
+CommandParser::CommandParser(VideoPlayer&& vp) : video_player_(std::move(vp)) {}
 
-void CommandParser::executeCommand(std::vector<std::string> command) {
+void CommandParser::executeCommand(std::vector<std::string> const& command) {
   if (command.empty()) {
     std::cout << "No commands passed in to executeCommand, that is unexpected"
               << std::endl;
@@ -14,32 +15,32 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
   }
 
   if (command[0] == "NUMBER_OF_VIDEOS") {
-    videoPlayer.numberOfVideos();
+    video_player_.numberOfVideos();
   } else if (command[0] == "SHOW_ALL_VIDEOS") {
-    videoPlayer.showAllVideos();
+    video_player_.showAllVideos();
   } else if (command[0] == "PLAY") {
     if (command.size() != 2) {
       std::cout << "Please enter PLAY command followed by video_id."
                 << std::endl;
     } else {
-      videoPlayer.playVideo(command[1]);
+      video_player_.playVideo(command[1]);
     }
   } else if (command[0] == "PLAY_RANDOM") {
-    videoPlayer.playRandomVideo();
+    video_player_.playRandomVideo();
   } else if (command[0] == "STOP") {
-    videoPlayer.stopVideo();
+    video_player_.stopVideo();
   } else if (command[0] == "PAUSE") {
-    videoPlayer.pauseVideo();
+    video_player_.pauseVideo();
   } else if (command[0] == "CONTINUE") {
-    videoPlayer.continueVideo();
+    video_player_.continueVideo();
   } else if (command[0] == "SHOW_PLAYING") {
-    videoPlayer.showPlaying();
+    video_player_.showPlaying();
   } else if (command[0] == "CREATE_PLAYLIST") {
     if (command.size() != 2) {
       std::cout << "Please enter CREATE_PLAYLIST command followed by video_id."
                 << std::endl;
     } else {
-      videoPlayer.createPlaylist(command[1]);
+      video_player_.createPlaylist(command[1]);
     }
   } else if (command[0] == "ADD_TO_PLAYLIST") {
     if (command.size() != 3) {
@@ -47,7 +48,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
                    "name and video_id."
                 << std::endl;
     } else {
-      videoPlayer.addVideoToPlaylist(command[1], command[2]);
+      video_player_.addVideoToPlaylist(command[1], command[2]);
     }
   } else if (command[0] == "REMOVE_FROM_PLAYLIST") {
     if (command.size() != 3) {
@@ -55,7 +56,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
                    "playlist name and video_id."
                 << std::endl;
     } else {
-      videoPlayer.removeFromPlaylist(command[1], command[2]);
+      video_player_.removeFromPlaylist(command[1], command[2]);
     }
   } else if (command[0] == "CLEAR_PLAYLIST") {
     if (command.size() != 2) {
@@ -63,7 +64,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
           << "Please enter CLEAR_PLAYLIST command followed by a playlist name."
           << std::endl;
     } else {
-      videoPlayer.clearPlaylist(command[1]);
+      video_player_.clearPlaylist(command[1]);
     }
   } else if (command[0] == "DELETE_PLAYLIST") {
     if (command.size() != 2) {
@@ -71,7 +72,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
           << "Please enter DELETE_PLAYLIST command followed by a playlist name."
           << std::endl;
     } else {
-      videoPlayer.deletePlaylist(command[1]);
+      video_player_.deletePlaylist(command[1]);
     }
   } else if (command[0] == "SHOW_PLAYLIST") {
     if (command.size() != 2) {
@@ -79,17 +80,17 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
           << "Please enter SHOW_PLAYLIST command followed by a playlist name."
           << std::endl;
     } else {
-      videoPlayer.showPlaylist(command[1]);
+      video_player_.showPlaylist(command[1]);
     }
   } else if (command[0] == "SHOW_ALL_PLAYLISTS") {
-    videoPlayer.showAllPlaylists();
+    video_player_.showAllPlaylists();
   } else if (command[0] == "SEARCH_VIDEOS") {
     if (command.size() != 2) {
       std::cout
           << "Please enter SEARCH_VIDEOS command followed by a search term."
           << std::endl;
     } else {
-      videoPlayer.searchVideos(command[1]);
+      video_player_.searchVideos(command[1]);
     }
   } else if (command[0] == "SEARCH_VIDEOS_WITH_TAG") {
     if (command.size() != 2) {
@@ -97,15 +98,15 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
                    "video tag."
                 << std::endl;
     } else {
-      videoPlayer.searchVideosWithTag(command[1]);
+      video_player_.searchVideosWithTag(command[1]);
     }
   } else if (command[0] == "FLAG_VIDEO") {
     switch (command.size()) {
       case 2:
-        videoPlayer.flagVideo(command[1]);
+        video_player_.flagVideo(command[1]);
         break;
       case 3:
-        videoPlayer.flagVideo(command[1], command[2]);
+        video_player_.flagVideo(command[1], command[2]);
         break;
       default:
         std::cout << "Please enter FLAG_VIDEO command followed by a video_id "
@@ -117,7 +118,7 @@ void CommandParser::executeCommand(std::vector<std::string> command) {
       std::cout << "Please enter ALLOW_VIDEO command followed by a video_id."
                 << std::endl;
     } else {
-      videoPlayer.allowVideo(command[1]);
+      video_player_.allowVideo(command[1]);
     }
   } else if (command[0] == "HELP") {
     getHelp();

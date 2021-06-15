@@ -9,27 +9,37 @@
  */
 class VideoPlayer {
  private:
-  VideoLibrary videoLibrary;
+  VideoLibrary video_library_;
 
  public:
+  VideoPlayer() = default;
+
+  // This class is not copyable to avoid expensive copies.
+  VideoPlayer(VideoPlayer const&) = delete;
+  VideoPlayer& operator=(VideoPlayer const&) = delete;
+
+  // This class is movable.
+  VideoPlayer(VideoPlayer&&) = default;
+  VideoPlayer& operator=(VideoPlayer&&) = default;
+
   void numberOfVideos();
   void showAllVideos();
-  void playVideo(std::string videoId);
+  void playVideo(std::string const& video_id);
   void playRandomVideo();
   void stopVideo();
   void pauseVideo();
   void continueVideo();
   void showPlaying();
-  void createPlaylist(std::string playlistName);
-  void addVideoToPlaylist(std::string playlistName, std::string videoId);
-  void showPlaylist(std::string playlistName);
+  void createPlaylist(std::string const& playlist_name);
+  void addVideoToPlaylist(std::string const& playlist_name, std::string const& video_id);
+  void showPlaylist(std::string const& playlist_name);
   void showAllPlaylists();
-  void removeFromPlaylist(std::string playlistName, std::string videoId);
-  void clearPlaylist(std::string playlistName);
-  void deletePlaylist(std::string playlistName);
-  void searchVideos(std::string searchTerm);
-  void searchVideosWithTag(std::string videoTag);
-  void flagVideo(std::string videoId);
-  void flagVideo(std::string videoId, std::string reason);
-  void allowVideo(std::string videoId);
+  void removeFromPlaylist(std::string const& playlist_name, std::string const& video_id);
+  void clearPlaylist(std::string const& playlist_name);
+  void deletePlaylist(std::string const& playlist_name);
+  void searchVideos(std::string const& search_term);
+  void searchVideosWithTag(std::string const& video_tag);
+  void flagVideo(std::string const& video_id);
+  void flagVideo(std::string const& video_id, std::string const& reason);
+  void allowVideo(std::string const& video_id);
 };
