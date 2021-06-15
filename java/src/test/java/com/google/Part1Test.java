@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -118,8 +117,8 @@ public class Part1Test {
 
     Pattern pattern = Pattern
         .compile(
-            "Playing video: (Amazing Cats|Another Cat Video|Funny Dogs|Life at Google|Video about nothing)");
-    Matcher matcher = pattern.matcher(outputStream.toString());
+            "Playing video: (Amazing Cats|Another Cat Video|Funny Dogs|Life at Google|Video about nothing).*",
+            Pattern.DOTALL);
     assertThat(outputStream.toString(), matchesPattern(pattern));
   }
 
@@ -131,8 +130,8 @@ public class Part1Test {
     assertThat(outputStream.toString(), containsString("Stopping video: Amazing Cats"));
     Pattern pattern = Pattern
         .compile(
-            "Playing video: (Amazing Cats|Another Cat Video|Funny Dogs|Life at Google|Video about nothing)");
-    Matcher matcher = pattern.matcher(outputStream.toString());
+            "Playing video: Amazing Cats.*Playing video: (Amazing Cats|Another Cat Video|Funny Dogs|Life at Google|Video about nothing).*",
+            Pattern.DOTALL);
     assertThat(outputStream.toString(), matchesPattern(pattern));
   }
 
