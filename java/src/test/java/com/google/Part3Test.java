@@ -38,9 +38,12 @@ public class Part3Test {
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), not(containsString("Playing video")));
   }
 
@@ -51,9 +54,12 @@ public class Part3Test {
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), containsString("Playing video: Another Cat Video"));
   }
 
@@ -64,9 +70,12 @@ public class Part3Test {
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), not(containsString("Playing video")));
   }
 
@@ -76,9 +85,12 @@ public class Part3Test {
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), not(containsString("Playing video")));
   }
 
@@ -94,9 +106,12 @@ public class Part3Test {
     videoPlayer.searchVideosWithTag("#cat");
     assertThat(outputStream.toString(), containsString("Here are the results for #cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), not(containsString("Playing video")));
   }
 
@@ -106,9 +121,12 @@ public class Part3Test {
     videoPlayer.searchVideosWithTag("#cat");
     assertThat(outputStream.toString(), containsString("Here are the results for #cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), containsString("Playing video: Amazing Cats"));
   }
 
@@ -118,9 +136,12 @@ public class Part3Test {
     videoPlayer.searchVideosWithTag("#cat");
     assertThat(outputStream.toString(), containsString("Here are the results for #cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id)"));
-    assertThat(outputStream.toString(), containsString("2) Another Cat Video (another_cat_video_id)"));
-    assertThat(outputStream.toString(), containsString("Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(), containsString("If your answer is not a valid number, we will assume it's a no."));
+    assertThat(outputStream.toString(),
+        containsString("2) Another Cat Video (another_cat_video_id)"));
+    assertThat(outputStream.toString(), containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(outputStream.toString(),
+        containsString("If your answer is not a valid number, we will assume it's a no."));
     assertThat(outputStream.toString(), not(containsString("Playing video")));
   }
 
