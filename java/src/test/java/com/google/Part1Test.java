@@ -38,11 +38,16 @@ public class Part1Test {
   public void testShowAllVideos() {
     videoPlayer.showAllVideos();
     assertThat(outputStream.toString(), containsString("Here's a list of all available videos:"));
-    assertThat(outputStream.toString(), containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-    assertThat(outputStream.toString(), containsString("Another Cat Video (another_cat_video_id) [#cat #animal]"));
-    assertThat(outputStream.toString(), containsString("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
-    assertThat(outputStream.toString(), containsString("Life at Google (life_at_google_video_id) [#google #career]"));
-    assertThat(outputStream.toString(), containsString("Video about nothing (nothing_video_id) []"));
+    assertThat(outputStream.toString(),
+        containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+    assertThat(outputStream.toString(),
+        containsString("Another Cat Video (another_cat_video_id) [#cat #animal]"));
+    assertThat(outputStream.toString(),
+        containsString("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
+    assertThat(outputStream.toString(),
+        containsString("Life at Google (life_at_google_video_id) [#google #career]"));
+    assertThat(outputStream.toString(),
+        containsString("Video about nothing (nothing_video_id) []"));
 
     List<String> outputList = new ArrayList<>(Arrays.asList(outputStream.toString().split("\n")));
     outputList.remove(0);
@@ -96,13 +101,15 @@ public class Part1Test {
 
     assertThat(outputStream.toString(), containsString("Playing video: Amazing Cats"));
     assertThat(outputStream.toString(), containsString("Stopping video: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Cannot stop video: No video is currently playing"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot stop video: No video is currently playing"));
   }
 
   @Test
   public void testStopVideoNothingPlaying() {
     videoPlayer.stopVideo();
-    assertThat(outputStream.toString(), containsString("Cannot stop video: No video is currently playing"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot stop video: No video is currently playing"));
   }
 
   @Test
@@ -134,7 +141,8 @@ public class Part1Test {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.showPlaying();
     assertThat(outputStream.toString(), containsString("Playing video: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+    assertThat(outputStream.toString(),
+        containsString("Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   }
 
   @Test
@@ -176,7 +184,8 @@ public class Part1Test {
   @Test
   public void testPauseVideoNothingPlaying() {
     videoPlayer.pauseVideo();
-    assertThat(outputStream.toString(), containsString("Cannot pause video: No video is currently playing"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot pause video: No video is currently playing"));
   }
 
   @Test
@@ -193,12 +202,14 @@ public class Part1Test {
   public void testContinueVideoNotPaused() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.continueVideo();
-    assertThat(outputStream.toString(), containsString("Cannot continue video: Video is not paused"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot continue video: Video is not paused"));
   }
 
   @Test
   public void testContinueVideoNothingPlaying() {
     videoPlayer.continueVideo();
-    assertThat(outputStream.toString(), containsString("Cannot continue video: No video is currently playing"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot continue video: No video is currently playing"));
   }
 }

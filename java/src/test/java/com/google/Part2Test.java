@@ -27,22 +27,26 @@ public class Part2Test {
   @Test
   public void testCreatePlaylist() {
     videoPlayer.createPlaylist("my_playlist");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
   }
 
   @Test
   public void testCreateExistingPlaylist() {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.createPlaylist("my_playlist");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Cannot create playlist: A playlist with the same name already exists"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot create playlist: A playlist with the same name already exists"));
   }
 
   @Test
   public void testAddToPlaylist() {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
   }
 
@@ -51,9 +55,11 @@ public class Part2Test {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Cannot add video to my_playlist: Video already added"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot add video to my_playlist: Video already added"));
   }
 
   @Test
@@ -61,14 +67,17 @@ public class Part2Test {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.addVideoToPlaylist("my_playlist", "some_other_video_id");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Cannot add video to my_playlist: Video does not exist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot add video to my_playlist: Video does not exist"));
   }
 
   @Test
   public void testAddVideoToPlaylistNonExistent() {
     videoPlayer.addVideoToPlaylist("another_playlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(), containsString("Cannot add video to another_playlist: Playlist does not exist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot add video to another_playlist: Playlist does not exist"));
   }
 
   @Test
@@ -99,12 +108,14 @@ public class Part2Test {
     videoPlayer.showPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.showPlaylist("my_playlist");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Showing playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("No videos here yet"));
     assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
     assertThat(outputStream.toString(), containsString("Showing playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+    assertThat(outputStream.toString(),
+        containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   }
 
   @Test
@@ -120,17 +131,21 @@ public class Part2Test {
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.removeFromPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.removeFromPlaylist("my_playlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Removed video from my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Cannot remove video from my_playlist: Video is not in playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Removed video from my_playlist: Amazing Cats"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot remove video from my_playlist: Video is not in playlist"));
   }
 
   @Test
   public void testRemoveFromPlaylistVideoNotInPlaylist() {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.removeFromPlaylist("my_playlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(), containsString("Cannot remove video from my_playlist: Video is not in playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot remove video from my_playlist: Video is not in playlist"));
   }
 
   @Test
@@ -138,15 +153,18 @@ public class Part2Test {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.removeFromPlaylist("my_playlist", "some_other_video_id");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Cannot remove video from my_playlist: Video does not exist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot remove video from my_playlist: Video does not exist"));
   }
 
   @Test
   public void testRemoveFromPlaylistNonexistentPlaylist() throws Exception {
     videoPlayer.removeFromPlaylist("my_cool_playlist", "some_other_video_id");
-    assertThat(outputStream.toString(), containsString("Cannot remove video from my_cool_playlist: Playlist does not exist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot remove video from my_cool_playlist: Playlist does not exist"));
   }
 
   @Test
@@ -157,11 +175,14 @@ public class Part2Test {
     videoPlayer.clearPlaylist("my_playlist");
     videoPlayer.showPlaylist("my_playlist");
 
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
     assertThat(outputStream.toString(), containsString("Showing playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-    assertThat(outputStream.toString(), containsString("Successfully removed all videos from my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully removed all videos from my_playlist"));
     assertThat(outputStream.toString(), containsString("Showing playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("No videos here yet"));
   }
@@ -169,20 +190,23 @@ public class Part2Test {
   @Test
   public void testClearPlaylistNonexistent() {
     videoPlayer.clearPlaylist("my_playlist");
-    assertThat(outputStream.toString(), containsString("Cannot clear playlist my_playlist: Playlist does not exist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot clear playlist my_playlist: Playlist does not exist"));
   }
 
   @Test
   public void testDeletePlaylist() {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.deletePlaylist("my_playlist");
-    assertThat(outputStream.toString(), containsString("Successfully created new playlist: my_playlist"));
+    assertThat(outputStream.toString(),
+        containsString("Successfully created new playlist: my_playlist"));
     assertThat(outputStream.toString(), containsString("Deleted playlist: my_playlist"));
   }
 
   @Test
   public void test_delete_playlist_nonexistent() {
     videoPlayer.deletePlaylist("my_playlist");
-    assertThat(outputStream.toString(), containsString("Cannot delete playlist my_playlist: Playlist does not exist"));
+    assertThat(outputStream.toString(),
+        containsString("Cannot delete playlist my_playlist: Playlist does not exist"));
   }
 }
