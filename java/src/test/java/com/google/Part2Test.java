@@ -1,15 +1,16 @@
 package com.google;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,11 +96,14 @@ public class Part2Test {
     assertThat(outputStream.toString(), containsString("my_playlist"));
     assertThat(outputStream.toString(), containsString("another_playlist"));
 
-    List<String> outputList = new ArrayList<>(Arrays.asList(outputStream.toString().split("\n")));
+
+    List<String> outputList = Stream.of(outputStream.toString().split("\n"))
+        .map(String::trim)
+        .collect(Collectors.toList());
     outputList = outputList.subList(outputList.size() - 2, outputList.size());
     List<String> expected = new ArrayList<>(outputList);
     Collections.sort(expected);
-    assertThat(outputList, contains(expected));
+    assertEquals(outputList, expected);
   }
 
   @Test
