@@ -146,6 +146,7 @@ def test_pause_video_play_video(capfd):
     out, err = capfd.readouterr()
     assert "Playing video: Amazing Cats" in out
     assert "Pausing video: Amazing Cats" in out
+    assert "Stopping video: Amazing Cats" in out
     assert "Currently playing: Amazing Cats (amazing_cats_video_id) " \
            "[#cat #animal]" in out
     assert "PAUSED" not in out

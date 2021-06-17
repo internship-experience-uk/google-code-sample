@@ -178,6 +178,10 @@ TEST(Part1, pauseVideoPlayVideo) {
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
   EXPECT_THAT(output, HasSubstr("Pausing video: Amazing Cats"));
+  EXPECT_THAT(output, HasSubstr("Stopping video: Amazing Cats"));
+  EXPECT_THAT(output,
+              HasSubstr("Currently playing: Amazing Cats "
+                        "(amazing_cats_video_id) [#cat #animal]"));
   EXPECT_THAT(output, Not(HasSubstr("PAUSED")));
 }
 
