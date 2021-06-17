@@ -181,6 +181,7 @@ public class Part1Test {
     videoPlayer.showPlaying();
     assertThat(outputStream.toString(), containsString("Playing video: Amazing Cats"));
     assertThat(outputStream.toString(), containsString("Pausing video: Amazing Cats"));
+    assertThat(outputStream.toString(), containsString("Stopping video: Amazing Cats"));
     assertThat(outputStream.toString(), not(containsString("PAUSED")));
   }
 
