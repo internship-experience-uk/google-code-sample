@@ -28,6 +28,6 @@ class Video {
 
   /** Returns a readonly collection of the tags of the video. */
   List<String> getTags() {
-    return Collections.unmodifiableList(tags);
+    return tags;
   }
 }
