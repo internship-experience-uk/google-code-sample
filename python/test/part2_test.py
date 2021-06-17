@@ -55,6 +55,13 @@ def test_add_to_playlist_nonexistent_playlist(capfd):
     assert "Cannot add video to another_playlist: Playlist does not exist" in out
 
 
+def test_add_to_playlist_nonexistent_playlist_nonexistent_video(capfd):
+    player = VideoPlayer()
+    player.add_to_playlist("another_playlist", "does_not_exist_video_id")
+    out, err = capfd.readouterr()
+    assert "Cannot add video to another_playlist: Playlist does not exist" in out
+
+
 def test_show_all_playlists_no_playlists_exist(capfd):
     player = VideoPlayer()
     player.show_all_playlists()

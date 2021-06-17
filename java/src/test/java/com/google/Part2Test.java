@@ -83,6 +83,13 @@ public class Part2Test {
   }
 
   @Test
+  public void testAddVideoToPlaylistNoVideoNoPlaylist() {
+    videoPlayer.addVideoToPlaylist("another_playlist", "does_not_exist_video_id");
+    assertThat(outputStream.toString(),
+        containsString("Cannot add video to another_playlist: Playlist does not exist"));
+  }
+
+  @Test
   public void testShowAllPlaylistsNoPlaylistsExist() {
     videoPlayer.showAllPlaylists();
     assertThat(outputStream.toString(), containsString("No playlists exist yet"));
@@ -229,7 +236,7 @@ public class Part2Test {
   }
 
   @Test
-  public void test_delete_playlist_nonexistent() {
+  public void testDeletePlaylistNonexistent() {
     videoPlayer.deletePlaylist("my_playlist");
     assertThat(outputStream.toString(),
         containsString("Cannot delete playlist my_playlist: Playlist does not exist"));
