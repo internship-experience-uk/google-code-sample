@@ -133,7 +133,10 @@ TEST(Part2, showPlaylistAfterRemoveAVideoFromPlaylistThenReAdd) {
               HasSubstr("Life at Google (life_at_google_video_id) [#google #career]"));
   EXPECT_THAT(output,
               HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-  EXPECT_TRUE(output.find("Life at Google") < output.find("Amazing Cats"));
+  EXPECT_TRUE(
+      output.find("Life at Google (life_at_google_video_id) [#google #career]") <
+      output.find("Amazing Cats (amazing_cats_video_id) [#cat #animal]")
+  );
 }
 
 TEST(Part2, showPlaylistNonExistent) {

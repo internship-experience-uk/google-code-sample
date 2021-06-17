@@ -103,7 +103,9 @@ def test_remove_from_playlist_then_re_add(capfd):
     assert "Showing playlist: my_playLIST" in out
     assert "Life at Google (life_at_google_video_id) [#google #career]" in out
     assert "Amazing Cats (amazing_cats_video_id) [#cat #animal]" in out
-    assert out.find("Life at Google") < out.find("Amazing Cats")
+    assert out.find(
+        "Life at Google (life_at_google_video_id) [#google #career]") < out.find(
+        "Amazing Cats (amazing_cats_video_id) [#cat #animal]")
 
 
 def test_show_playlist_nonexistent_playlist(capfd):

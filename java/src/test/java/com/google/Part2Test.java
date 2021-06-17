@@ -136,8 +136,10 @@ public class Part2Test {
         containsString("Life at Google (life_at_google_video_id) [#google #career]"));
     assertThat(outputStream.toString(),
         containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-    assertTrue(outputStream.toString().indexOf("Life at Google") < outputStream.toString()
-        .indexOf("Amazing Cats"));
+    assertTrue(outputStream.toString()
+        .indexOf("Life at Google (life_at_google_video_id) [#google #career]") < outputStream
+        .toString()
+        .indexOf("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   }
 
   @Test
