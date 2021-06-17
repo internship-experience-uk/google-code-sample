@@ -13,7 +13,7 @@ public class Run {
     while (true) {
       System.out.print("YT> ");
       var input = scanner.nextLine();
-      if (input.toUpperCase().equals("EXIT")) {
+      if (input.equalsIgnoreCase("exit")) {
         System.out.println("YouTube has now terminated its execution. " +
             "Thank you and goodbye!");
         System.exit(0);

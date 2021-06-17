@@ -50,9 +50,6 @@ class VideoLibrary {
    * Get a video by id. Returns null if the video is not found.
    */
   Video getVideo(String videoId) {
-    if (this.videos.containsKey(videoId)) {
-      return this.videos.get(videoId);
-    }
-    return null;
+    return this.videos.get(videoId);
   }
 }
