@@ -79,6 +79,17 @@ TEST(Part2, addVideoToPlaylistNonExistent) {
           "Cannot add video to anotHER_playlist: Playlist does not exist"));
 }
 
+TEST(Part2, addVideoToPlaylistNonExistentNoPlaylistNoVideo) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  videoPlayer.addVideoToPlaylist("anotHER_playlist", "video_does_not_exist");
+  std::string output = testing::internal::GetCapturedStdout();
+  EXPECT_THAT(
+      output,
+      HasSubstr(
+          "Cannot add video to anotHER_playlist: Playlist does not exist"));
+}
+
 TEST(Part2, showAllPlaylistsNoPlaylistsExist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
