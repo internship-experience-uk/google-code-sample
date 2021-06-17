@@ -19,7 +19,7 @@ TEST(Part2, createExistingPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
-  videoPlayer.createPlaylist("mY_plaYList");
+  videoPlayer.createPlaylist("MY_PLAYLIST");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: mY_plaYList"));
@@ -31,11 +31,11 @@ TEST(Part2, addToPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
-  videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
+  videoPlayer.addVideoToPlaylist("mY_playLIST", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(output, HasSubstr("Added video to mY_playLIST: Amazing Cats"));
 }
 
 TEST(Part2, addToPlaylistAlreadyAdded) {
@@ -151,14 +151,14 @@ TEST(Part2, removeFromPlaylist) {
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
-  videoPlayer.removeFromPlaylist("mY_plaYList", "amazing_cats_video_id");
+  videoPlayer.removeFromPlaylist("MY_playlist", "amazing_cats_video_id");
   videoPlayer.removeFromPlaylist("mY_plaYList", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: mY_plaYList"));
   EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
   EXPECT_THAT(output,
-              HasSubstr("Removed video from mY_plaYList: Amazing Cats"));
+              HasSubstr("Removed video from MY_playlist: Amazing Cats"));
   EXPECT_THAT(
       output,
       HasSubstr(
@@ -236,11 +236,11 @@ TEST(Part2, deletePlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
-  videoPlayer.deletePlaylist("mY_plaYList");
+  videoPlayer.deletePlaylist("MY_PLAYLIST");
   std::string output = testing::internal::GetCapturedStdout();
   EXPECT_THAT(output,
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Deleted playlist: mY_plaYList"));
+  EXPECT_THAT(output, HasSubstr("Deleted playlist: MY_PLAYLIST"));
 }
 
 TEST(Part2, deletePlaylistNonexistent) {
