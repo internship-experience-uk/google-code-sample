@@ -86,7 +86,7 @@ def test_show_all_playlists(capfd):
 def test_show_playlist(capfd):
     player = VideoPlayer()
     player.create_playlist("my_cool_playlist")
-    player.show_playlist("my_COOL_playlist")
+    player.show_playlist("my_cool_playlist")
     player.add_to_playlist("my_cool_playlist", "amazing_cats_video_id")
     player.show_playlist("my_COOL_playlist")
     out, err = capfd.readouterr()
