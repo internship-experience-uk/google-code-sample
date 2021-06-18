@@ -195,9 +195,12 @@ public class Part1Test extends TestBase {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.pauseVideo();
     videoPlayer.pauseVideo();
-    assertThat(outputStream.toString(), containsString("Playing video: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Pausing video: Amazing Cats"));
-    assertThat(outputStream.toString(), containsString("Video already paused: Amazing Cats"));
+
+    String[] lines = getOutputLines();
+    assertEquals(3, lines.length);
+    assertThat(lines[0], containsString("Playing video: Amazing Cats"));
+    assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
+    assertThat(lines[2], containsString("Video already paused: Amazing Cats"));
   }
   
   @Test
