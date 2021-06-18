@@ -25,15 +25,15 @@ class VideoPlayer {
   void numberOfVideos();
   void showAllVideos();
   void playVideo(const std::string& videoId);
-  void playRandomVideo();
   void stopVideo();
+  void playRandomVideo();
   void pauseVideo();
   void continueVideo();
   void showPlaying();
   void createPlaylist(const std::string& playlistName);
   void addVideoToPlaylist(const std::string& playlistName, const std::string& videoId);
-  void showPlaylist(const std::string& playlistName);
   void showAllPlaylists();
+  void showPlaylist(const std::string& playlistName);
   void removeFromPlaylist(const std::string& playlistName, const std::string& videoId);
   void clearPlaylist(const std::string& playlistName);
   void deletePlaylist(const std::string& playlistName);
