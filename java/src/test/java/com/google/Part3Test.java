@@ -2,8 +2,6 @@ package com.google;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;

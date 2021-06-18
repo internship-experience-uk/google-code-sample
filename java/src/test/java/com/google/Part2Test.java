@@ -1,12 +1,8 @@
 package com.google;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +10,10 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Part2Test extends TestBase {
-
   @Test
   public void testCreatePlaylist() {
     videoPlayer.createPlaylist("my_PLAYlist");
@@ -52,7 +46,8 @@ public class Part2Test extends TestBase {
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.addVideoToPlaylist("my_PLAYlist", "amazing_cats_video_id");
 
-    var lines = getOutputLines(3);
+    var lines = getOutputLines();
+    assertEquals(3, lines.length);
     assertThat(lines[0], containsString("Successfully created new playlist: my_playlist"));
     assertThat(lines[1], containsString("Added video to my_playlist: Amazing Cats"));
     assertThat(lines[2], containsString("Cannot add video to my_PLAYlist: Video already added"));

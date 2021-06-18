@@ -29,10 +29,8 @@ public class TestBase {
         System.setIn(stdin);
     }
 
-    String[] getOutputLines(int expectedNumberOfLines) {
-      var result = outputStream.toString().split("\\r?\\n");
-      assertThat(Arrays.asList(result), hasSize(expectedNumberOfLines));
-      return result;
+    String[] getOutputLines() {
+        return outputStream.toString().split("\\r?\\n");
     }
 
     void setInput(String str) {
