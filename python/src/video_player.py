@@ -26,15 +26,15 @@ class VideoPlayer:
         """
         print("play_video needs implementation")
 
-    def play_random_video(self):
-        """Plays a random video from the video library."""
-
-        print("play_random_video needs implementation")
-
     def stop_video(self):
         """Stops the current video."""
 
         print("stop_video needs implementation")
+
+    def play_random_video(self):
+        """Plays a random video from the video library."""
+
+        print("play_random_video needs implementation")
 
     def pause_video(self):
         """Pauses the current video."""
@@ -68,6 +68,11 @@ class VideoPlayer:
         """
         print("add_to_playlist needs implementation")
 
+    def show_all_playlists(self):
+        """Display all playlists."""
+
+        print("show_all_playlists needs implementation")
+
     def show_playlist(self, playlist_name):
         """Display all videos in a playlist with a given name.
 
@@ -75,11 +80,6 @@ class VideoPlayer:
             playlist_name: The playlist name.
         """
         print("show_playlist needs implementation")
-
-    def show_all_playlists(self):
-        """Display all playlists."""
-
-        print("show_all_playlists needs implementation")
 
     def remove_from_playlist(self, playlist_name, video_id):
         """Removes a video to a playlist with a given name.

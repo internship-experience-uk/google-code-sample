@@ -15,12 +15,12 @@ void VideoPlayer::playVideo(const std::string& videoId) {
   std::cout << "playVideo needs implementation" << std::endl;
 }
 
-void VideoPlayer::playRandomVideo() {
-  std::cout << "playRandomVideo needs implementation" << std::endl;
-}
-
 void VideoPlayer::stopVideo() {
   std::cout << "stopVideo needs implementation" << std::endl;
+}
+
+void VideoPlayer::playRandomVideo() {
+  std::cout << "playRandomVideo needs implementation" << std::endl;
 }
 
 void VideoPlayer::pauseVideo() {
@@ -44,12 +44,12 @@ void VideoPlayer::addVideoToPlaylist(const std::string& playlistName,
   std::cout << "addVideoToPlaylist needs implementation" << std::endl;
 }
 
-void VideoPlayer::showPlaylist(const std::string& playlistName) {
-  std::cout << "showPlaylist needs implementation" << std::endl;
-}
-
 void VideoPlayer::showAllPlaylists() {
   std::cout << "showAllPlaylists needs implementation" << std::endl;
+}
+
+void VideoPlayer::showPlaylist(const std::string& playlistName) {
+  std::cout << "showPlaylist needs implementation" << std::endl;
 }
 
 void VideoPlayer::removeFromPlaylist(const std::string& playlistName,
