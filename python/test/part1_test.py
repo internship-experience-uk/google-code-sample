@@ -152,6 +152,17 @@ def test_pause_video_play_video(capfd):
     assert "PAUSED" not in out
 
 
+def test_pause_already_paused_video(capfd):
+    player = VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.pause_video()
+    player.pause_video()
+    out, err = capfd.readouterr()
+    assert "Playing video: Amazing Cats" in out
+    assert "Pausing video: Amazing Cats" in out
+    assert "Video already paused: Amazing Cats" in out
+
+
 def test_pause_video_none_playing(capfd):
     player = VideoPlayer()
     player.pause_video()

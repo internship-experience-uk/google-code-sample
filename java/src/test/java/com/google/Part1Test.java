@@ -191,6 +191,19 @@ public class Part1Test extends TestBase {
   }
 
   @Test
+  public void testPauseAlreadyPausedVideo() {
+    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.pauseVideo();
+    videoPlayer.pauseVideo();
+
+    String[] lines = getOutputLines();
+    assertEquals(3, lines.length);
+    assertThat(lines[0], containsString("Playing video: Amazing Cats"));
+    assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
+    assertThat(lines[2], containsString("Video already paused: Amazing Cats"));
+  }
+  
+  @Test
   public void testPauseVideoNothingPlaying() {
     videoPlayer.pauseVideo();
     assertEquals(1, getOutputLines().length);
