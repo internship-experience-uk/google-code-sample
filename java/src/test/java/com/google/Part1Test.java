@@ -17,16 +17,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Part1Test {
-
-  private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-  private VideoPlayer videoPlayer;
-
-  @BeforeEach
-  public void setUp() {
-    System.setOut(new PrintStream(outputStream));
-    videoPlayer = new VideoPlayer();
-  }
+public class Part1Test extends TestBase {
 
   @Test
   public void testNumberOfVideos() {

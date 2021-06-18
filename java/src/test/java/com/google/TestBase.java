@@ -1,0 +1,41 @@
+package com.google;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+
+public class TestBase {
+    protected final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    protected VideoPlayer videoPlayer;
+    private InputStream stdin;
+
+    @BeforeEach
+    public void setUp() {
+      System.setOut(new PrintStream(outputStream));
+      videoPlayer = new VideoPlayer();
+      stdin = System.in;
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setIn(stdin);
+    }
+
+    String[] getOutputLines(int expectedNumberOfLines) {
+      var result = outputStream.toString().split("\\r?\\n");
+      assertThat(Arrays.asList(result), hasSize(expectedNumberOfLines));
+      return result;
+    }
+
+    void setInput(String str) {
+      System.setIn(new ByteArrayInputStream((str + "\r\n").getBytes()));
+    }
+}

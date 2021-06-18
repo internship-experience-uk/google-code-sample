@@ -1,39 +1,18 @@
 package com.google;
 
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-public class Part3Test {
-
-  private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-  private VideoPlayer videoPlayer;
-
-  private InputStream stdin;
-
-  @BeforeEach
-  public void setUp() {
-    System.setOut(new PrintStream(outputStream));
-    videoPlayer = new VideoPlayer();
-    stdin = System.in;
-  }
-
-  @AfterEach
-  public void tearDown() {
-    System.setIn(stdin);
-  }
+public class Part3Test extends TestBase {
 
   @Test
   public void testSearchVideosWithNoAnswer() {
-    System.setIn(new ByteArrayInputStream("No\r\n".getBytes()));
+    setInput("No");
 
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
@@ -49,7 +28,7 @@ public class Part3Test {
 
   @Test
   public void testSearchVideosAndPlayAnswer() {
-    System.setIn(new ByteArrayInputStream("2\r\n".getBytes()));
+    setInput("2");
 
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
@@ -65,7 +44,7 @@ public class Part3Test {
 
   @Test
   public void testSearchVideosAnswerOutOfBounds() {
-    System.setIn(new ByteArrayInputStream("5\r\n".getBytes()));
+    setInput("5");
 
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
@@ -81,7 +60,7 @@ public class Part3Test {
 
   @Test
   public void testSearchVideosInvalidNumber() {
-    System.setIn(new ByteArrayInputStream("ab3g\r\n".getBytes()));
+    setInput("ab3g");
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
@@ -102,7 +81,7 @@ public class Part3Test {
 
   @Test
   public void testSearchVideosWithTagNoAnswer() {
-    System.setIn(new ByteArrayInputStream("no\r\n".getBytes()));
+    setInput("no");
     videoPlayer.searchVideosWithTag("#cat");
     assertThat(outputStream.toString(), containsString("Here are the results for #cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
@@ -117,7 +96,7 @@ public class Part3Test {
 
   @Test
   public void testSearchVideosWithTagPlayAnswer() {
-    System.setIn(new ByteArrayInputStream("1\r\n".getBytes()));
+    setInput("1");
     videoPlayer.searchVideosWithTag("#cat");
     assertThat(outputStream.toString(), containsString("Here are the results for #cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
@@ -132,7 +111,7 @@ public class Part3Test {
 
   @Test
   public void testSearchVideosWithTagAnswerOutOfBounds() {
-    System.setIn(new ByteArrayInputStream("5\r\n".getBytes()));
+    setInput("5");
     videoPlayer.searchVideosWithTag("#cat");
     assertThat(outputStream.toString(), containsString("Here are the results for #cat:"));
     assertThat(outputStream.toString(), containsString("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));

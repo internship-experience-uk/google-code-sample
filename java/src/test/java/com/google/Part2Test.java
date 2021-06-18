@@ -1,30 +1,24 @@
 package com.google;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-public class Part2Test {
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-  private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-  private VideoPlayer videoPlayer;
-
-  @BeforeEach
-  public void setUp() {
-    System.setOut(new PrintStream(outputStream));
-    videoPlayer = new VideoPlayer();
-  }
+public class Part2Test extends TestBase {
 
   @Test
   public void testCreatePlaylist() {
@@ -57,11 +51,11 @@ public class Part2Test {
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.addVideoToPlaylist("my_PLAYlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(),
-        containsString("Successfully created new playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(),
-        containsString("Cannot add video to my_PLAYlist: Video already added"));
+
+    var lines = getOutputLines(3);
+    assertThat(lines[0], containsString("Successfully created new playlist: my_playlist"));
+    assertThat(lines[1], containsString("Added video to my_playlist: Amazing Cats"));
+    assertThat(lines[2], containsString("Cannot add video to my_PLAYlist: Video already added"));
   }
 
   @Test
@@ -151,7 +145,7 @@ public class Part2Test {
   }
 
   @Test
-  public void testShowPlaylistNonExistent() throws Exception {
+  public void testShowPlaylistNonExistent() {
     videoPlayer.showPlaylist("my_playlist");
     assertThat(outputStream.toString(), containsString(
         "Cannot show playlist my_playlist: Playlist does not exist"));

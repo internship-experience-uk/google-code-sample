@@ -11,23 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Part4Test {
-
-  private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-  private InputStream stdin;
-  private VideoPlayer videoPlayer;
-
-  @BeforeEach
-  public void setUp() {
-    System.setOut(new PrintStream(outputStream));
-    videoPlayer = new VideoPlayer();
-    stdin = System.in;
-  }
-
-  @AfterEach
-  public void tearDown() {
-    System.setIn(stdin);
-  }
+public class Part4Test extends TestBase {
 
   @Test
   public void testFlagVideoWithReason() {
@@ -118,7 +102,7 @@ public class Part4Test {
 
   @Test
   public void testFlagVideoSearchVideos() {
-    System.setIn(new ByteArrayInputStream("No\r\n".getBytes()));
+    setInput("No");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.searchVideos("cat");
     assertThat(outputStream.toString(),
