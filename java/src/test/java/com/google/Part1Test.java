@@ -27,7 +27,7 @@ public class Part1Test extends TestBase {
     videoPlayer.showAllVideos();
 
     String[] lines = getOutputLines();
-    assertEquals(6, lines.length);
+    assertEquals(6, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Here's a list of all available videos:"));
     assertThat(lines[1],
         containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
@@ -61,7 +61,7 @@ public class Part1Test extends TestBase {
     videoPlayer.playVideo("funny_dogs_video_id");
 
     String[] lines = getOutputLines();
-    assertEquals(3, lines.length);
+    assertEquals(3, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Stopping video: Amazing Cats"));
     assertThat(lines[2], containsString("Playing video: Funny Dogs"));
@@ -73,7 +73,7 @@ public class Part1Test extends TestBase {
     videoPlayer.playVideo("some_other_video");
 
     String[] lines = getOutputLines();
-    assertEquals(2, lines.length);
+    assertEquals(2, lines.length, outputStream.toString());
     assertThat(lines[0], not(containsString("Stopping video: Amazing Cats")));
     assertThat(lines[1], containsString("Cannot play video: Video does not exist"));
   }
@@ -84,7 +84,7 @@ public class Part1Test extends TestBase {
     videoPlayer.stopVideo();
 
     String[] lines = getOutputLines();
-    assertEquals(2, lines.length);
+    assertEquals(2, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Stopping video: Amazing Cats"));
   }
@@ -96,7 +96,7 @@ public class Part1Test extends TestBase {
     videoPlayer.stopVideo();
 
     String[] lines = getOutputLines();
-    assertEquals(3, lines.length);
+    assertEquals(3, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Stopping video: Amazing Cats"));
     assertThat(lines[2],
@@ -124,7 +124,7 @@ public class Part1Test extends TestBase {
     videoPlayer.playRandomVideo();
 
     String[] lines = getOutputLines();
-    assertEquals(3, lines.length);
+    assertEquals(3, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Stopping video: Amazing Cats"));
     assertThat(lines[2], matchesPattern(PLAYING_RANDOM_VIDEO_PATTERN));
@@ -136,7 +136,7 @@ public class Part1Test extends TestBase {
     videoPlayer.showPlaying();
 
     String[] lines = getOutputLines();
-    assertEquals(2, lines.length);
+    assertEquals(2, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1],
         containsString("Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
@@ -155,7 +155,7 @@ public class Part1Test extends TestBase {
     videoPlayer.pauseVideo();
 
     String[] lines = getOutputLines();
-    assertEquals(2, lines.length);
+    assertEquals(2, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
   }
@@ -167,7 +167,7 @@ public class Part1Test extends TestBase {
     videoPlayer.showPlaying();
 
     String[] lines = getOutputLines();
-    assertEquals(3, lines.length);
+    assertEquals(3, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
     assertThat(lines[2], containsString(
@@ -182,7 +182,7 @@ public class Part1Test extends TestBase {
     videoPlayer.showPlaying();
 
     String[] lines = getOutputLines();
-    assertEquals(5, lines.length);
+    assertEquals(5, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
     assertThat(lines[2], containsString("Stopping video: Amazing Cats"));
@@ -205,7 +205,7 @@ public class Part1Test extends TestBase {
     videoPlayer.continueVideo();
 
     String[] lines = getOutputLines();
-    assertEquals(3, lines.length);
+    assertEquals(3, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
     assertThat(lines[2], containsString("Continuing video: Amazing Cats"));
@@ -217,7 +217,7 @@ public class Part1Test extends TestBase {
     videoPlayer.continueVideo();
 
     String[] lines = getOutputLines();
-    assertEquals(2, lines.length);
+    assertEquals(2, lines.length, outputStream.toString());
     assertThat(lines[1],
         containsString("Cannot continue video: Video is not paused"));
   }

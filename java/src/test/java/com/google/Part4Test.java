@@ -2,6 +2,7 @@ package com.google;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ public class Part4Test extends TestBase {
   @Test
   public void testFlagVideoWithReason() {
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
+    assertEquals(1, getOutputLines().length);
     assertThat(outputStream.toString(),
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
   }
@@ -17,6 +19,7 @@ public class Part4Test extends TestBase {
   @Test
   public void testFlagVideoWithoutReason() {
     videoPlayer.flagVideo("another_cat_video_id");
+    assertEquals(1, getOutputLines().length);
     assertThat(outputStream.toString(),
         containsString("Successfully flagged video: Another Cat Video (reason: Not supplied)"));
   }
@@ -25,9 +28,12 @@ public class Part4Test extends TestBase {
   public void testFlagVideoAlreadyFlagged() {
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(2, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1],
         containsString("Cannot flag video: Video is already flagged"));
   }
 
@@ -41,9 +47,12 @@ public class Part4Test extends TestBase {
   public void testFlagVideoCanNoLongerPlay() {
     videoPlayer.flagVideo("amazing_cats_video_id");
     videoPlayer.playVideo("amazing_cats_video_id");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(2, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully flagged video: Amazing Cats (reason: Not supplied)"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1],
         containsString("Cannot play video: Video is currently flagged (reason: Not supplied)"));
   }
 
@@ -52,11 +61,14 @@ public class Part4Test extends TestBase {
     videoPlayer.flagVideo("amazing_cats_video_id");
     videoPlayer.createPlaylist("my_playlist");
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(3, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully flagged video: Amazing Cats (reason: Not supplied)"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1],
         containsString("Successfully created new playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString(
+    assertThat(lines[2], containsString(
         "Cannot add video to my_playlist: Video is currently flagged (reason: Not supplied)"));
   }
 
@@ -66,13 +78,16 @@ public class Part4Test extends TestBase {
     videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.showPlaylist("my_playlist");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(5, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully created new playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1], containsString("Added video to my_playlist: Amazing Cats"));
+    assertThat(lines[2],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(), containsString("Showing playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString(
+    assertThat(lines[3], containsString("Showing playlist: my_playlist"));
+    assertThat(lines[4], containsString(
         "Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED (reason: dont_like_cats)"));
   }
 
@@ -81,32 +96,40 @@ public class Part4Test extends TestBase {
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.showAllVideos();
 
-    assertThat(outputStream.toString(),
+    var lines = getOutputLines();
+    assertEquals(7, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(), containsString("Here's a list of all available videos:"));
-    assertThat(outputStream.toString(), containsString(
+    assertThat(lines[1], containsString("Here's a list of all available videos:"));
+    assertThat(lines[2], containsString(
         "Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[3],
         containsString("Another Cat Video (another_cat_video_id) [#cat #animal]"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[4],
         containsString("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[5],
         containsString("Life at Google (life_at_google_video_id) [#google #career]"));
+    assertThat(lines[6],
+        containsString("Video about nothing (nothing_video_id) []"));
   }
 
   @Test
   public void testFlagVideoSearchVideos() {
     setInput("No");
+
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.searchVideos("cat");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(5, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(), containsString("Here are the results for cat:"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1], containsString("Here are the results for cat:"));
+    assertThat(lines[2],
         containsString("1) Another Cat Video (another_cat_video_id) [#cat #animal]"));
-    assertThat(outputStream.toString(), containsString(
+    assertThat(lines[3], containsString(
         "Would you like to play any of the above? If yes, specify the number of the video."));
-    assertThat(outputStream.toString(),
+    assertThat(lines[4],
         containsString("If your answer is not a valid number, we will assume it's a no."));
   }
 
@@ -115,26 +138,33 @@ public class Part4Test extends TestBase {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.showPlaying();
-    assertThat(outputStream.toString(), containsString("Playing video: Amazing Cats"));
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(3, lines.length, outputStream.toString());
+    assertThat(lines[0], containsString("Playing video: Amazing Cats"));
+    assertThat(lines[1],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(), containsString("No video is currently playing"));
+    assertThat(lines[2], containsString("No video is currently playing"));
   }
 
   @Test
   public void testAllowVideo() {
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
     videoPlayer.allowVideo("amazing_cats_video_id");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(2, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1],
         containsString("Successfully removed flag from video: Amazing Cats"));
   }
 
   @Test
   public void testAllowVideoNotFlagged() {
     videoPlayer.allowVideo("amazing_cats_video_id");
-    videoPlayer.showPlaying();
+
+    assertEquals(1, getOutputLines().length);
     assertThat(outputStream.toString(),
         containsString("Cannot remove flag from video: Video is not flagged"));
   }
@@ -142,6 +172,7 @@ public class Part4Test extends TestBase {
   @Test
   public void testAllowVideoNonexistent() {
     videoPlayer.allowVideo("video_does_not_exist");
+    assertEquals(1, getOutputLines().length);
     assertThat(outputStream.toString(),
         containsString("Cannot remove flag from video: Video does not exist"));
   }
@@ -154,17 +185,20 @@ public class Part4Test extends TestBase {
     videoPlayer.showPlaylist("my_playlist");
     videoPlayer.allowVideo("amazing_cats_video_id");
     videoPlayer.showPlaylist("my_playlist");
-    assertThat(outputStream.toString(),
+
+    var lines = getOutputLines();
+    assertEquals(8, lines.length, outputStream.toString());
+    assertThat(lines[0],
         containsString("Successfully created new playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString("Added video to my_playlist: Amazing Cats"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[1], containsString("Added video to my_playlist: Amazing Cats"));
+    assertThat(lines[2],
         containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(), containsString("Showing playlist: my_playlist"));
-    assertThat(outputStream.toString(), containsString(
+    assertThat(lines[3], containsString("Showing playlist: my_playlist"));
+    assertThat(lines[4], containsString(
         "Amazing Cats (amazing_cats_video_id) [#cat #animal] - FLAGGED (reason: dont_like_cats)"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[5],
         containsString("Successfully removed flag from video: Amazing Cats"));
-    assertThat(outputStream.toString(),
+    assertThat(lines[7],
         containsString("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   }
 }
