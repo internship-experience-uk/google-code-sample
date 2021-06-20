@@ -25,6 +25,10 @@ To run all the tests:
 ```shell script
 mvn test
 ```
+If you haven't changed anything in the code, it's expected to see error messages like this:
+```
+[ERROR] Tests run: 67, Failures: 63, Errors: 0, Skipped: 0
+```
 
 To run tests for a single Part:
 ```shell script
