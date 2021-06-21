@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 
 #include "../src/videoplayer.h"
+#include "../src/helper.h"
 
 using ::testing::HasSubstr;
 using ::testing::MatchesRegex;
@@ -11,8 +12,10 @@ TEST(Part4, flagVideoWithReason) {
   testing::internal::CaptureStdout();
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
 }
@@ -32,8 +35,10 @@ TEST(Part4, flagVideoAlreadyFlagged) {
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
   EXPECT_THAT(output, HasSubstr("Cannot flag video: Video is already flagged"));
@@ -44,7 +49,10 @@ TEST(Part4, flagVideoNonexistent) {
   testing::internal::CaptureStdout();
   videoPlayer.flagVideo("video_does_not_exist", "flagVideo_reason");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output, HasSubstr("Cannot flag video: Video does not exist"));
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
+  EXPECT_THAT(
+  commandOutput[0], HasSubstr("Cannot flag video: Video does not exist"));
 }
 
 TEST(Part4, flagVideoCanNoLongerPlay) {
@@ -53,11 +61,13 @@ TEST(Part4, flagVideoCanNoLongerPlay) {
   videoPlayer.flagVideo("amazing_cats_video_id");
   videoPlayer.playVideo("amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 2);
   EXPECT_THAT(
-      output,
+  commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: Not supplied)"));
-  EXPECT_THAT(output, HasSubstr("Cannot play video: Video is currently flagged "
+  EXPECT_THAT(commandOutput[1], HasSubstr("Cannot play video: Video is currently flagged "
                                 "(reason: Not supplied)"));
 }
 
@@ -68,9 +78,11 @@ TEST(Part4, flagVideoAddVideoToPlaylist) {
   videoPlayer.createPlaylist("my_playlist");
   videoPlayer.addVideoToPlaylist("my_playlist", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 3);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: my_playlist"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[1],
               HasSubstr("Cannot add video to my_playlist: Video is "
                         "currently flagged (reason: Not supplied)"));
 }
@@ -83,15 +95,17 @@ TEST(Part4, flagVideoShowPlaylist) {
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   videoPlayer.showPlaylist("my_playlist");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 5);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: my_playlist"));
-  EXPECT_THAT(output, HasSubstr("Added video to my_playlist: Amazing Cats"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to my_playlist: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[2],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("Showing playlist: my_playlist"));
-  EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
+  EXPECT_THAT(commandOutput[3], HasSubstr("Showing playlist: my_playlist"));
+  EXPECT_THAT(commandOutput[4], HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
                                 "#animal] - FLAGGED (reason: dont_like_cats)"));
 }
 
@@ -101,21 +115,26 @@ TEST(Part4, flagVideoShowAllVideos) {
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   videoPlayer.showAllVideos();
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 7);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("Here's a list of all available videos:"));
-  EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
+  EXPECT_THAT(commandOutput[1], HasSubstr("Here's a list of all available videos:"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
                                 "#animal] - FLAGGED (reason: dont_like_cats)"));
   EXPECT_THAT(
-      output,
+      commandOutput[3],
       HasSubstr("Another Cat Video (another_cat_video_id) [#cat #animal]"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[4],
               HasSubstr("Funny Dogs (funny_dogs_video_id) [#dog #animal]"));
   EXPECT_THAT(
-      output,
+      commandOutput[5],
       HasSubstr("Life at Google (life_at_google_video_id) [#google #career]"));
+  EXPECT_THAT(
+      commandOutput[6],
+      HasSubstr("Video about nothing (nothing_video_id) []"));    
 }
 
 TEST(Part4, flagVideoSearchVideos) {
@@ -128,19 +147,20 @@ TEST(Part4, flagVideoSearchVideos) {
   videoPlayer.searchVideos("cat");
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 5);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("Here are the results for cat:"));
-  EXPECT_THAT(output, HasSubstr("1) Another Cat Video (another_cat_video_id) [#cat #animal]"));
-  EXPECT_THAT(output, HasSubstr("Would you like to play any of the above? If "
+  EXPECT_THAT(commandOutput[1], HasSubstr("Here are the results for cat:"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("1) Another Cat Video (another_cat_video_id) [#cat #animal]"));
+  EXPECT_THAT(commandOutput[3], HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
-      output,
+      commandOutput[4],
       HasSubstr(
           "If your answer is not a valid number, we will assume it's a no."));
-  EXPECT_THAT(output, Not(HasSubstr("Amazing Cats (amazing_cats_video_id)")));
 }
 
 TEST(Part4, flagVideoStopVideoPlaying) {
@@ -150,12 +170,14 @@ TEST(Part4, flagVideoStopVideoPlaying) {
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   videoPlayer.showPlaying();
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 3);
+  EXPECT_THAT(commandOutput[0], HasSubstr("Playing video: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[1],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("No video is currently playing"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("No video is currently playing"));
 }
 
 TEST(Part4, allowVideo) {
@@ -164,11 +186,13 @@ TEST(Part4, allowVideo) {
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   videoPlayer.allowVideo("amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 2);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[1],
               HasSubstr("Successfully removed flag from video: Amazing Cats"));
 }
 
@@ -177,7 +201,9 @@ TEST(Part4, allowVideoNotFlagged) {
   testing::internal::CaptureStdout();
   videoPlayer.allowVideo("amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Cannot remove flag from video: Video is not flagged"));
 }
 
@@ -186,7 +212,9 @@ TEST(Part4, allowVideoNonexistent) {
   testing::internal::CaptureStdout();
   videoPlayer.allowVideo("video_does_not_exist");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Cannot remove flag from video: Video does not exist"));
 }
 
@@ -200,18 +228,20 @@ TEST(Part4, allowVideoShowPlaylist) {
   videoPlayer.allowVideo("amazing_cats_video_id");
   videoPlayer.showPlaylist("my_playlist");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 8);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: my_playlist"));
-  EXPECT_THAT(output, HasSubstr("Added video to my_playlist: Amazing Cats"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to my_playlist: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[2],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("Showing playlist: my_playlist"));
-  EXPECT_THAT(output, HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
+  EXPECT_THAT(commandOutput[3], HasSubstr("Showing playlist: my_playlist"));
+  EXPECT_THAT(commandOutput[4], HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat "
                                 "#animal] - FLAGGED (reason: dont_like_cats)"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[5],
               HasSubstr("Successfully removed flag from video: Amazing Cats"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[7],
               HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
 }
