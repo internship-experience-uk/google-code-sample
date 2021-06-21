@@ -27,7 +27,7 @@ class Video:
         if self._flagged:
             print(f"Cannot play video: Video is currently flagged (reason: {self._flag_reason})")
         else:
-            print(f"Playing video: {self._title}")
+            print(f"Playing video: {self}")
 
     def stop(self):
         print(f"Stopping video: {self._title}")

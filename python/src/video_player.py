@@ -39,6 +39,7 @@ class VideoPlayer:
 
         if self._current_video:
             self._current_video.stop()
+            self._is_paused = False
         self._current_video = video
         video.play()
 
@@ -61,17 +62,12 @@ class VideoPlayer:
     def show_playing(self):
         """Displays video currently playing."""
         if self._current_video:
-            currently_playing_str = f"Currently playing: {self._current_video.title} ({self._current_video.video_id})"
+            currently_playing_str = f"Currently playing: {self._current_video}"
             if self._is_paused:
                 currently_playing_str += " - PAUSED"
             print(currently_playing_str)
         else:
-            print("Nothing currently playing")
-
-    def play_random_video(self):
-        """Plays a random video from the video library."""
-
-        print("play_random_video needs implementation")
+            print("No video is currently playing")
 
     def pause_video(self):
         """Pauses the current video."""
@@ -113,31 +109,17 @@ class VideoPlayer:
         name: The playlist name.
         video_id: The video_id to be added.
     """
-        playlist = self._playlists.get(name.lower(), None)
+        playlist = self._playlists.get(playlist_name.lower(), None)
         if not playlist:
-            print(f"Cannot add video to {name}: Playlist does not exist")
+            print(f"Cannot add video to {playlist_name}: Playlist does not exist")
             return
 
         video = self._video_library.get_video(video_id)
         if not video:
-            print(f"Cannot add video to {name}: Video does not exist")
+            print(f"Cannot add video to {playlist_name}: Video does not exist")
             return
 
-        playlist.add_video(video)
-
-
-    def show_all_playlists(self):
-        """Display all playlists."""
-
-        print("show_all_playlists needs implementation")
-
-    def show_playlist(self, playlist_name):
-        """Display all videos in a playlist with a given name.
-
-        Args:
-            playlist_name: The playlist name.
-        """
-        print("show_playlist needs implementation")
+        playlist.add_video(playlist_name, video)
 
     def remove_from_playlist(self, playlist_name, video_id):
         """Removes a video to a playlist with a given name.
@@ -146,17 +128,17 @@ class VideoPlayer:
         name: The playlist name.
         video_id: The video_id to be removed.
     """
-        playlist = self._playlists.get(name.lower())
+        playlist = self._playlists.get(playlist_name.lower())
         if not playlist:
-            print(f"Cannot remove video from {name}: Playlist does not exist")
+            print(f"Cannot remove video from {playlist_name}: Playlist does not exist")
             return
 
         video = self._video_library.get_video(video_id)
         if not video:
-            print(f"Cannot remove video from {name}: Video does not exist")
+            print(f"Cannot remove video from {playlist_name}: Video does not exist")
             return
 
-        playlist.remove_video(video)
+        playlist.remove_video(playlist_name, video)
 
     def clear_playlist(self, playlist_name):
         """Removes all videos from a playlist with a given name.
@@ -164,11 +146,11 @@ class VideoPlayer:
      Args:
         name: The playlist name.
     """
-        playlist = self._playlists.get(name.lower())
+        playlist = self._playlists.get(playlist_name.lower())
         if not playlist:
-            print(f"Cannot clear playlist {name}: Playlist does not exist")
+            print(f"Cannot clear playlist {playlist_name}: Playlist does not exist")
         else:
-            playlist.clear()
+            playlist.clear(playlist_name)
 
     def delete_playlist(self, playlist_name):
         """Deletes a playlist with a given name.
@@ -176,23 +158,23 @@ class VideoPlayer:
     Args:
         name: The playlist name.
     """
-        if name.lower() not in self._playlists:
-            print(f"Cannot delete playlist {name}: Playlist does not exist")
+        if playlist_name.lower() not in self._playlists:
+            print(f"Cannot delete playlist {playlist_name}: Playlist does not exist")
         else:
-            del self._playlists[name.lower()]
-            print(f"Deleted playlist: {name}")
+            del self._playlists[playlist_name.lower()]
+            print(f"Deleted playlist: {playlist_name}")
 
-    def show_playlist(self, name):
+    def show_playlist(self, playlist_name):
         """Display all videos in a playlist with a given name.
 
     Args:
         name: The playlist name.
     """
-        playlist = self._playlists.get(name.lower())
+        playlist = self._playlists.get(playlist_name.lower())
         if not playlist:
-            print(f"Cannot show playlist {name}: Playlist does not exist")
+            print(f"Cannot show playlist {playlist_name}: Playlist does not exist")
         else:
-            playlist.show()
+            playlist.show(playlist_name)
 
     def show_all_playlists(self):
         """Display all playlists."""
@@ -220,14 +202,13 @@ class VideoPlayer:
 
         print(f"Here are the results for {search_term}:")
         for i, video in enumerate(results, 1):
-            print(f"  {i}) {video.title} ({video.video_id})")
+            print(f"  {i}) {video}")
         print("Would you like to play any of the above? If yes, "
               "specify the number of the video. If your answer is not a valid "
               "number, we will assume it's a no.")
         answer = input()
         if answer.strip().isdigit() and int(answer.strip()) <=len(results):
             results[int(answer)-1].play()
-
 
     def search_videos_tag(self, video_tag):
         """Display all videos whose tags contains the provided tag.
@@ -246,7 +227,7 @@ class VideoPlayer:
 
         print(f"Here are the results for {video_tag}:")
         for i, video in enumerate(results, 1):
-            print(f"  {i}) {video.title} ({video.video_id})")
+            print(f"  {i}) {video}")
         print("Would you like to play any of the above? If yes, "
               "specify the number of the video. If your answer is not a valid "
               "number, we will assume it's a no.")
