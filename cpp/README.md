@@ -2,6 +2,9 @@
 
 The C++ YouTube Challenge uses C++ 11, CMake and [GTest](https://google.github.io/googletest/).
 
+NOTE: **Please do not edit videos.txt as it will cause tests to break. There is no need to modify this file to complete this challenge.**
+
+## Installing C++ and CMake
 You need to install:
 
 - [CMake 3.14+](https://cmake.org/install/) and a build tool like GNU make or Ninja.
