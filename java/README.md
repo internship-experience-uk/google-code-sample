@@ -1,7 +1,20 @@
 # Youtube Challenge - Java
 The Java Youtube Challenge uses Java 11, Junit 5.4 and Maven.
 
+## Installing Java and Maven
+
+If you need to install Java, follow [these](https://java.tutorials24x7.com/blog/how-to-install-java-11-on-windows) 
+instructions for Windows, and [these](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html) instructions if you are on Mac.
+The linux instructions are [here](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html)
+
 If you need to install Maven, follow the instructions in [this](https://www.baeldung.com/install-maven-on-windows-linux-mac) link.
+> If you are on OSX Catalina, you might encounter issues while installing Maven, 
+> such as "libjansi.jnilib” cannot be opened because the developer cannot be verified".
+> In the Finder on your Mac, locate the problematic item (in this case jnilib) 
+> and right-click -> Open With -> TextEdit. This will force your Mac to save
+> whatever you opened as an exception. After performing this step, you can retry 
+> the installation, and it should succeed.
+                
 
 ## Setting up
 You can write code in any editor you'd like. However, different editors have 
@@ -20,8 +33,14 @@ To build & run:
 ```shell script
 mvn exec:java
 ```
+You can close the app by typing `EXIT` as a command.
 
-To run all the tests:
+#### Running all the tests
+To run all the tests use the below code. You will have to compile your code before running 
+the tests.
+```shell script
+mvn compile
+```
 ```shell script
 mvn test
 ```
