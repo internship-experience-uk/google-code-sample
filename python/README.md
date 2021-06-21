@@ -3,6 +3,8 @@ The Python Youtube Challenge uses Python3.
 The below commands use Python3 specifically, to account for users that might 
 have Python2 installed alongside Python3.
 
+NOTE: **Please do not edit videos.txt as it will cause tests to break. There is no need to modify this file to complete this challenge.**
+
 ## Installing Python and pytest
 [This guide](https://realpython.com/installing-python/) explains how to check if you already
 have Python installed, and if not, how to install it on your machine.

@@ -1,6 +1,8 @@
 # Youtube Challenge - Java
 The Java Youtube Challenge uses Java 11, Junit 5.4 and Maven.
 
+NOTE: **Please do not edit videos.txt as it will cause tests to break. There is no need to modify this file to complete this challenge.**
+
 ## Installing Java and Maven
 
 If you need to install Java, follow [these](https://java.tutorials24x7.com/blog/how-to-install-java-11-on-windows) 
