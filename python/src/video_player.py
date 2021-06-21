@@ -204,7 +204,7 @@ class VideoPlayer:
         for i, video in enumerate(results, 1):
             print(f"  {i}) {video}")
         print("Would you like to play any of the above? If yes, "
-              "specify the number of the video. If your answer is not a valid "
+              "specify the number of the video.\nIf your answer is not a valid "
               "number, we will assume it's a no.")
         answer = input()
         if answer.strip().isdigit() and int(answer.strip()) <=len(results):
@@ -229,7 +229,7 @@ class VideoPlayer:
         for i, video in enumerate(results, 1):
             print(f"  {i}) {video}")
         print("Would you like to play any of the above? If yes, "
-              "specify the number of the video. If your answer is not a valid "
+              "specify the number of the video.\nIf your answer is not a valid "
               "number, we will assume it's a no.")
         answer = input()
         if answer.strip().isdigit() and int(answer.strip()) <= len(results):
