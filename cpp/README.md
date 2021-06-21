@@ -18,6 +18,25 @@ On Windows, you can install the [Microsoft Visual Studio Community
 Edition](https://visualstudio.microsoft.com/downloads/) for the compiler and
 build tools. Make sure to choose to install CMake as part of this.
 
+On a Mac, you need to go to the App Store and download Xcode for free - it is Apple's IDE - Integrated Development Environment. Without Xcode, you will have no compiler (i.e. clang or gcc or g++) and no build tools, (i.e. make).
+After you've installed Xcode you need to install command line tools:
+
+```shell
+xcode-select --install
+```
+
+For CMake: 
+
+- Download the latest CMake Mac binary distribution here: https://cmake.org/download/.
+
+- Double click the downloaded .dmg file to install it. In the window that pops up, drag the CMake icon into the Application folder.
+
+- Add this line to your .bashrc file: PATH="/Applications/CMake.app/Contents/bin":"$PATH"
+
+- Reload your .bashrc file: source ~/.bashrc
+
+- Verify the latest cmake version is installed: cmake --version
+
 > Note: You can use a higher version of C++ (C++ 17 or C++ 20) if you want:
 > Just change the `CMAKE_CXX_STANDARD` in `CMakeLists.txt`!
 
