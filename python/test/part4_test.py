@@ -114,7 +114,7 @@ def test_flag_video_search_videos(capfd):
     player.search_videos("cat")
     out, err = capfd.readouterr()
     lines = out.splitlines()
-    assert len(lines) == 4
+    assert len(lines) == 5
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in lines[0]
     assert "Here are the results for cat:" in lines[1]
@@ -122,7 +122,7 @@ def test_flag_video_search_videos(capfd):
     assert ("Would you like to play any of the above? If yes, "
             "specify the number of the video.") in lines[3]
     assert("If your answer is not a valid number, we will assume "
-           "it's a no.") in lines[3]
+           "it's a no.") in lines[4]
 
 
 def test_flag_video_stop_video_playing(capfd):
