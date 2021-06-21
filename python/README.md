@@ -3,6 +3,16 @@ The Python Youtube Challenge uses Python3.
 The below commands use Python3 specifically, to account for users that might 
 have Python2 installed alongside Python3.
 
+## Installing Python and pytest
+[This guide](https://realpython.com/installing-python/) explains how to check if you already
+have Python installed, and if not, how to install it on your machine.
+Please make sure you install Python 3.7 or higher.
+
+The tests are using `pytest`, if you don't have `pytest` installed yet, you can do so by running:
+```shell script
+python3 -m pip install pytest
+```
+
 ## Setting up
 You can write code in any editor you'd like. However, different editors have 
 different ways of dealing with Python code, so in case of doubt we recommend 
@@ -14,13 +24,9 @@ To run the command-line application:
 python3 -m src.run
 ```
 
-#### Running the tests
-The tests are using pytest, if you don't have pytest installed yet, you can do so by running:
-```shell script
-python3 -m pip install pytest
-```
-You can close the app by typing EXIT as a command.
+You can close the app by typing `EXIT` as a command.
 
+#### Running the tests
 To run all the tests:
 ```shell script
 python3 -m pytest
