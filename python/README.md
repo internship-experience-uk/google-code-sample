@@ -44,7 +44,7 @@ python3 -m pytest test/part4_test.py
 ```
 
 For more information on pytest commandline options, such as only running a specific test,
-you can read more [here](https://docs.pytest.org/en/reorganize-docs/new-docs/user/commandlineuseful.html).
+you can read more [here](https://docs.pytest.org/en/6.2.x/usage.html#).
 
 ## Running and testing from IntelliJ/PyCharm
 * Mark both the `python/` and `src/` directory as Sources Root
