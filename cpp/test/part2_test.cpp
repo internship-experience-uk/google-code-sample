@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 
 #include "../src/videoplayer.h"
+#include "../src/helper.h"
 
 using ::testing::HasSubstr;
 using ::testing::MatchesRegex;
@@ -11,7 +12,9 @@ TEST(Part2, createPlaylist) {
   testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
 }
 
@@ -21,9 +24,11 @@ TEST(Part2, createExistingPlaylist) {
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.createPlaylist("MY_PLAYLIST");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 2);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Cannot create playlist: A playlist with the "
+  EXPECT_THAT(commandOutput[1], HasSubstr("Cannot create playlist: A playlist with the "
                                 "same name already exists"));
 }
 
@@ -33,9 +38,11 @@ TEST(Part2, addToPlaylist) {
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.addVideoToPlaylist("mY_playLIST", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 2);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_playLIST: Amazing Cats"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to mY_playLIST: Amazing Cats"));
 }
 
 TEST(Part2, addToPlaylistAlreadyAdded) {
@@ -45,11 +52,13 @@ TEST(Part2, addToPlaylistAlreadyAdded) {
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 3);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to mY_plaYList: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[2],
       HasSubstr("Cannot add video to mY_plaYList: Video already added"));
 }
 
@@ -60,11 +69,13 @@ TEST(Part2, addVideoToPlaylistNonExistentVideo) {
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "some_other_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 3);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to mY_plaYList: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[2],
       HasSubstr("Cannot add video to mY_plaYList: Video does not exist"));
 }
 
@@ -73,8 +84,10 @@ TEST(Part2, addVideoToPlaylistNonExistent) {
   testing::internal::CaptureStdout();
   videoPlayer.addVideoToPlaylist("anotHER_playlist", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Cannot add video to anotHER_playlist: Playlist does not exist"));
 }
@@ -84,8 +97,10 @@ TEST(Part2, addVideoToPlaylistNonExistentNoPlaylistNoVideo) {
   testing::internal::CaptureStdout();
   videoPlayer.addVideoToPlaylist("anotHER_playlist", "video_does_not_exist");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr(
           "Cannot add video to anotHER_playlist: Playlist does not exist"));
 }
@@ -95,20 +110,22 @@ TEST(Part2, showAllPlaylistsNoPlaylistsExist) {
   testing::internal::CaptureStdout();
   videoPlayer.showAllPlaylists();
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output, HasSubstr("No playlists exist yet"));
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
+  EXPECT_THAT(commandOutput[0], HasSubstr("No playlists exist yet"));
 }
 
 TEST(Part2, showAllPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   videoPlayer.createPlaylist("mY_plaYList");
-  videoPlayer.createPlaylist("anotHER_playlist");
-  testing::internal::CaptureStdout();
   videoPlayer.showAllPlaylists();
+  testing::internal::CaptureStdout();
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output, HasSubstr("Showing all playlists:"));
-  EXPECT_THAT(output, HasSubstr("mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("anotHER_playlist"));
-  EXPECT_TRUE(output.find("anotHER_playlist") < output.find("mY_plaYList"));
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 5);
+  EXPECT_THAT(commandOutput[2], HasSubstr("Showing all playlists:"));
+  EXPECT_THAT(commandOutput[3], HasSubstr("anotHER_playlist"));
+  EXPECT_THAT(commandOutput[4], HasSubstr("my_cool_playLIST"));
 }
 
 TEST(Part2, showPlaylist) {
@@ -119,13 +136,15 @@ TEST(Part2, showPlaylist) {
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.showPlaylist("mY_plaYList");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 6);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Showing playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("No videos here yet"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
-  EXPECT_THAT(output, HasSubstr("Showing playlist: mY_plaYList"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[1], HasSubstr("Showing playlist: mY_plaYList"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("No videos here yet"));
+  EXPECT_THAT(commandOutput[3], HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(commandOutput[4], HasSubstr("Showing playlist: mY_plaYList"));
+  EXPECT_THAT(commandOutput[5],
               HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
 }
 
@@ -136,18 +155,16 @@ TEST(Part2, showPlaylistAfterRemoveAVideoFromPlaylistThenReAdd) {
   videoPlayer.addVideoToPlaylist("mY_plaYList", "life_at_google_video_id");
   videoPlayer.removeFromPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
-  testing::internal::CaptureStdout();
   videoPlayer.showPlaylist("mY_plaYList");
+  testing::internal::CaptureStdout();
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output, HasSubstr("Showing playlist: mY_plaYList"));
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 8);
+  EXPECT_THAT(commandOutput[5], HasSubstr("Showing playlist: mY_plaYList"));
+  EXPECT_THAT(commandOutput[6],
               HasSubstr("Life at Google (life_at_google_video_id) [#google #career]"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[7],
               HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-  EXPECT_TRUE(
-      output.find("Life at Google (life_at_google_video_id) [#google #career]") <
-      output.find("Amazing Cats (amazing_cats_video_id) [#cat #animal]")
-  );
 }
 
 TEST(Part2, showPlaylistNonExistent) {
@@ -155,8 +172,10 @@ TEST(Part2, showPlaylistNonExistent) {
   testing::internal::CaptureStdout();
   videoPlayer.showPlaylist("mY_plaYList");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr("Cannot show playlist mY_plaYList: Playlist does not exist"));
 }
 
@@ -168,13 +187,15 @@ TEST(Part2, removeFromPlaylist) {
   videoPlayer.removeFromPlaylist("MY_playlist", "amazing_cats_video_id");
   videoPlayer.removeFromPlaylist("mY_plaYList", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 4);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(commandOutput[2],
               HasSubstr("Removed video from MY_playlist: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[3],
       HasSubstr(
           "Cannot remove video from mY_plaYList: Video is not in playlist"));
 }
@@ -185,8 +206,10 @@ TEST(Part2, removeFromPlaylistVideoNotInPlaylist) {
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.removeFromPlaylist("mY_plaYList", "amazing_cats_video_id");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 2);
   EXPECT_THAT(
-      output,
+      commandOutput[1],
       HasSubstr(
           "Cannot remove video from mY_plaYList: Video is not in playlist"));
 }
@@ -198,11 +221,13 @@ TEST(Part2, removeFromPlaylistNonexistentVideo) {
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.removeFromPlaylist("mY_plaYList", "some_other_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 3);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to mY_plaYList: Amazing Cats"));
   EXPECT_THAT(
-      output,
+      commandOutput[2],
       HasSubstr("Cannot remove video from mY_plaYList: Video does not exist"));
 }
 
@@ -211,7 +236,9 @@ TEST(Part2, removeFromPlaylistNonexistentPlaylist) {
   testing::internal::CaptureStdout();
   videoPlayer.removeFromPlaylist("my_cool_playlist", "some_other_video_id");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output, HasSubstr("Cannot remove video from my_cool_playlist: "
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
+  EXPECT_THAT(commandOutput[0], HasSubstr("Cannot remove video from my_cool_playlist: "
                                 "Playlist does not exist"));
 }
 
@@ -224,16 +251,18 @@ TEST(Part2, clearPlaylist) {
   videoPlayer.clearPlaylist("mY_plaYList");
   videoPlayer.showPlaylist("mY_plaYList");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 7);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Added video to mY_plaYList: Amazing Cats"));
-  EXPECT_THAT(output, HasSubstr("Showing playlist: mY_plaYList"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[1], HasSubstr("Added video to mY_plaYList: Amazing Cats"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("Showing playlist: mY_plaYList"));
+  EXPECT_THAT(commandOutput[3],
               HasSubstr("Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
-  EXPECT_THAT(output,
+  EXPECT_THAT(commandOutput[4],
               HasSubstr("Successfully removed all videos from mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Showing playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("No videos here yet"));
+  EXPECT_THAT(commandOutput[5], HasSubstr("Showing playlist: mY_plaYList"));
+  EXPECT_THAT(commandOutput[6], HasSubstr("No videos here yet"));
 }
 
 TEST(Part2, clearPlaylistNonexistent) {
@@ -241,8 +270,10 @@ TEST(Part2, clearPlaylistNonexistent) {
   testing::internal::CaptureStdout();
   videoPlayer.clearPlaylist("mY_plaYList");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr("Cannot clear playlist mY_plaYList: Playlist does not exist"));
 }
 
@@ -252,9 +283,11 @@ TEST(Part2, deletePlaylist) {
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.deletePlaylist("MY_PLAYLIST");
   std::string output = testing::internal::GetCapturedStdout();
-  EXPECT_THAT(output,
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 2);
+  EXPECT_THAT(commandOutput[0],
               HasSubstr("Successfully created new playlist: mY_plaYList"));
-  EXPECT_THAT(output, HasSubstr("Deleted playlist: MY_PLAYLIST"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Deleted playlist: MY_PLAYLIST"));
 }
 
 TEST(Part2, deletePlaylistNonexistent) {
@@ -262,7 +295,9 @@ TEST(Part2, deletePlaylistNonexistent) {
   testing::internal::CaptureStdout();
   videoPlayer.deletePlaylist("mY_plaYList");
   std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 1);
   EXPECT_THAT(
-      output,
+      commandOutput[0],
       HasSubstr("Cannot delete playlist mY_plaYList: Playlist does not exist"));
 }
