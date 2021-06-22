@@ -16,7 +16,14 @@ If you need to install Maven, follow the instructions in [this](https://www.bael
 > and right-click -> Open With -> TextEdit. This will force your Mac to save
 > whatever you opened as an exception. After performing this step, you can retry 
 > the installation, and it should succeed.
-                
+
+> On Linux, if you are encountering some problems installing Maven, try the following:
+> 1. Replace `export MAVEN_OPTS=-Xms256m -Xmx512m` with `export MAVEN_OPTS='-Xms256m -Xmx512m'`
+> (added some single quotes around the value) in `.bashrc`.
+> 2. Make sure that `/usr/local/apache-maven/apache-maven-3.8.1/bin` exists.
+> Following the instructions you may happen to create `/usr/local/apache-maven/apache-maven-3.8.1/apache-maven-3.8.1/bin` instead. If that is the case, you can fix the issue by running:
+> $ mv /usr/local/apache-maven/apache-maven-3.8.1/apache-maven-3.8.1/* /usr/local/apache-maven/apache-maven-3.8.1/
+> $ rmdir /usr/local/apache-maven/apache-maven-3.8.1/apache-maven-3.8.1
 
 ## Setting up
 You can write code in any editor you'd like. However, different editors have 
