@@ -14,8 +14,8 @@ std::string trim(std::string toTrim) {
   return toTrim;
 }
 
-std::vector <std::string> splitlines(std::string output) {
-  std::vector <std::string> commandOutput;
+std::vector<std::string> splitlines(std::string output) {
+  std::vector<std::string> commandOutput;
   std::stringstream ss(output);
   std::string line;
   while (std::getline(ss, line, '\n')) {
