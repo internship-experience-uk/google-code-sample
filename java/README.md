@@ -72,3 +72,8 @@ Make sure that the project SDK is set to Java 11, [the official IntelliJ instruc
 
 To run the Application, click on the little green play symbol next to `Run`.
 To run the tests, click on the little green double arrow next to the tests class.
+To run all tests, right-click on the root `java` folder and select `Run 'All Tests'`.
+
+Here is a screen capture showing all those initial steps:
+
+![Screen capture of the initial steps](running-and-testing-from-intellij.gif)
