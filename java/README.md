@@ -28,7 +28,7 @@ If you need to install Maven, follow the instructions in [this](https://www.bael
 ## Setting up
 You can write code in any editor you'd like. However, different editors have 
 different ways of dealing with Java code, so in case of doubt we recommend 
-you run the code and tests from the command line as shown  below.
+you run the code and tests from the command line as shown below.
 
 The below commands assume you are located in the java/ folder.
 

@@ -15,6 +15,9 @@ The tests are using `pytest`, if you don't have `pytest` installed yet, you can 
 python3 -m pip install pytest
 ```
 
+pip should be installed already if you installed Python from the official source. If not, you
+can find many guides online on how to install pip for your operating system.
+
 ## Setting up
 You can write code in any editor you'd like. However, different editors have 
 different ways of dealing with Python code, so in case of doubt we recommend 
