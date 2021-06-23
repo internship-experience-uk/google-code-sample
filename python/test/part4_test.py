@@ -124,6 +124,22 @@ def test_flag_video_search_videos(capfd):
     assert("If your answer is not a valid number, we will assume "
            "it's a no.") in lines[4]
 
+@mock.patch('builtins.input', lambda *args: 'No')
+def test_flag_video_search_videos(capfd):
+    player = VideoPlayer()
+    player.flag_video("amazing_cats_video_id", "dont_like_cats")
+    player.search_videos_tag("#cat")
+    out, err = capfd.readouterr()
+    lines = out.splitlines()
+    assert len(lines) == 5
+    assert "Successfully flagged video: Amazing Cats " \
+           "(reason: dont_like_cats)" in lines[0]
+    assert "Here are the results for #cat:" in lines[1]
+    assert "1) Another Cat Video (another_cat_video_id) [#cat #animal]" in lines[2]
+    assert ("Would you like to play any of the above? If yes, "
+            "specify the number of the video.") in lines[3]
+    assert("If your answer is not a valid number, we will assume "
+           "it's a no.") in lines[4]
 
 def test_flag_video_stop_video_playing(capfd):
     player = VideoPlayer()
