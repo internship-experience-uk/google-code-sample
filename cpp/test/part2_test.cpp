@@ -117,7 +117,9 @@ TEST(Part2, showAllPlaylistsNoPlaylistsExist) {
 
 TEST(Part2, showAllPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
+  videoPlayer.createPlaylist("anotHER_playlist");
   videoPlayer.showAllPlaylists();
   testing::internal::CaptureStdout();
   std::string output = testing::internal::GetCapturedStdout();
@@ -150,6 +152,7 @@ TEST(Part2, showPlaylist) {
 
 TEST(Part2, showPlaylistAfterRemoveAVideoFromPlaylistThenReAdd) {
   VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "life_at_google_video_id");
