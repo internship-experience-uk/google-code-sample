@@ -83,17 +83,27 @@ TEST(Part4, flagVideosPlayRandom) {
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
   ASSERT_EQ(commandOutput.size(), 6);
-  EXPECT_THAT(commandOutput[0], HasSubstr("Successfully flagged video: Funny Dogs "
-                                "(reason: Not supplied)"));
-  EXPECT_THAT(commandOutput[1], HasSubstr("Successfully flagged video: Amazing Cats "
-                                "(reason: Not supplied)"));
-  EXPECT_THAT(commandOutput[2], HasSubstr("Successfully flagged video: Another Cat Video "
-  "(reason: Not supplied)"));
-  EXPECT_THAT(commandOutput[3], HasSubstr("Successfully flagged video: Life at Google "
-  "(reason: Not supplied)"));
-  EXPECT_THAT(commandOutput[4], HasSubstr("Successfully flagged video: Video about nothing "
-  "(reason: Not supplied)"));
-  EXPECT_THAT(commandOutput[5], HasSubstr("No videos available."));
+  EXPECT_THAT(
+      commandOutput[0],
+      HasSubstr(
+          "Successfully flagged video: Funny Dogs (reason: Not supplied)"));
+  EXPECT_THAT(
+      commandOutput[1],
+      HasSubstr(
+          "Successfully flagged video: Amazing Cats (reason: Not supplied)"));
+  EXPECT_THAT(
+      commandOutput[2],
+      HasSubstr(
+          "Successfully flagged video: Another Cat Video (reason: Not supplied)"));
+  EXPECT_THAT(
+      commandOutput[3],
+       HasSubstr(
+          "Successfully flagged video: Life at Google (reason: Not supplied)"));
+  EXPECT_THAT(
+      commandOutput[4],
+      HasSubstr(
+          "Successfully flagged video: Video about nothing (reason: Not supplied)"));
+  EXPECT_THAT(commandOutput[5], HasSubstr("No videos available"));
 }
 
 TEST(Part4, flagVideoAddVideoToPlaylist) {

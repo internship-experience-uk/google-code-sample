@@ -30,7 +30,8 @@ def test_flag_video_already_flagged(capfd):
     out, err = capfd.readouterr()
     lines = out.splitlines()
     assert len(lines) == 2
-    assert "Successfully flagged video: Amazing Cats (reason: dont_like_cats)" in lines[0]
+    assert "Successfully flagged video: Amazing Cats (reason: dont_like_cats)" in \
+           lines[0]
     assert "Cannot flag video: Video is already flagged" in lines[1]
 
 
@@ -55,6 +56,7 @@ def test_flag_video_can_no_longer_play(capfd):
     assert "Cannot play video: Video is currently flagged " \
            "(reason: Not supplied)" in lines[1]
 
+
 def test_flag_videos_play_random(capfd):
     player = VideoPlayer()
     player.flag_video("funny_dogs_video_id")
@@ -73,10 +75,11 @@ def test_flag_videos_play_random(capfd):
     assert "Successfully flagged video: Another Cat Video " \
            "(reason: Not supplied)" in lines[2]
     assert "Successfully flagged video: Life at Google " \
-    "(reason: Not supplied)" in lines[3]
+           "(reason: Not supplied)" in lines[3]
     assert "Successfully flagged video: Video about nothing " \
-    "(reason: Not supplied)" in lines[4]
-    assert "No videos available." in lines[5]          
+           "(reason: Not supplied)" in lines[4]
+    assert "No videos available" in lines[5]
+
 
 def test_flag_video_add_to_playlist(capfd):
     player = VideoPlayer()
@@ -125,7 +128,8 @@ def test_flag_video_show_all_videos(capfd):
             "(reason: dont_like_cats)") in lines[2]
     assert "Another Cat Video (another_cat_video_id) [#cat #animal]" in lines[3]
     assert "Funny Dogs (funny_dogs_video_id) [#dog #animal]" in lines[4]
-    assert "Life at Google (life_at_google_video_id) [#google #career]" in lines[5]
+    assert "Life at Google (life_at_google_video_id) [#google #career]" in \
+           lines[5]
     assert "Video about nothing (nothing_video_id) []" in lines[6]
 
 
@@ -140,14 +144,16 @@ def test_flag_video_search_videos(capfd):
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in lines[0]
     assert "Here are the results for cat:" in lines[1]
-    assert "1) Another Cat Video (another_cat_video_id) [#cat #animal]" in lines[2]
+    assert "1) Another Cat Video (another_cat_video_id) [#cat #animal]" in \
+           lines[2]
     assert ("Would you like to play any of the above? If yes, "
             "specify the number of the video.") in lines[3]
-    assert("If your answer is not a valid number, we will assume "
-           "it's a no.") in lines[4]
+    assert ("If your answer is not a valid number, we will assume "
+            "it's a no.") in lines[4]
+
 
 @mock.patch('builtins.input', lambda *args: 'No')
-def test_flag_video_search_videos(capfd):
+def test_flag_video_search_videos_with_tag(capfd):
     player = VideoPlayer()
     player.flag_video("amazing_cats_video_id", "dont_like_cats")
     player.search_videos_tag("#cat")
@@ -157,11 +163,13 @@ def test_flag_video_search_videos(capfd):
     assert "Successfully flagged video: Amazing Cats " \
            "(reason: dont_like_cats)" in lines[0]
     assert "Here are the results for #cat:" in lines[1]
-    assert "1) Another Cat Video (another_cat_video_id) [#cat #animal]" in lines[2]
+    assert "1) Another Cat Video (another_cat_video_id) [#cat #animal]" in \
+           lines[2]
     assert ("Would you like to play any of the above? If yes, "
             "specify the number of the video.") in lines[3]
-    assert("If your answer is not a valid number, we will assume "
-           "it's a no.") in lines[4]
+    assert ("If your answer is not a valid number, we will assume "
+            "it's a no.") in lines[4]
+
 
 def test_flag_video_stops_playing_video(capfd):
     player = VideoPlayer()
