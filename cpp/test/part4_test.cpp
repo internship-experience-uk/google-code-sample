@@ -36,12 +36,13 @@ TEST(Part4, flagVideoAlreadyFlagged) {
   videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
-  ASSERT_EQ(commandOutput.size(), 1);
+  ASSERT_EQ(commandOutput.size(), 2);
   EXPECT_THAT(
       commandOutput[0],
       HasSubstr(
           "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-  EXPECT_THAT(output, HasSubstr("Cannot flag video: Video is already flagged"));
+  EXPECT_THAT(
+    commandOutput[1], HasSubstr("Cannot flag video: Video is already flagged"));
 }
 
 TEST(Part4, flagVideoNonexistent) {
@@ -80,9 +81,13 @@ TEST(Part4, flagVideoAddVideoToPlaylist) {
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
   ASSERT_EQ(commandOutput.size(), 3);
-  EXPECT_THAT(commandOutput[0],
-              HasSubstr("Successfully created new playlist: my_playlist"));
+  EXPECT_THAT(
+  commandOutput[0],
+      HasSubstr(
+          "Successfully flagged video: Amazing Cats (reason: Not supplied)"));
   EXPECT_THAT(commandOutput[1],
+              HasSubstr("Successfully created new playlist: my_playlist"));
+  EXPECT_THAT(commandOutput[2],
               HasSubstr("Cannot add video to my_playlist: Video is "
                         "currently flagged (reason: Not supplied)"));
 }

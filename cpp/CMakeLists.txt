@@ -39,7 +39,8 @@ add_library(youtube_lib
     src/videolibrary.h
     src/videoplayer.cpp
     src/videoplayer.h
-    src/videoplaylist.h)
+    src/videoplaylist.h
+    src/videoplaylist.cpp)
 
 add_executable(youtube src/main.cpp)
 target_link_libraries(youtube youtube_lib)
