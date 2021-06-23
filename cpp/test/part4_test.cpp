@@ -71,6 +71,31 @@ TEST(Part4, flagVideoCanNoLongerPlay) {
                                 "(reason: Not supplied)"));
 }
 
+TEST(Part4, flagVideosPlayRandom) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  videoPlayer.flagVideo("funny_dogs_video_id");
+  videoPlayer.flagVideo("amazing_cats_video_id");
+  videoPlayer.flagVideo("another_cat_video_id");
+  videoPlayer.flagVideo("life_at_google_video_id");
+  videoPlayer.flagVideo("nothing_video_id");
+  videoPlayer.playRandomVideo();
+  std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 6);
+  EXPECT_THAT(commandOutput[0], HasSubstr("Successfully flagged video: Funny Dogs "
+                                "(reason: Not supplied)"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Successfully flagged video: Amazing Cats "
+                                "(reason: Not supplied)"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("Successfully flagged video: Another Cat Video "
+  "(reason: Not supplied)"));
+  EXPECT_THAT(commandOutput[3], HasSubstr("Successfully flagged video: Life at Google "
+  "(reason: Not supplied)"));
+  EXPECT_THAT(commandOutput[4], HasSubstr("Successfully flagged video: Video about nothing "
+  "(reason: Not supplied)"));
+  EXPECT_THAT(commandOutput[5], HasSubstr("No videos available."));
+}
+
 TEST(Part4, flagVideoAddVideoToPlaylist) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();

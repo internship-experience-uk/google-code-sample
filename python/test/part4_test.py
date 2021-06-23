@@ -55,6 +55,28 @@ def test_flag_video_can_no_longer_play(capfd):
     assert "Cannot play video: Video is currently flagged " \
            "(reason: Not supplied)" in lines[1]
 
+def test_flag_videos_play_random(capfd):
+    player = VideoPlayer()
+    player.flag_video("funny_dogs_video_id")
+    player.flag_video("amazing_cats_video_id")
+    player.flag_video("another_cat_video_id")
+    player.flag_video("life_at_google_video_id")
+    player.flag_video("nothing_video_id")
+    player.play_random_video()
+    out, err = capfd.readouterr()
+    lines = out.splitlines()
+    assert len(lines) == 6
+    assert "Successfully flagged video: Funny Dogs " \
+           "(reason: Not supplied)" in lines[0]
+    assert "Successfully flagged video: Amazing Cats " \
+           "(reason: Not supplied)" in lines[1]
+    assert "Successfully flagged video: Another Cat Video " \
+           "(reason: Not supplied)" in lines[2]
+    assert "Successfully flagged video: Life at Google " \
+    "(reason: Not supplied)" in lines[3]
+    assert "Successfully flagged video: Video about nothing " \
+    "(reason: Not supplied)" in lines[4]
+    assert "No videos available." in lines[5]          
 
 def test_flag_video_add_to_playlist(capfd):
     player = VideoPlayer()
