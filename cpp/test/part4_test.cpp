@@ -163,6 +163,32 @@ TEST(Part4, flagVideoSearchVideos) {
           "If your answer is not a valid number, we will assume it's a no."));
 }
 
+TEST(Part4, flagVideoSearchVideosWithTag) {
+  VideoPlayer videoPlayer = VideoPlayer();
+  testing::internal::CaptureStdout();
+  std::streambuf* orig = std::cin.rdbuf();
+  std::istringstream input("no");
+  std::cin.rdbuf(input.rdbuf());
+  videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
+  videoPlayer.searchVideosWithTag("#cat");
+  std::cin.rdbuf(orig);
+  std::string output = testing::internal::GetCapturedStdout();
+  std::vector<std::string> commandOutput = splitlines(output);
+  ASSERT_EQ(commandOutput.size(), 5);
+  EXPECT_THAT(
+      commandOutput[0],
+      HasSubstr(
+          "Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
+  EXPECT_THAT(commandOutput[1], HasSubstr("Here are the results for #cat:"));
+  EXPECT_THAT(commandOutput[2], HasSubstr("1) Another Cat Video (another_cat_video_id) [#cat #animal]"));
+  EXPECT_THAT(commandOutput[3], HasSubstr("Would you like to play any of the above? If "
+                                "yes, specify the number of the video."));
+  EXPECT_THAT(
+      commandOutput[4],
+      HasSubstr(
+          "If your answer is not a valid number, we will assume it's a no."));
+}
+
 TEST(Part4, flagVideoStopVideoPlaying) {
   VideoPlayer videoPlayer = VideoPlayer();
   testing::internal::CaptureStdout();

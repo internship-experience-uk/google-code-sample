@@ -134,6 +134,26 @@ public class Part4Test extends TestBase {
   }
 
   @Test
+  public void testFlagVideoSearchVideosWithTag() {
+    setInput("No");
+
+    videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
+    videoPlayer.searchVideosWithTag("#cat");
+
+    var lines = getOutputLines();
+    assertEquals(5, lines.length, outputStream.toString());
+    assertThat(lines[0],
+        containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
+    assertThat(lines[1], containsString("Here are the results for #cat:"));
+    assertThat(lines[2],
+        containsString("1) Another Cat Video (another_cat_video_id) [#cat #animal]"));
+    assertThat(lines[3], containsString(
+        "Would you like to play any of the above? If yes, specify the number of the video."));
+    assertThat(lines[4],
+        containsString("If your answer is not a valid number, we will assume it's a no."));
+  }
+
+  @Test
   public void testFlagVideoStopVideoPlaying() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
