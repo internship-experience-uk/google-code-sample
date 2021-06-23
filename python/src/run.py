@@ -10,8 +10,7 @@ if __name__ == "__main__":
     video_player = VideoPlayer()
     parser = CommandParser(video_player)
     while True:
-        print("YT> ", end='')
-        command = input()
+        command = input("YT> ")
         if command.upper() == "EXIT":
             break
         try:
