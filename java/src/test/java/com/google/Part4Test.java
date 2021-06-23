@@ -154,17 +154,50 @@ public class Part4Test extends TestBase {
   }
 
   @Test
-  public void testFlagVideoStopVideoPlaying() {
+  public void testFlagVideoStopPlayingVideo() {
     videoPlayer.playVideo("amazing_cats_video_id");
     videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
+    videoPlayer.showPlaying();
+
+    var lines = getOutputLines();
+    assertEquals(4, lines.length, outputStream.toString());
+    assertThat(lines[0], containsString("Playing video: Amazing Cats"));
+    assertThat(lines[1], containsString("Stopping video: Amazing Cats"));
+    assertThat(lines[2],
+        containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
+    assertThat(lines[3], containsString("No video is currently playing"));
+  }
+
+  @Test
+  public void testFlagVideoStopPausedVideo() {
+    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.pauseVideo();
+    videoPlayer.flagVideo("amazing_cats_video_id", "dont_like_cats");
+    videoPlayer.showPlaying();
+
+    var lines = getOutputLines();
+    assertEquals(5, lines.length, outputStream.toString());
+    assertThat(lines[0], containsString("Playing video: Amazing Cats"));
+    assertThat(lines[1], containsString("Pausing video: Amazing Cats"));
+    assertThat(lines[2], containsString("Stopping video: Amazing Cats"));
+    assertThat(lines[3],
+        containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
+    assertThat(lines[4], containsString("No video is currently playing"));
+  }
+
+  @Test
+  public void testFlagVideoKeepVideoPlayingIfDifferentFromFlaggedVideo() {
+    videoPlayer.playVideo("amazing_cats_video_id");
+    videoPlayer.flagVideo("another_cat_video_id", "dont_like_cats");
     videoPlayer.showPlaying();
 
     var lines = getOutputLines();
     assertEquals(3, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Playing video: Amazing Cats"));
     assertThat(lines[1],
-        containsString("Successfully flagged video: Amazing Cats (reason: dont_like_cats)"));
-    assertThat(lines[2], containsString("No video is currently playing"));
+        containsString("Successfully flagged video: Another Cat Video (reason: dont_like_cats)"));
+    assertThat(lines[2],
+        containsString("Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   }
 
   @Test

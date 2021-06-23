@@ -141,18 +141,51 @@ def test_flag_video_search_videos(capfd):
     assert("If your answer is not a valid number, we will assume "
            "it's a no.") in lines[4]
 
-def test_flag_video_stop_video_playing(capfd):
+def test_flag_video_stops_playing_video(capfd):
     player = VideoPlayer()
     player.play_video("amazing_cats_video_id")
     player.flag_video("amazing_cats_video_id", "dont_like_cats")
     player.show_playing()
     out, err = capfd.readouterr()
     lines = out.splitlines()
+    assert len(lines) == 4
+    assert "Playing video: Amazing Cats" in lines[0]
+    assert "Stopping video: Amazing Cats" in lines[1]
+    assert "Successfully flagged video: Amazing Cats " \
+           "(reason: dont_like_cats)" in lines[2]
+    assert "No video is currently playing" in lines[3]
+
+
+def test_flag_video_leaves_video_if_video_is_different(capfd):
+    player = VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.flag_video("another_cat_video_id", "dont_like_cats")
+    player.show_playing()
+    out, err = capfd.readouterr()
+    lines = out.splitlines()
     assert len(lines) == 3
     assert "Playing video: Amazing Cats" in lines[0]
-    assert "Successfully flagged video: Amazing Cats " \
+    assert "Successfully flagged video: Another Cat Video " \
            "(reason: dont_like_cats)" in lines[1]
-    assert "No video is currently playing" in lines[2]
+    assert "Currently playing: Amazing Cats (amazing_cats_video_id) " \
+           "[#cat #animal]" in lines[2]
+
+
+def test_flag_video_stops_paused_video(capfd):
+    player = VideoPlayer()
+    player.play_video("amazing_cats_video_id")
+    player.pause_video()
+    player.flag_video("amazing_cats_video_id", "dont_like_cats")
+    player.show_playing()
+    out, err = capfd.readouterr()
+    lines = out.splitlines()
+    assert len(lines) == 5
+    assert "Playing video: Amazing Cats" in lines[0]
+    assert "Pausing video: Amazing Cats" in lines[1]
+    assert "Stopping video: Amazing Cats" in lines[2]
+    assert "Successfully flagged video: Amazing Cats " \
+           "(reason: dont_like_cats)" in lines[3]
+    assert "No video is currently playing" in lines[4]
 
 
 def test_allow_video(capfd):
