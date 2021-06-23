@@ -57,6 +57,30 @@ public class Part4Test extends TestBase {
   }
 
   @Test
+  public void testFlagVideosPlayRandom() {
+    videoPlayer.flagVideo("funny_dogs_video_id");
+    videoPlayer.flagVideo("amazing_cats_video_id");
+    videoPlayer.flagVideo("another_cat_video_id");
+    videoPlayer.flagVideo("life_at_google_video_id");
+    videoPlayer.flagVideo("nothing_video_id");
+    videoPlayer.playRandomVideo();
+    var lines = getOutputLines();
+    assertEquals(6, lines.length, outputStream.toString());
+    assertThat(lines[0],
+    containsString("Successfully flagged video: Funny Dogs (reason: Not supplied)"));
+    assertThat(lines[1],
+    containsString("Successfully flagged video: Amazing Cats (reason: Not supplied)"));
+    assertThat(lines[2],
+    containsString("Successfully flagged video: Another Cat Video (reason: Not supplied)"));
+    assertThat(lines[3],
+    containsString("Successfully flagged video: Life at Google (reason: Not supplied)"));
+    assertThat(lines[4],
+    containsString("Successfully flagged video: Video about nothing (reason: Not supplied)"));
+    assertThat(lines[5],
+    containsString("No videos available."));
+  }
+
+  @Test
   public void testFlagVideoAddVideoToPlaylist() {
     videoPlayer.flagVideo("amazing_cats_video_id");
     videoPlayer.createPlaylist("my_playlist");
