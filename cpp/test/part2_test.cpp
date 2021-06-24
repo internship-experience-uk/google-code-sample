@@ -121,13 +121,12 @@ TEST(Part2, showAllPlaylist) {
   videoPlayer.createPlaylist("mY_plaYList");
   videoPlayer.createPlaylist("anotHER_playlist");
   videoPlayer.showAllPlaylists();
-  testing::internal::CaptureStdout();
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
   ASSERT_EQ(commandOutput.size(), 5);
   EXPECT_THAT(commandOutput[2], HasSubstr("Showing all playlists:"));
+  EXPECT_THAT(commandOutput[4], HasSubstr("mY_plaYList"));
   EXPECT_THAT(commandOutput[3], HasSubstr("anotHER_playlist"));
-  EXPECT_THAT(commandOutput[4], HasSubstr("my_cool_playLIST"));
 }
 
 TEST(Part2, showPlaylist) {
@@ -159,7 +158,6 @@ TEST(Part2, showPlaylistAfterRemoveAVideoFromPlaylistThenReAdd) {
   videoPlayer.removeFromPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.addVideoToPlaylist("mY_plaYList", "amazing_cats_video_id");
   videoPlayer.showPlaylist("mY_plaYList");
-  testing::internal::CaptureStdout();
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
   ASSERT_EQ(commandOutput.size(), 8);
