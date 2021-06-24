@@ -63,14 +63,14 @@ TEST(Part3, searchVideosAnswerOutOfBounds) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
-  ASSERT_EQ(commandOutput.size(), 4);
+  ASSERT_EQ(commandOutput.size(), 5);
   EXPECT_THAT(commandOutput[0], HasSubstr("Here are the results for cat:"));
   EXPECT_THAT(commandOutput[1], HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   EXPECT_THAT(commandOutput[2], HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
   EXPECT_THAT(commandOutput[3], HasSubstr("Would you like to play any of the above? If "
                                 "yes, specify the number of the video."));
   EXPECT_THAT(
-      commandOutput[3],
+      commandOutput[4],
       HasSubstr(
           "If your answer is not a valid number, we will assume it's a no."));
   EXPECT_THAT(output, Not(HasSubstr("Playing video")));
@@ -142,7 +142,7 @@ TEST(Part3, searchVideosWithTagPlayAnswer) {
   std::cin.rdbuf(orig);
   std::string output = testing::internal::GetCapturedStdout();
   std::vector<std::string> commandOutput = splitlines(output);
-  ASSERT_EQ(commandOutput.size(), 5);
+  ASSERT_EQ(commandOutput.size(), 6);
   EXPECT_THAT(commandOutput[0], HasSubstr("Here are the results for #cat:"));
   EXPECT_THAT(commandOutput[1], HasSubstr("1) Amazing Cats (amazing_cats_video_id) [#cat #animal]"));
   EXPECT_THAT(commandOutput[2], HasSubstr("2) Another Cat Video (another_cat_video_id) [#cat #animal]"));
@@ -152,7 +152,7 @@ TEST(Part3, searchVideosWithTagPlayAnswer) {
       commandOutput[4],
       HasSubstr(
           "If your answer is not a valid number, we will assume it's a no."));
-  EXPECT_THAT(output, HasSubstr("Playing video: Amazing Cats"));
+  EXPECT_THAT(commandOutput[5], HasSubstr("Playing video: Amazing Cats"));
 }
 
 TEST(Part3, searchVideosWithTagAnswerOutOfBounds) {
