@@ -128,9 +128,24 @@ class VideoPlayer:
 
     def show_playing(self):
         """Displays video currently playing."""
+        if (self._video_playing):
+            # create a tags string in the correct format
+            tags = self._video_playing.tags
+            tags_string = "["
+            num_tags = len(tags)
+            if num_tags > 0:
+                for tag_index in range(num_tags-1):
+                    tags_string += tags[tag_index] + " "
+                tags_string += tags[-1]
+            tags_string += "]"
 
-        print("show_playing needs implementation")
-
+            print(f"Currently playing: {self._video_playing.title} ({self._video_playing.video_id}) {tags_string}",end="")
+            if self._video_status == "Paused":
+                print(" - PAUSED",end="")
+            print()
+        else:
+            print("No video is currently playing")
+        
     def create_playlist(self, playlist_name):
         """Creates a playlist with a given name.
 

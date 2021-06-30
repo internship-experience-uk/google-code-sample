@@ -138,8 +138,29 @@
   YT> CONTINUE
   Cannot continue video: No video is currently playing
   ```
+- [x] SHOW_PLAYING
+  - Display the title, video_id, video tags and paused status of the video currently playing
+    - If no video playing, display a message
+  ```
+  YT> PLAY amazing_cats_video_id
+  Playing video: Amazing Cats
+  
+  YT> SHOW_PLAYING
+  Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal]
+  
+  YT> PAUSE
+  Pausing video: Amazing Cats
+  
+  YT> SHOW_PLAYING
+  Currently playing: Amazing Cats (amazing_cats_video_id) [#cat #animal] - PAUSED
+ 
+  YT> STOP
+  Stopping video: Amazing Cats
+  
+  YT> SHOW_PLAYING
+  No video is currently playing
 
-
+  ```
 ```
 GreyTeddy - Dennis (Dionysios Ntouka)
 Art by Joan G. Stark
