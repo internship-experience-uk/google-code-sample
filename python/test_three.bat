@@ -1,0 +1,1 @@
+python -m pytest test/part3_test.py
