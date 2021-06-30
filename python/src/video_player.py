@@ -8,6 +8,7 @@ class VideoPlayer:
 
     def __init__(self):
         self._video_library = VideoLibrary()
+        self._video_playing = None
 
     def get_number_of_videos(self):
         """
@@ -52,7 +53,20 @@ class VideoPlayer:
         Args:
             video_id: The video_id to be played.
         """
-        print("play_video needs implementation")
+
+        # get the video to be played
+        video_to_play = self._video_library.get_video(video_id)
+        # if the video exists
+        if (video_to_play):
+            # to stop playing current video
+            if (self._video_playing):
+                print(f"Stopping video: {self._video_playing.title}")
+            # set the video to be "played"
+            self._video_playing = video_to_play
+            print(f"Playing video: {self._video_library.get_video(video_id).title}")
+        else:
+            print("Cannot play video: Video does not exist")
+
 
     def stop_video(self):
         """Stops the current video."""
