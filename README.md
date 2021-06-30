@@ -60,7 +60,7 @@
   ```
 - [x] PLAY_RANDOM
   - Play a random video
-    - [x] If a video is already playing, stop the video
+    - If a video is already playing, stop the video
   ```
   YT> PLAY_RANDOM
   Playing video: Life at Google
