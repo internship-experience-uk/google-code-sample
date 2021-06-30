@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 std::string trim(std::string s);
 
