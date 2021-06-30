@@ -71,7 +71,7 @@
   ```
     - imported `random.randint()` 
       - outside of class: so it does not have to be imported for every instance (unless python caches it)
-      - `randint()` is both inclusive so the arguments are `0` and `number_of_videos - 1`
+      - `randint()` is [both inclusive](https://docs.python.org/3/library/random.html#:~:text=Return%20a%20random%20integer%20N%20such%20that%20a%20%3C%3D%20N%20%3C%3D%20b.%20Alias%20for%20randrange(a%2C%20b%2B1)) so the arguments are `0` and `number_of_videos - 1`
 - [x] PAUSE
   - Pause the current plaing video
     - If already paused, show a warning message
@@ -139,7 +139,7 @@
   Cannot continue video: No video is currently playing
   ```
 - [x] SHOW_PLAYING
-  - Display the title, video_id, video tags and paused status of the video currently playing
+  - Display the title, video id, video tags and paused status of the video currently playing
     - If no video playing, display a message
   ```
   YT> PLAY amazing_cats_video_id
@@ -161,6 +161,9 @@
   No video is currently playing
 
   ```
+
+
+
 ```
 GreyTeddy - Dennis (Dionysios Ntouka)
 Art by Joan G. Stark
