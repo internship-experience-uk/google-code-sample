@@ -11,6 +11,10 @@ class VideoPlayer:
     def __init__(self):
         self._video_library = VideoLibrary()
         self._video_playing = None
+        # this could be indicated with numbers 0,1,2
+        # but for readability strings are used: 
+        # -> "Stopped", "Paused", "Playing"
+        self._video_status = "Stopped"
 
     def get_number_of_videos(self):
         """
@@ -65,6 +69,7 @@ class VideoPlayer:
                 print(f"Stopping video: {self._video_playing.title}")
             # set the video to be "played"
             self._video_playing = video_to_play
+            self._video_status = "Playing"
             print(f"Playing video: {self._video_library.get_video(video_id).title}")
         else:
             print("Cannot play video: Video does not exist")
@@ -102,8 +107,14 @@ class VideoPlayer:
 
     def pause_video(self):
         """Pauses the current video."""
-
-        print("pause_video needs implementation")
+        
+        if self._video_status == "Paused":
+            print(f"Video already paused: {self._video_playing.title}")
+        elif self._video_status == "Playing":
+            print(f"Pausing video: {self._video_playing.title}")
+            self._video_status = "Paused"
+        else:
+            print(f"Cannot pause video: No video is currently playing")
 
     def continue_video(self):
         """Resumes playing the current video."""

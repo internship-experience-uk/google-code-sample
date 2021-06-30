@@ -72,6 +72,48 @@
     - imported `random.randint()` 
       - outside of class: so it does not have to be imported for every instance (unless python caches it)
       - `randint()` is both inclusive so the arguments are `0` and `number_of_videos - 1`
+- [x] PAUSE
+  - Pause the current plaing video
+    - If already paused, show a warning message
+    - If no video, show a warning message
+  ```
+  YT> PLAY amazing_cats_video_id
+  Playing video: Amazing Cats
+
+  YT> PAUSE
+  Pausing video: Amazing Cats
+
+  YT> PAUSE
+  Video already paused: Amazing Cats
+
+  YT> STOP
+  Stopping video: Amazing Cats
+
+  YT> PAUSE
+  Cannot pause video: No video is currently playing
+  ```
+  - If new video is played with one already paused
+    - New video should play and ignore paused status
+    - New video can be paused
+  ```
+  YT> PLAY amazing_cats_video_id
+  Playing video: Amazing Cats
+
+  YT> PAUSE
+  Pausing video: Amazing Cats
+
+  YT> PLAY another_cat_video_id
+  Stopping video: Amazing Cats
+  Playing video: Another Cat Video
+  
+  YT> PAUSE
+  Pausing video: Another Cat Video
+  ```
+  - added `_video_status` to the class
+    - with `"Stopped"`, `"Paused"` and `"Playing"` as possible values
+      - could use integers `0`,`1` and `2` but for readability strings were used instead
+
+
 ```
 GreyTeddy - Dennis (Dionysios Ntouka)
 Art by Joan G. Stark
