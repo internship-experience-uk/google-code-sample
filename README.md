@@ -112,6 +112,32 @@
   - added `_video_status` to the class
     - with `"Stopped"`, `"Paused"` and `"Playing"` as possible values
       - could use integers `0`,`1` and `2` but for readability strings were used instead
+- [x] CONTINUE
+  - Continue a currently paused video
+    - If not paused, display warning
+    - If no video playing, display warning
+  ```
+  YT> PLAY amazing_cats_video_id
+  Playing video: Amazing Cats
+
+  YT> CONTINUE
+  Cannot continue video: Video is not paused
+
+  YT> PAUSE
+  Pausing video: Amazing Cats
+  
+  YT> CONTINUE
+  Continuing video: Amazing Cats
+  
+  YT> CONTINUE
+  Cannot continue video: Video is not paused
+  
+  YT> STOP
+  Stopping video: Amazing Cats
+  
+  YT> CONTINUE
+  Cannot continue video: No video is currently playing
+  ```
 
 
 ```
