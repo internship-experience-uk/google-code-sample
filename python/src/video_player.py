@@ -9,14 +9,42 @@ class VideoPlayer:
     def __init__(self):
         self._video_library = VideoLibrary()
 
-    def number_of_videos(self):
+    def get_number_of_videos(self):
+        """
+        Returns
+            number of videos: int
+        """
         num_videos = len(self._video_library.get_all_videos())
+        return num_videos
+
+    def number_of_videos(self):
+        num_videos = self.get_number_of_videos()
         print(f"{num_videos} videos in the library")
 
     def show_all_videos(self):
-        """Returns all videos."""
+        ## """Returns all videos."""
+        """Shows all videos."""
+        videos = self._video_library.get_all_videos()
+        # https://stackoverflow.com/questions/3121979/how-to-sort-a-list-tuple-of-lists-tuples-by-the-element-at-a-given-index
+        videos.sort(key= lambda tup: tup.title)
+        print("Here's a list of all available videos:")
+        for video_index in range(self.get_number_of_videos()):
+            video_title = videos[video_index].title
+            video_id = "("+ videos[video_index].video_id + ")"
 
-        print("show_all_videos needs implementation")
+            tags = videos[video_index].tags
+            # print(tags)
+            tags_string = "["
+            num_tags = len(tags)
+            if num_tags > 0:
+                for tag_index in range(num_tags-1):
+                    tags_string += tags[tag_index] + " "
+                tags_string += tags[-1]
+            tags_string += "]"
+
+            print(video_title,video_id,tags_string)
+        # exit()
+        # print("show_all_videos needs implementation")
 
     def play_video(self, video_id):
         """Plays the respective video.

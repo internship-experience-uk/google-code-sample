@@ -11,6 +11,20 @@
 ### Part 1
 - [x] NUMBER_OF_VIDEOS
   - already implemented
+- [x] SHOW_ALL_VIDEOS
+  - To show all the videos
+  ```
+  YT> SHOW_ALL_VIDEOS
+    Here's a list of all available videos:
+    Amazing cats (amazing_cats_video_id) [#cat #animal]
+    Another Cat Video (another_cat_video_id) [#cat #animal]
+    Funny Dogs (funny_dogs_video_id) [#dog #animal]
+    Life at Google (life_at_google_video_id) [#google #career]
+    Video about nothing (nothing_video_id) []
+  ```
+  - implemented ```get_number_of_videos()``` that returns the number of videos
+    - edited ```number_of_videos()``` so it uses ```get_number_of_videos()```
+  - used ```sorted()``` with ```key = lambda ... ``` to sort the videos in terms of title in lexicographical order (as [sort()](https://docs.python.org/3/howto/sorting.html#:~:text=This%20idiom%20works%20because%20tuples%20are%20compared%20lexicographically%3B%20the%20first%20items%20are%20compared%3B%20if%20they%20are%20the%20same%20then%20the%20second%20items%20are%20compared%2C%20and%20so%20on)) does
 ```
 GreyTeddy - Dennis (Dionysios Ntouka)
 Art by Joan G. Stark
