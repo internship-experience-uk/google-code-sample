@@ -81,6 +81,7 @@ class VideoPlayer:
         if (self._video_playing):
             print(f"Stopping video: {self._video_playing.title}")
             self._video_playing = None
+            self._video_status = "Stopped"
         else:
             print(f"Cannot stop video: No video is currently playing")
 
