@@ -2,10 +2,12 @@
 
 from .video_library import VideoLibrary
 
+# import outside of class so it is not imported per instance
+# (unless there is caching, I don't know)
+from random import randint
 
 class VideoPlayer:
     """A class used to represent a Video Player."""
-
     def __init__(self):
         self._video_library = VideoLibrary()
         self._video_playing = None
@@ -81,7 +83,22 @@ class VideoPlayer:
     def play_random_video(self):
         """Plays a random video from the video library."""
 
-        print("play_random_video needs implementation")
+        # some of the code can use already existing methods
+        # but as the code is little and it saves a bit of time
+        # some code will be somewhat reused
+        
+        # stop video if currently playing
+        if (self._video_playing):
+            print(f"Stopping video: {self._video_playing.title}")
+            self._video_playing = None
+
+        # get a number between 0 and the number of videos
+        #    number_of_videos - 1: counting starts from zero and randint is both inclusive
+        random_index = randint(0,self.get_number_of_videos()-1)
+
+        # get the video id for a random video
+        random_video_id = self._video_library.get_all_videos()[random_index].video_id
+        self.play_video(random_video_id)
 
     def pause_video(self):
         """Pauses the current video."""

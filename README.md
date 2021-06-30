@@ -58,6 +58,20 @@
   YT> STOP
   Cannot stop video: No video is currently playing
   ```
+- [x] PLAY_RANDOM
+  - Play a random video
+    - [x] If a video is already playing, stop the video
+  ```
+  YT> PLAY_RANDOM
+  Playing video: Life at Google
+
+  YT> PLAY_RANDOM
+  Stopping video: Life at Google
+  Playing video: Funny Dogs
+  ```
+    - imported `random.randint()` 
+      - outside of class: so it does not have to be imported for every instance (unless python caches it)
+      - `randint()` is both inclusive so the arguments are `0` and `number_of_videos - 1`
 ```
 GreyTeddy - Dennis (Dionysios Ntouka)
 Art by Joan G. Stark
