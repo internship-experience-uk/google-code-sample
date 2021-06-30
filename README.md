@@ -46,7 +46,18 @@
   ```
   - added `_video_playing` attribute to the `video_player` class
   - used `get_video(video_id)` method from `video` class
+- [x] STOP
+  - Stop the current video playing
+  ```
+  YT> PLAY amazing_cats_video_id
+  Playing video: Amazing Cats
 
+  YT> STOP
+  Stopping video: Amazing Cats
+
+  YT> STOP
+  Cannot stop video: No video is currently playing
+  ```
 ```
 GreyTeddy - Dennis (Dionysios Ntouka)
 Art by Joan G. Stark
