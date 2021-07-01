@@ -1,0 +1,293 @@
+<html>
+<head>
+<title>video_player.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+.s5 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+video_player.py</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;&quot;&quot;A video player class.&quot;&quot;&quot;</span>
+
+<span class="s2">from </span><span class="s1">.video_library </span><span class="s2">import </span><span class="s1">VideoLibrary</span>
+<span class="s2">import </span><span class="s1">random</span>
+<span class="s2">from </span><span class="s1">random </span><span class="s2">import </span><span class="s1">seed</span>
+<span class="s2">from </span><span class="s1">random </span><span class="s2">import </span><span class="s1">randint</span>
+
+<span class="s1">playing = </span><span class="s2">False</span>
+<span class="s1">current = </span><span class="s2">None</span>
+<span class="s1">new = </span><span class="s2">None</span>
+<span class="s1">paused= </span><span class="s2">False</span>
+<span class="s1">playlists = []</span>
+
+<span class="s2">class </span><span class="s1">VideoPlayer:</span>
+    <span class="s0">&quot;&quot;&quot;A class used to represent a Video Player.&quot;&quot;&quot;</span>
+
+    <span class="s2">def </span><span class="s1">__init__(self):</span>
+        <span class="s1">self._video_library = VideoLibrary()</span>
+
+    <span class="s2">def </span><span class="s1">number_of_videos(self):</span>
+        <span class="s1">num_videos = len(self._video_library.get_all_videos())</span>
+        <span class="s1">print(</span><span class="s3">f&quot;</span><span class="s2">{</span><span class="s1">num_videos</span><span class="s2">} </span><span class="s3">videos in the library&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">show_all_videos(self):</span>
+        <span class="s0">&quot;&quot;&quot;Returns all videos.&quot;&quot;&quot;</span>
+        <span class="s1">videos = self._video_library.get_all_videos()</span>
+        <span class="s1">list = []</span>
+        <span class="s1">print(</span><span class="s3">&quot;Here's a list of all available videos:&quot;</span><span class="s1">)</span>
+
+        <span class="s4"># for each video on the list</span>
+        <span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">videos:</span>
+            <span class="s4">#</span>
+            <span class="s4"># The following for loop removes the brackets and apostrophes from tags</span>
+            <span class="s4"># Initialise a variable i</span>
+            <span class="s1">i = </span><span class="s5">0</span>
+            <span class="s1">newtags = </span><span class="s3">&quot;&quot;</span>
+            <span class="s2">for </span><span class="s1">tag </span><span class="s2">in </span><span class="s1">x.tags:</span>
+                <span class="s4"># Increment i by 1 each loop</span>
+                <span class="s1">i += </span><span class="s5">1</span>
+                <span class="s1">newtags += tag</span>
+                <span class="s4"># As long as i is not equal to the length of x.tags (the number of tags), put a space &quot; &quot;</span>
+                <span class="s4"># this is to separate the tags out</span>
+                <span class="s4"># Otherwise, the space is not added, so there will be no space before the square bracket to close it</span>
+                <span class="s2">if </span><span class="s1">i !=len(x.tags):</span>
+                    <span class="s1">newtags = newtags + </span><span class="s3">&quot; &quot;</span>
+            <span class="s4">#</span>
+            <span class="s4"># Add information to list, using x.title to get the title of the xth video in the list</span>
+            <span class="s4"># Use just {newtags} because we have a new tags list for every x (in the loop)</span>
+            <span class="s4"># Indent inside string for formatting</span>
+            <span class="s1">list += [</span><span class="s3">f&quot; </span><span class="s2">{</span><span class="s1">j.title</span><span class="s2">} </span><span class="s3">(</span><span class="s2">{</span><span class="s1">j.video_id</span><span class="s2">}</span><span class="s3">) [</span><span class="s2">{</span><span class="s1">newtags</span><span class="s2">}</span><span class="s3">]&quot;</span><span class="s1">]</span>
+        <span class="s4"># sorted() sorts the list in alphabetical order</span>
+        <span class="s2">for </span><span class="s1">item </span><span class="s2">in </span><span class="s1">sorted(list):</span>
+            <span class="s1">print(item)</span>
+
+    <span class="s2">def </span><span class="s1">play_video(self</span><span class="s2">, </span><span class="s1">video_id):</span>
+        <span class="s0">&quot;&quot;&quot;Plays the respective video. 
+ 
+        Args: 
+            video_id: The video_id to be played. 
+        &quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playing</span>
+        <span class="s2">global </span><span class="s1">current</span>
+        <span class="s2">global </span><span class="s1">new</span>
+        <span class="s2">global </span><span class="s1">paused</span>
+        <span class="s1">new = self._video_library.get_video(video_id)</span>
+
+        <span class="s2">if not </span><span class="s1">new:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Cannot play video: Video does not exist&quot;</span><span class="s1">)</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">playing </span><span class="s2">is True</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Stopping video: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Playing video: </span><span class="s2">{</span><span class="s1">new.title</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+                <span class="s1">current = new.title</span>
+                <span class="s1">paused = </span><span class="s2">False</span>
+            <span class="s2">else</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Playing video: </span><span class="s2">{</span><span class="s1">new.title</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+                <span class="s1">playing = </span><span class="s2">True</span>
+                <span class="s1">current = new.title</span>
+
+
+    <span class="s2">def </span><span class="s1">stop_video(self):</span>
+        <span class="s0">&quot;&quot;&quot;Stops the current video.&quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playing</span>
+        <span class="s2">global </span><span class="s1">current</span>
+        <span class="s2">global </span><span class="s1">paused</span>
+
+        <span class="s2">if </span><span class="s1">playing </span><span class="s2">is True</span><span class="s1">:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Stopping video: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+            <span class="s1">current = </span><span class="s2">None</span>
+            <span class="s1">playing = </span><span class="s2">False</span>
+            <span class="s1">paused = </span><span class="s2">False</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Cannot stop video: No video is currently playing&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">play_random_video(self):</span>
+        <span class="s0">&quot;&quot;&quot;Plays a random video from the video library.&quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playing</span>
+        <span class="s2">global </span><span class="s1">current</span>
+        <span class="s2">global </span><span class="s1">paused</span>
+        <span class="s2">global </span><span class="s1">new</span>
+
+        <span class="s1">new = random.choice(self._video_library.get_all_videos())</span>
+
+        <span class="s2">if </span><span class="s1">playing </span><span class="s2">is True</span><span class="s1">:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Stopping video: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Playing video: </span><span class="s2">{</span><span class="s1">new.title</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+            <span class="s1">current = new.title</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Playing video: </span><span class="s2">{</span><span class="s1">new.title</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+            <span class="s1">playing = </span><span class="s2">True</span>
+            <span class="s1">current = new.title</span>
+            <span class="s1">paused = </span><span class="s2">False</span>
+
+    <span class="s2">def </span><span class="s1">pause_video(self):</span>
+        <span class="s0">&quot;&quot;&quot;Pauses the current video.&quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playing</span>
+        <span class="s2">global </span><span class="s1">paused</span>
+        <span class="s2">global </span><span class="s1">current</span>
+
+        <span class="s2">if </span><span class="s1">paused </span><span class="s2">is True</span><span class="s1">:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;Video is already paused: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+        <span class="s2">if </span><span class="s1">playing </span><span class="s2">is True</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">paused </span><span class="s2">is False</span><span class="s1">:</span>
+                <span class="s1">paused = </span><span class="s2">True</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Cannot pause video: No video is currently playing&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">continue_video(self):</span>
+        <span class="s0">&quot;&quot;&quot;Resumes playing the current video.&quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playing</span>
+        <span class="s2">global </span><span class="s1">paused</span>
+        <span class="s2">global </span><span class="s1">current</span>
+
+        <span class="s2">if </span><span class="s1">playing </span><span class="s2">is True</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">paused </span><span class="s2">is False</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Cannot continue video: Video is not paused&quot;</span><span class="s1">)</span>
+                <span class="s2">if </span><span class="s1">paused </span><span class="s2">is True</span><span class="s1">:</span>
+                    <span class="s1">print(</span><span class="s3">f&quot;Continuting video: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">}</span><span class="s3">&quot;</span><span class="s1">)</span>
+                    <span class="s1">paused = </span><span class="s2">False</span>
+            <span class="s2">if </span><span class="s1">playing </span><span class="s2">is False</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Cannot continue video: No video is currently playing&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">show_playing(self):</span>
+        <span class="s0">&quot;&quot;&quot;Displays video currently playing.&quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playing</span>
+        <span class="s2">global </span><span class="s1">paused</span>
+        <span class="s2">global </span><span class="s1">current</span>
+        <span class="s2">global </span><span class="s1">new</span>
+
+        <span class="s2">if </span><span class="s1">playing </span><span class="s2">is False</span><span class="s1">:</span>
+            <span class="s1">print(</span><span class="s3">f&quot;No video is currently playing&quot;</span><span class="s1">)</span>
+        <span class="s2">if </span><span class="s1">playing </span><span class="s2">is True</span><span class="s1">:</span>
+            <span class="s4">#</span>
+            <span class="s1">i = </span><span class="s5">0</span>
+            <span class="s1">newtags = </span><span class="s3">&quot;&quot;</span>
+            <span class="s2">for </span><span class="s1">tag </span><span class="s2">in </span><span class="s1">new.tags:</span>
+                <span class="s1">i += </span><span class="s5">1</span>
+                <span class="s1">newtags += tag</span>
+                <span class="s2">if </span><span class="s1">i != len(new.tags):</span>
+                    <span class="s1">newtags = newtags + </span><span class="s3">&quot; &quot;</span>
+            <span class="s4">#</span>
+            <span class="s2">if </span><span class="s1">paused </span><span class="s2">is False</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Currently playing: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">} </span><span class="s3">(</span><span class="s2">{</span><span class="s1">new.video_id</span><span class="s2">} </span><span class="s3">[</span><span class="s2">{</span><span class="s1">newtags</span><span class="s2">}</span><span class="s3">]&quot;</span><span class="s1">)</span>
+            <span class="s2">if </span><span class="s1">paused </span><span class="s2">is True</span><span class="s1">:</span>
+                <span class="s1">print(</span><span class="s3">f&quot;Currently playing: </span><span class="s2">{</span><span class="s1">current</span><span class="s2">} </span><span class="s3">(</span><span class="s2">{</span><span class="s1">new.video_id</span><span class="s2">}</span><span class="s3">) [</span><span class="s2">{</span><span class="s1">newtags</span><span class="s2">}</span><span class="s3">] - PAUSED&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">create_playlist(self</span><span class="s2">, </span><span class="s1">playlist_name):</span>
+        <span class="s0">&quot;&quot;&quot;Creates a playlist with a given name. 
+ 
+        Args: 
+            playlist_name: The playlist name. 
+        &quot;&quot;&quot;</span>
+        <span class="s2">global </span><span class="s1">playlists</span>
+
+    <span class="s2">def </span><span class="s1">add_to_playlist(self</span><span class="s2">, </span><span class="s1">playlist_name</span><span class="s2">, </span><span class="s1">video_id):</span>
+        <span class="s0">&quot;&quot;&quot;Adds a video to a playlist with a given name. 
+ 
+        Args: 
+            playlist_name: The playlist name. 
+            video_id: The video_id to be added. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;add_to_playlist needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">show_all_playlists(self):</span>
+        <span class="s0">&quot;&quot;&quot;Display all playlists.&quot;&quot;&quot;</span>
+
+        <span class="s1">print(</span><span class="s3">&quot;show_all_playlists needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">show_playlist(self</span><span class="s2">, </span><span class="s1">playlist_name):</span>
+        <span class="s0">&quot;&quot;&quot;Display all videos in a playlist with a given name. 
+ 
+        Args: 
+            playlist_name: The playlist name. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;show_playlist needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">remove_from_playlist(self</span><span class="s2">, </span><span class="s1">playlist_name</span><span class="s2">, </span><span class="s1">video_id):</span>
+        <span class="s0">&quot;&quot;&quot;Removes a video to a playlist with a given name. 
+ 
+        Args: 
+            playlist_name: The playlist name. 
+            video_id: The video_id to be removed. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;remove_from_playlist needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">clear_playlist(self</span><span class="s2">, </span><span class="s1">playlist_name):</span>
+        <span class="s0">&quot;&quot;&quot;Removes all videos from a playlist with a given name. 
+ 
+        Args: 
+            playlist_name: The playlist name. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;clears_playlist needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">delete_playlist(self</span><span class="s2">, </span><span class="s1">playlist_name):</span>
+        <span class="s0">&quot;&quot;&quot;Deletes a playlist with a given name. 
+ 
+        Args: 
+            playlist_name: The playlist name. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;deletes_playlist needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">search_videos(self</span><span class="s2">, </span><span class="s1">search_term):</span>
+        <span class="s0">&quot;&quot;&quot;Display all the videos whose titles contain the search_term. 
+ 
+        Args: 
+            search_term: The query to be used in search. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;search_videos needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">search_videos_tag(self</span><span class="s2">, </span><span class="s1">video_tag):</span>
+        <span class="s0">&quot;&quot;&quot;Display all videos whose tags contains the provided tag. 
+ 
+        Args: 
+            video_tag: The video tag to be used in search. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">all_vids = self._video_library.get_all_videos()</span>
+
+        <span class="s1">response = []</span>
+        <span class="s2">for </span><span class="s1">vid </span><span class="s2">in </span><span class="s1">all_vids:</span>
+            <span class="s2">if </span><span class="s1">search_term.lower() </span><span class="s2">in </span><span class="s1">vid._title.lower():</span>
+                <span class="s1">response.append(vid)</span>
+
+        <span class="s2">if </span><span class="s1">(len(response) !=</span><span class="s5">0</span><span class="s1">):</span>
+            <span class="s1">i = </span><span class="s5">1</span>
+            <span class="s1">print(</span><span class="s3">&quot;Here are the results for &quot;</span><span class="s1">+ search_term + </span><span class="s3">&quot;:&quot;</span><span class="s1">)</span>
+            <span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">response:</span>
+
+                <span class="s1">details = str(x.title + </span><span class="s3">&quot; (&quot; </span><span class="s1">+ x._video_id +</span><span class="s3">&quot;) [&quot; </span><span class="s1">+ </span><span class="s3">' '</span><span class="s1">.join(list(x.tags)) + </span><span class="s3">&quot;]&quot;</span><span class="s1">)</span>
+
+                <span class="s1">print(</span><span class="s3">f&quot;</span><span class="s2">{</span><span class="s1">details</span><span class="s2">}</span><span class="s3">)&quot;</span><span class="s1">)</span>
+                <span class="s1">i += </span><span class="s5">1</span>
+            <span class="s1">print(</span><span class="s3">&quot;Would you like to play any of the above? If so, specify the number of the video.&quot;</span><span class="s1">)</span>
+            <span class="s1">print(</span><span class="s3">&quot;If your answer is not a valid number, it will be assumed as a no&quot;</span><span class="s1">)</span>
+
+            <span class="s1">num = input()</span>
+
+    <span class="s2">def </span><span class="s1">flag_video(self</span><span class="s2">, </span><span class="s1">video_id</span><span class="s2">, </span><span class="s1">flag_reason=</span><span class="s3">&quot;&quot;</span><span class="s1">):</span>
+        <span class="s0">&quot;&quot;&quot;Mark a video as flagged. 
+ 
+        Args: 
+            video_id: The video_id to be flagged. 
+            flag_reason: Reason for flagging the video. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;flag_video needs implementation&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">allow_video(self</span><span class="s2">, </span><span class="s1">video_id):</span>
+        <span class="s0">&quot;&quot;&quot;Removes a flag from a video. 
+ 
+        Args: 
+            video_id: The video_id to be allowed again. 
+        &quot;&quot;&quot;</span>
+        <span class="s1">print(</span><span class="s3">&quot;allow_video needs implementation&quot;</span><span class="s1">)</span>
+</pre>
+</body>
+</html>

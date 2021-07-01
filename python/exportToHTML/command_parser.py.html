@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>command_parser.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+command_parser.py</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;&quot;&quot;A command parser class.&quot;&quot;&quot;</span>
+
+<span class="s2">import </span><span class="s1">textwrap</span>
+<span class="s2">from </span><span class="s1">typing </span><span class="s2">import </span><span class="s1">Sequence</span>
+
+
+<span class="s2">class </span><span class="s1">CommandException(Exception):</span>
+    <span class="s0">&quot;&quot;&quot;A class used to represent a wrong command exception.&quot;&quot;&quot;</span>
+    <span class="s2">pass</span>
+
+
+<span class="s2">class </span><span class="s1">CommandParser:</span>
+    <span class="s0">&quot;&quot;&quot;A class used to parse and execute a user Command.&quot;&quot;&quot;</span>
+
+    <span class="s2">def </span><span class="s1">__init__(self</span><span class="s2">, </span><span class="s1">video_player):</span>
+        <span class="s1">self._player = video_player</span>
+
+    <span class="s2">def </span><span class="s1">execute_command(self</span><span class="s2">, </span><span class="s1">command: Sequence[str]):</span>
+        <span class="s0">&quot;&quot;&quot;Executes the user command. Expects the command to be upper case. 
+           Raises CommandException if a command cannot be parsed. 
+        &quot;&quot;&quot;</span>
+        <span class="s2">if not </span><span class="s1">command:</span>
+            <span class="s2">raise </span><span class="s1">CommandException(</span>
+                <span class="s3">&quot;Please enter a valid command, &quot;</span>
+                <span class="s3">&quot;type HELP for a list of available commands.&quot;</span><span class="s1">)</span>
+
+        <span class="s2">if </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;NUMBER_OF_VIDEOS&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.number_of_videos()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;SHOW_ALL_VIDEOS&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.show_all_videos()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;PLAY&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter PLAY command followed by video_id.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.play_video(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;PLAY_RANDOM&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.play_random_video()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;STOP&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.stop_video()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;PAUSE&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.pause_video()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;CONTINUE&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.continue_video()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;SHOW_PLAYING&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.show_playing()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;CREATE_PLAYLIST&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter CREATE_PLAYLIST command followed by a &quot;</span>
+                    <span class="s3">&quot;playlist name.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.create_playlist(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;ADD_TO_PLAYLIST&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">3</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter ADD_TO_PLAYLIST command followed by a &quot;</span>
+                    <span class="s3">&quot;playlist name and video_id to add.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.add_to_playlist(command[</span><span class="s4">1</span><span class="s1">]</span><span class="s2">, </span><span class="s1">command[</span><span class="s4">2</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;REMOVE_FROM_PLAYLIST&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">3</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter REMOVE_FROM_PLAYLIST command followed by a &quot;</span>
+                    <span class="s3">&quot;playlist name and video_id to remove.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.remove_from_playlist(command[</span><span class="s4">1</span><span class="s1">]</span><span class="s2">, </span><span class="s1">command[</span><span class="s4">2</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;CLEAR_PLAYLIST&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter CLEAR_PLAYLIST command followed by a &quot;</span>
+                    <span class="s3">&quot;playlist name.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.clear_playlist(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;DELETE_PLAYLIST&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter DELETE_PLAYLIST command followed by a &quot;</span>
+                    <span class="s3">&quot;playlist name.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.delete_playlist(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;SHOW_PLAYLIST&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter SHOW_PLAYLIST command followed by a &quot;</span>
+                    <span class="s3">&quot;playlist name.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.show_playlist(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;SHOW_ALL_PLAYLISTS&quot;</span><span class="s1">:</span>
+            <span class="s1">self._player.show_all_playlists()</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;SEARCH_VIDEOS&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter SEARCH_VIDEOS command followed by a &quot;</span>
+                    <span class="s3">&quot;search term.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.search_videos(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;SEARCH_VIDEOS_WITH_TAG&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter SEARCH_VIDEOS_WITH_TAG command followed by a &quot;</span>
+                    <span class="s3">&quot;video tag.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.search_videos_tag(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;FLAG_VIDEO&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) == </span><span class="s4">3</span><span class="s1">:</span>
+                <span class="s1">self._player.flag_video(command[</span><span class="s4">1</span><span class="s1">]</span><span class="s2">, </span><span class="s1">command[</span><span class="s4">2</span><span class="s1">])</span>
+            <span class="s2">elif </span><span class="s1">len(command) == </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s1">self._player.flag_video(command[</span><span class="s4">1</span><span class="s1">])</span>
+            <span class="s2">else</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter FLAG_VIDEO command followed by a &quot;</span>
+                    <span class="s3">&quot;video_id and an optional flag reason.&quot;</span><span class="s1">)</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;ALLOW_VIDEO&quot;</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">len(command) != </span><span class="s4">2</span><span class="s1">:</span>
+                <span class="s2">raise </span><span class="s1">CommandException(</span>
+                    <span class="s3">&quot;Please enter ALLOW_VIDEO command followed by a &quot;</span>
+                    <span class="s3">&quot;video_id.&quot;</span><span class="s1">)</span>
+            <span class="s1">self._player.allow_video(command[</span><span class="s4">1</span><span class="s1">])</span>
+
+        <span class="s2">elif </span><span class="s1">command[</span><span class="s4">0</span><span class="s1">].upper() == </span><span class="s3">&quot;HELP&quot;</span><span class="s1">:</span>
+            <span class="s1">self._get_help()</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s1">print(</span>
+                <span class="s3">&quot;Please enter a valid command, type HELP for a list of &quot;</span>
+                <span class="s3">&quot;available commands.&quot;</span><span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">_get_help(self):</span>
+        <span class="s0">&quot;&quot;&quot;Displays all available commands to the user.&quot;&quot;&quot;</span>
+        <span class="s1">help_text = textwrap.dedent(</span><span class="s3">&quot;&quot;&quot; 
+        Available commands: 
+            NUMBER_OF_VIDEOS - Shows how many videos are in the library. 
+            SHOW_ALL_VIDEOS - Lists all videos from the library. 
+            PLAY &lt;video_id&gt; - Plays specified video. 
+            PLAY_RANDOM - Plays a random video from the library. 
+            STOP - Stop the current video. 
+            PAUSE - Pause the current video. 
+            CONTINUE - Resume the current paused video. 
+            SHOW_PLAYING - Displays the title, url and paused status of the video that is currently playing (or paused). 
+            CREATE_PLAYLIST &lt;playlist_name&gt; - Creates a new (empty) playlist with the provided name. 
+            ADD_TO_PLAYLIST &lt;playlist_name&gt; &lt;video_id&gt; - Adds the requested video to the playlist. 
+            REMOVE_FROM_PLAYLIST &lt;playlist_name&gt; &lt;video_id&gt; - Removes the specified video from the specified playlist 
+            CLEAR_PLAYLIST &lt;playlist_name&gt; - Removes all the videos from the playlist. 
+            DELETE_PLAYLIST &lt;playlist_name&gt; - Deletes the playlist. 
+            SHOW_PLAYLIST &lt;playlist_name&gt; - List all the videos in this playlist. 
+            SHOW_ALL_PLAYLISTS - Display all the available playlists. 
+            SEARCH_VIDEOS &lt;search_term&gt; - Display all the videos whose titles contain the search_term. 
+            SEARCH_VIDEOS_WITH_TAG &lt;tag_name&gt; -Display all videos whose tags contains the provided tag. 
+            FLAG_VIDEO &lt;video_id&gt; &lt;flag_reason&gt; - Mark a video as flagged. 
+            ALLOW_VIDEO &lt;video_id&gt; - Removes a flag from a video. 
+            HELP - Displays help. 
+            EXIT - Terminates the program execution. 
+        &quot;&quot;&quot;</span><span class="s1">)</span>
+        <span class="s1">print(help_text)</span>
+</pre>
+</body>
+</html>

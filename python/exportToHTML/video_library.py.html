@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>video_library.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #808080;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+video_library.py</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;&quot;&quot;A video library class.&quot;&quot;&quot;</span>
+
+<span class="s2">from </span><span class="s1">.video </span><span class="s2">import </span><span class="s1">Video</span>
+<span class="s2">from </span><span class="s1">pathlib </span><span class="s2">import </span><span class="s1">Path</span>
+<span class="s2">import </span><span class="s1">csv</span>
+
+
+<span class="s3"># Helper Wrapper around CSV reader to strip whitespace from around</span>
+<span class="s3"># each item.</span>
+<span class="s2">def </span><span class="s1">_csv_reader_with_strip(reader):</span>
+    <span class="s2">yield from </span><span class="s1">((item.strip() </span><span class="s2">for </span><span class="s1">item </span><span class="s2">in </span><span class="s1">line) </span><span class="s2">for </span><span class="s1">line </span><span class="s2">in </span><span class="s1">reader)</span>
+
+
+<span class="s2">class </span><span class="s1">VideoLibrary:</span>
+    <span class="s0">&quot;&quot;&quot;A class used to represent a Video Library.&quot;&quot;&quot;</span>
+
+    <span class="s2">def </span><span class="s1">__init__(self):</span>
+        <span class="s0">&quot;&quot;&quot;The VideoLibrary class is initialized.&quot;&quot;&quot;</span>
+        <span class="s1">self._videos = {}</span>
+        <span class="s2">with </span><span class="s1">open(Path(__file__).parent / </span><span class="s4">&quot;videos.txt&quot;</span><span class="s1">) </span><span class="s2">as </span><span class="s1">video_file:</span>
+            <span class="s1">reader = _csv_reader_with_strip(</span>
+                <span class="s1">csv.reader(video_file</span><span class="s2">, </span><span class="s1">delimiter=</span><span class="s4">&quot;|&quot;</span><span class="s1">))</span>
+            <span class="s2">for </span><span class="s1">video_info </span><span class="s2">in </span><span class="s1">reader:</span>
+                <span class="s1">title</span><span class="s2">, </span><span class="s1">url</span><span class="s2">, </span><span class="s1">tags = video_info</span>
+                <span class="s1">self._videos[url] = Video(</span>
+                    <span class="s1">title</span><span class="s2">,</span>
+                    <span class="s1">url</span><span class="s2">,</span>
+                    <span class="s1">[tag.strip() </span><span class="s2">for </span><span class="s1">tag </span><span class="s2">in </span><span class="s1">tags.split(</span><span class="s4">&quot;,&quot;</span><span class="s1">)] </span><span class="s2">if </span><span class="s1">tags </span><span class="s2">else </span><span class="s1">[]</span><span class="s2">,</span>
+                <span class="s1">)</span>
+
+    <span class="s2">def </span><span class="s1">get_all_videos(self):</span>
+        <span class="s0">&quot;&quot;&quot;Returns all available video information from the video library.&quot;&quot;&quot;</span>
+        <span class="s2">return </span><span class="s1">list(self._videos.values())</span>
+
+    <span class="s2">def </span><span class="s1">get_video(self</span><span class="s2">, </span><span class="s1">video_id):</span>
+        <span class="s0">&quot;&quot;&quot;Returns the video object (title, url, tags) from the video library. 
+ 
+        Args: 
+            video_id: The video url. 
+ 
+        Returns: 
+            The Video object for the requested video_id. None if the video 
+            does not exist. 
+        &quot;&quot;&quot;</span>
+        <span class="s2">return </span><span class="s1">self._videos.get(video_id</span><span class="s2">, None</span><span class="s1">)</span>
+</pre>
+</body>
+</html>

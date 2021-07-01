@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>run.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+run.py</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;&quot;&quot;A youtube terminal simulator.&quot;&quot;&quot;</span>
+<span class="s2">from </span><span class="s1">.video_player </span><span class="s2">import </span><span class="s1">VideoPlayer</span>
+<span class="s2">from </span><span class="s1">.command_parser </span><span class="s2">import </span><span class="s1">CommandException</span>
+<span class="s2">from </span><span class="s1">.command_parser </span><span class="s2">import </span><span class="s1">CommandParser</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">&quot;__main__&quot;</span><span class="s1">:</span>
+    <span class="s1">print(</span><span class="s3">&quot;&quot;&quot;Hello and welcome to YouTube, what would you like to do? 
+    Enter HELP for list of available commands or EXIT to terminate.&quot;&quot;&quot;</span><span class="s1">)</span>
+    <span class="s1">video_player = VideoPlayer()</span>
+    <span class="s1">parser = CommandParser(video_player)</span>
+    <span class="s2">while True</span><span class="s1">:</span>
+        <span class="s1">command = input(</span><span class="s3">&quot;YT&gt; &quot;</span><span class="s1">)</span>
+        <span class="s2">if </span><span class="s1">command.upper() == </span><span class="s3">&quot;EXIT&quot;</span><span class="s1">:</span>
+            <span class="s2">break</span>
+        <span class="s2">try</span><span class="s1">:</span>
+            <span class="s1">parser.execute_command(command.split())</span>
+        <span class="s2">except </span><span class="s1">CommandException </span><span class="s2">as </span><span class="s1">e:</span>
+            <span class="s1">print(e)</span>
+    <span class="s1">print(</span><span class="s3">&quot;YouTube has now terminated its execution. &quot;</span>
+          <span class="s3">&quot;Thank you and goodbye!&quot;</span><span class="s1">)</span>
+</pre>
+</body>
+</html>

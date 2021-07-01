@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>video.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #629755; font-style: italic;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+video.py</font>
+</center></td></tr></table>
+<pre><span class="s0">&quot;&quot;&quot;A video class.&quot;&quot;&quot;</span>
+
+<span class="s2">from </span><span class="s1">typing </span><span class="s2">import </span><span class="s1">Sequence</span>
+
+
+<span class="s2">class </span><span class="s1">Video:</span>
+    <span class="s0">&quot;&quot;&quot;A class used to represent a Video.&quot;&quot;&quot;</span>
+
+    <span class="s2">def </span><span class="s1">__init__(self</span><span class="s2">, </span><span class="s1">video_title: str</span><span class="s2">, </span><span class="s1">video_id: str</span><span class="s2">, </span><span class="s1">video_tags: Sequence[str]):</span>
+        <span class="s0">&quot;&quot;&quot;Video constructor.&quot;&quot;&quot;</span>
+        <span class="s1">self._title = video_title</span>
+        <span class="s1">self._video_id = video_id</span>
+
+        <span class="s3"># Turn the tags into a tuple here so it's unmodifiable,</span>
+        <span class="s3"># in case the caller changes the 'video_tags' they passed to us</span>
+        <span class="s1">self._tags = tuple(video_tags)</span>
+
+    <span class="s1">@property</span>
+    <span class="s2">def </span><span class="s1">title(self) -&gt; str:</span>
+        <span class="s0">&quot;&quot;&quot;Returns the title of a video.&quot;&quot;&quot;</span>
+        <span class="s2">return </span><span class="s1">self._title</span>
+
+    <span class="s1">@property</span>
+    <span class="s2">def </span><span class="s1">video_id(self) -&gt; str:</span>
+        <span class="s0">&quot;&quot;&quot;Returns the video id of a video.&quot;&quot;&quot;</span>
+        <span class="s2">return </span><span class="s1">self._video_id</span>
+
+    <span class="s1">@property</span>
+    <span class="s2">def </span><span class="s1">tags(self) -&gt; Sequence[str]:</span>
+        <span class="s0">&quot;&quot;&quot;Returns the list of tags of a video.&quot;&quot;&quot;</span>
+        <span class="s2">return </span><span class="s1">self._tags</span>
+</pre>
+</body>
+</html>
