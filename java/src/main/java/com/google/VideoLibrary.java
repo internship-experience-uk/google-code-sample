@@ -30,7 +30,7 @@ class VideoLibrary {
         List<String> tags;
         if (split.length > 2) {
           tags = Arrays.stream(split[2].split(",")).map(String::strip).collect(
-              Collectors.toList());
+                  Collectors.toList());
         } else {
           tags = new ArrayList<>();
         }
@@ -52,4 +52,15 @@ class VideoLibrary {
   Video getVideo(String videoId) {
     return this.videos.get(videoId);
   }
+
+  String getVideoName(String name) {
+    return this.videos.get(name).getTitle();
+  }
+
+  String getVidDetails(String name){
+    String s = this.videos.get(name).getTitle() + " " + this.videos.get(name).getVideoId() + " " + this.videos.get(name).getTags();
+    return s;
+  }
+
+  int getSize() { return videos.size(); }
 }
