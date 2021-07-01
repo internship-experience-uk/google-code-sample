@@ -11,6 +11,12 @@ class PlaybackState(enum.Enum):
 
 
 class VideoPlayback:
+    """A class to keep track of the currently playing video and it's state
+    (PAUSED, STOPPED, PLAYING).
+
+    We need to make sure we keep the two together because when no video is
+    currently playing, it can also not be paused.
+    """
     def __init__(self):
         self._video = None
         self._state = PlaybackState.STOPPED
@@ -45,5 +51,6 @@ class VideoPlayback:
         return self._state
 
     def _check_video(self):
+        """Check to make sure that there is a video currently playing."""
         if self._video is None:
             raise VideoPlaybackError("No video is currently playing")
