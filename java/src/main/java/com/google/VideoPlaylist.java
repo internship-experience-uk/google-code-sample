@@ -38,6 +38,7 @@ class VideoPlaylist {
     }
     public void removeVideo(String playListName, String videoId) {
         this.playListVidoes.remove(playListName, videoLibrary.getVideo(videoId));
+        if(!playListVidoes.containsKey(playListName)) playListVidoes.put(playListName, null);
     }
 
     public void clearVideos(String playlistName) {
