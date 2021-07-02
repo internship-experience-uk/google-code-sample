@@ -7,7 +7,6 @@ public class VideoPlayer {
   Scanner scanner;
 
   private final VideoLibrary videoLibrary;
-  private VideoPlaylistLibrary videoPlaylistLibrary;
   private Video video;
   private Video playing;
   private Boolean isPaused = false;
@@ -17,7 +16,6 @@ public class VideoPlayer {
 
   public VideoPlayer() {
     this.videoLibrary = new VideoLibrary();
-    this.videoPlaylistLibrary = new VideoPlaylistLibrary();
   }
 
   public void numberOfVideos() {
@@ -32,10 +30,7 @@ public class VideoPlayer {
     System.out.println("Here's a list of all available videos:");
 
     List<Video> tempList = videoLibrary.getVideos();
-//    tempList.sort(Comparator.naturalOrder());
-
-    tempList.sort(new SortByTitle());
-
+    tempList.sort(Comparator.naturalOrder());
     for (Video video : tempList) {
       System.out.printf("%s (%s) %s %s\n", video.getTitle(), video.getVideoId(),
           video.getTags().toString().replaceAll(",", ""), video.getIsFlagged() ? "- FLAGGED " +
@@ -175,9 +170,7 @@ public class VideoPlayer {
       return;
     }
 
-    videoPlaylistLibrary.createPlaylist(playlistName);
-
-//    playlists.add(new VideoPlaylist(playlistName));
+    playlists.add(new VideoPlaylist(playlistName));
     System.out.printf("Successfully created new playlist: %s\n", playlistName);
   }
 
