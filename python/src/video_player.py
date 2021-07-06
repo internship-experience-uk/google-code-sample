@@ -41,10 +41,7 @@ class VideoPlayer:
     def show_all_videos(self):
         """Returns all videos."""
         print("Here's a list of all available videos:")
-        library = []
-        for video in self._video_library.get_all_videos():
-            library.append(video.__str__())
-
+        library = self._video_library.get_all_videos()
         library.sort()
         for video in library:
             print(video)
@@ -237,13 +234,36 @@ class VideoPlayer:
         else:
             print(f"Cannot delete playlist {playlist_name}:", Messages.PLAYLIST_NOT_EXIST.value)
 
+    def play_selected_video(self, results: list[Video]):
+        print("Would you like to play any of the above? If yes, specify the number of the video.")
+        print("If your answer is not a valid number, we will assume it's a no.")
+
+        user_choice = input().strip()
+        if user_choice.isdecimal() and int(user_choice) <= len(results):
+            user_choice = int(user_choice)
+            self.play_known_video(results[user_choice - 1])
+        else:
+            pass
+
     def search_videos(self, search_term):
         """Display all the videos whose titles contain the search_term.
 
         Args:
             search_term: The query to be used in search.
         """
-        print("search_videos needs implementation")
+        results = []
+        for video in self._video_library.get_all_videos():
+            if search_term.lower() in video.title.lower():
+                results.append(video)
+
+        if len(results) == 0:
+            print(f"No search results for {search_term}")
+        else:
+            results.sort()
+            print(f"Here are the results for {search_term}:")
+            for (index, hit) in enumerate(results):
+                print(f"{index + 1}) {hit}")
+            self.play_selected_video(results)
 
     def search_videos_tag(self, video_tag):
         """Display all videos whose tags contains the provided tag.
@@ -251,7 +271,19 @@ class VideoPlayer:
         Args:
             video_tag: The video tag to be used in search.
         """
-        print("search_videos_tag needs implementation")
+        results = []
+        for video in self._video_library.get_all_videos():
+            video_tags = [tag.lower() for tag in video.tags]
+            if video_tag.lower() in video_tags:
+                results.append(video)
+        if len(results) == 0:
+            print(f"No search results for {video_tag}:")
+        else:
+            results.sort()
+            print(f"Here are the results for {video_tag}:")
+            for (index, hit) in enumerate(results):
+                print(f"{index + 1}) {hit}")
+            self.play_selected_video(results)
 
     def flag_video(self, video_id, flag_reason=""):
         """Mark a video as flagged.
