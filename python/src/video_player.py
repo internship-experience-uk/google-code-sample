@@ -125,10 +125,10 @@ class VideoPlayer:
             print(Messages.NO_VIDEO_PLAYING.value)
 
         if self.playing_status == VideoStatus.PLAYING:
-            print("Currently playing:", self.currently_playing.__str__())
+            print("Currently playing:", self.currently_playing)
 
         if self.playing_status == VideoStatus.PAUSED:
-            print("Currently playing:", self.currently_playing.__str__(), "-", VideoStatus.PAUSED.value)
+            print("Currently playing:", self.currently_playing, "-", VideoStatus.PAUSED.value)
 
     def create_playlist(self, playlist_name):
         """Creates a playlist with a given name.
