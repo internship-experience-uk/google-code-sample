@@ -186,7 +186,7 @@ class VideoPlayer:
         name = playlist_name.lower()
         if name in self.playlists:
             playlist = self.playlists[name]
-            print("Showing playlist:", playlist_name)
+            print("Showing playlist:", playlist_name, f"({len(playlist.videos)}) video{''.join(['s' for _ in range(1) if len(playlist.videos) > 1])}")
             if len(playlist.videos) > 0:
                 for video in playlist.videos:
                     if video.flag:
