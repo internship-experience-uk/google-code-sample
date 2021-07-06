@@ -1,6 +1,21 @@
 """A video player class."""
 
 from .video_library import VideoLibrary
+from .video import Video
+import enum
+
+
+class Messages(enum.Enum):
+    NOT_PLAYING = "No video is currently playing"
+    NOT_PAUSED = "Video is not paused"
+    NOT_EXISTS = "Video does not exist"
+    NOT_AVAILABLE = "No videos available"
+
+
+class PlayingStatus(enum.Enum):
+    PLAYING = "PLAYING"
+    PAUSED = "PAUSED"
+    STOPPED = "STOPPED"
 
 
 class VideoPlayer:
@@ -8,6 +23,8 @@ class VideoPlayer:
 
     def __init__(self):
         self._video_library = VideoLibrary()
+        self.currently_playing = None
+        self.playing_status = None
 
     def number_of_videos(self):
         num_videos = len(self._video_library.get_all_videos())
@@ -15,8 +32,14 @@ class VideoPlayer:
 
     def show_all_videos(self):
         """Returns all videos."""
+        print("Here's a list of all available videos:")
+        library = []
+        for video in self._video_library.get_all_videos():
+            library.append(video.__str__())
 
-        print("show_all_videos needs implementation")
+        library.sort()
+        for video in library:
+            print(video)
 
     def play_video(self, video_id):
         """Plays the respective video.
@@ -24,32 +47,73 @@ class VideoPlayer:
         Args:
             video_id: The video_id to be played.
         """
-        print("play_video needs implementation")
+        video = self._video_library.get_video(video_id)
+        if not video:
+            print("Cannot play video:", Messages.NOT_EXISTS.value)
+        else:
+            self.play_known_video(video)
+
+    def play_known_video(self, video: Video):
+        """Plays a known video that exists in the Video Library
+
+        Args:
+            video: An already known video that exists in the video library
+        """
+        if self.playing_status in [PlayingStatus.PLAYING, PlayingStatus.PAUSED]:
+            self.stop_video()
+
+        print("Playing video:", video.title)
+        self.currently_playing = video
+        self.playing_status = PlayingStatus.PLAYING
 
     def stop_video(self):
         """Stops the current video."""
-
-        print("stop_video needs implementation")
+        if self.playing_status == PlayingStatus.STOPPED or not self.currently_playing:
+            print("Cannot stop video:", Messages.NOT_PLAYING.value)
+        else:
+            print("Stopping video:", self.currently_playing.title)
+            self.playing_status = PlayingStatus.STOPPED
 
     def play_random_video(self):
         """Plays a random video from the video library."""
+        import random
 
-        print("play_random_video needs implementation")
+        try:
+            video = random.choice(self._video_library.get_all_videos())
+            self.play_known_video(video)
+        except IndexError:
+            print(Messages.NOT_AVAILABLE.value)
 
     def pause_video(self):
         """Pauses the current video."""
-
-        print("pause_video needs implementation")
+        if self.playing_status == PlayingStatus.PLAYING:
+            print("Pausing video:", self.currently_playing.title)
+            self.playing_status = PlayingStatus.PAUSED
+        elif self.playing_status == PlayingStatus.PAUSED:
+            print("Video already paused:", self.currently_playing.title)
+        else:
+            print("Cannot pause video:", Messages.NOT_PLAYING.value)
 
     def continue_video(self):
         """Resumes playing the current video."""
-
-        print("continue_video needs implementation")
+        if self.playing_status == PlayingStatus.PAUSED:
+            print("Continuing video:", self.currently_playing.title)
+            self.playing_status = PlayingStatus.PLAYING
+        elif self.playing_status == PlayingStatus.STOPPED or not self.currently_playing:
+            print("Cannot continue video:", Messages.NOT_PLAYING.value)
+        else:
+            print("Cannot continue video:", Messages.NOT_PAUSED.value)
 
     def show_playing(self):
         """Displays video currently playing."""
+        if self.playing_status == PlayingStatus.STOPPED or not self.currently_playing:
+            print(Messages.NOT_PLAYING.value)
 
-        print("show_playing needs implementation")
+        if self.playing_status == PlayingStatus.PLAYING:
+            print("Currently playing:", self.currently_playing.__str__())
+
+        if self.playing_status == PlayingStatus.PAUSED:
+            print("Currently playing:", self.currently_playing.__str__(), "-", PlayingStatus.PAUSED.value)
 
     def create_playlist(self, playlist_name):
         """Creates a playlist with a given name.
