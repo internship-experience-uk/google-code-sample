@@ -32,3 +32,12 @@ class Video:
 
     def __str__(self):
         return f"{self.title} ({self.video_id}) [{' '.join(self.tags)}]"
+
+    def __eq__(self, other):
+        return self.__str__() == other.__str__()
+
+    def __lt__(self, other):
+        return self.__str__() < other.__str__()
+
+    def __gt__(self, other):
+        return self.__str__() > other.__str__()
