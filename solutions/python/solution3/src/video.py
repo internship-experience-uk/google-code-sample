@@ -1,6 +1,6 @@
 """A video class."""
 
-from typing import Sequence
+from typing import Sequence, Optional
 
 
 class Video:
@@ -14,6 +14,7 @@ class Video:
         # Turn the tags into a tuple here so it's unmodifiable,
         # in case the caller changes the 'video_tags' they passed to us
         self._tags = tuple(video_tags)
+        self._flag = None
 
     @property
     def title(self) -> str:
@@ -29,3 +30,18 @@ class Video:
     def tags(self) -> Sequence[str]:
         """Returns the list of tags of a video."""
         return self._tags
+
+    @property
+    def flag(self) -> Optional[str]:
+        """Returns the flag on a video."""
+        return self._flag
+    
+    def set_flag(self, flag="") -> None:
+        self._flag = flag
+
+    def format(self):
+        return (
+            f"{self.title} ({self.video_id})" +
+            (f" [{' '.join(self.tags)}]") +
+            (f" - FLAGGED (reason: {self.flag})" * (self.flag != None))
+        )
