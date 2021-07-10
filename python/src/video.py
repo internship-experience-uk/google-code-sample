@@ -15,6 +15,13 @@ class Video:
         # in case the caller changes the 'video_tags' they passed to us
         self._tags = tuple(video_tags)
 
+        # custom property: flag
+        self._flag = None
+
+    def __str__(self):
+        """Custom String Representation"""
+        return "{title} ({id}) [{tags}]".format(title=self._title, id=self._video_id, tags=" ".join(self._tags))
+
     @property
     def title(self) -> str:
         """Returns the title of a video."""
@@ -29,3 +36,17 @@ class Video:
     def tags(self) -> Sequence[str]:
         """Returns the list of tags of a video."""
         return self._tags
+
+    # Custom property: flag
+    @property
+    def flag(self) -> str:
+        """Returns the flag of a video."""
+        return self._flag
+
+    # Custom flag video method
+    def action_flag(self, reason):
+        self._flag = reason
+
+    # Custom flag removal method
+    def remove_flag(self):
+        self._flag = None
