@@ -16,6 +16,8 @@ class VideoLibrary:
 
     def __init__(self):
         """The VideoLibrary class is initialized."""
+        self._is_playing = None
+        self._is_paused = False
         self._videos = {}
         with open(Path(__file__).parent / "videos.txt") as video_file:
             reader = _csv_reader_with_strip(
@@ -43,3 +45,23 @@ class VideoLibrary:
             does not exist.
         """
         return self._videos.get(video_id, None)
+
+    def get_video_playing(self):
+        """Returns the playing video id."""
+        return self._is_playing
+
+    def is_video_paused(self):
+        """Returns the paused video id."""
+        return self._is_paused
+
+    def set_video_playing(self, video_id):
+        """Sets self._is_palying the respective video_id.
+
+        Args:
+            video_id: The video_id to be played.
+        """
+        self._is_playing = video_id
+    
+    def set_video_paused(self, status):
+        """Swiches self._is_paused."""
+        self._is_paused = status
