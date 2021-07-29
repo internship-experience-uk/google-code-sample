@@ -1,5 +1,8 @@
 package com.google;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class VideoPlayer {
 
   private final VideoLibrary videoLibrary;
@@ -12,12 +15,18 @@ public class VideoPlayer {
     System.out.printf("%s videos in the library%n", videoLibrary.getVideos().size());
   }
 
-  public void showAllVideos() {
-    System.out.println("showAllVideos needs implementation");
+  public String showAllVideos() {
+    System.out.println("Here's a list of all available videos:");
+    Map<String, String> myvideos = new TreeMap<>();
+    for (Video video : videoLibrary.getVideos()) {
+      System.out.println(video.getTitle() + " " + (video.getVideoId()) + " " + video.getTags());
+    }
+    return videoLibrary.toString();
   }
 
   public void playVideo(String videoId) {
-    System.out.println("playVideo needs implementation");
+    //System.out.println("playVideo needs implementation");
+    System.out.println(videoLibrary.getVideo(videoId));
   }
 
   public void stopVideo() {
