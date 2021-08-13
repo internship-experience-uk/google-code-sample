@@ -43,3 +43,18 @@ class VideoLibrary:
             does not exist.
         """
         return self._videos.get(video_id, None)
+
+    def get_sorted_videos(self):
+         """Returns list of video objects sorted lexicographically"""
+         sorted_list = []
+         for video in self.get_all_videos():
+             sorted_list.append(video.video_id)
+         sorted_list.sort()
+
+         sorted_videos = []
+         for id in sorted_list:
+             sorted_videos.append(self.get_video(id))
+
+         return sorted_videos
+    
+    python3 -m pytest
