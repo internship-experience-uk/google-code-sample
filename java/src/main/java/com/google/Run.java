@@ -19,6 +19,7 @@ public class Run {
         return;
       }
       parser.executeCommand(Arrays.asList(input.split("\\s+")));
+    scanner.close();
     }
   }
 }
