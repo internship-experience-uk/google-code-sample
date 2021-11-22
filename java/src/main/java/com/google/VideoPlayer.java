@@ -78,7 +78,7 @@ public class VideoPlayer {
   }
 
   public void playRandomVideo() {
-
+//i
     List<Video> vids = this.videoLibrary.getVideos();
     Random r = new Random();
         int rndmInt = r.nextInt(vids.size()-1);
