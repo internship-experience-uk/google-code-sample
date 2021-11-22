@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 
 public class VideoLibraryTest {
 
-  private VideoLibrary videoLibrary;
+  private prevVideoLibrary videoLibrary;
 
   @BeforeEach
   public void setUp() {
-    videoLibrary = new VideoLibrary();
+    videoLibrary = new prevVideoLibrary();
   }
 
   @Test
