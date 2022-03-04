@@ -25,7 +25,7 @@ public class Part1Test extends TestBase {
   @Test
   public void testShowAllVideos() {
     videoPlayer.showAllVideos();
-
+//BITCH I DID ITOIHSDLGJSDL;JGL;SDJG;SDJG
     String[] lines = getOutputLines();
     assertEquals(6, lines.length, outputStream.toString());
     assertThat(lines[0], containsString("Here's a list of all available videos:"));
@@ -40,6 +40,7 @@ public class Part1Test extends TestBase {
     assertThat(lines[5],
         containsString("Video about nothing (nothing_video_id) []"));
   }
+  //so you print a line of each.....so like each object kinda on a new line
 
   @Test
   public void testPlayVideo() {
